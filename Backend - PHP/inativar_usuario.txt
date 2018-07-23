@@ -2,3 +2,4 @@
 	require_once 'include/Funcoes_BD.php';
 	$db = new Funcoes_BD();
 	
+	// daniel teste 
