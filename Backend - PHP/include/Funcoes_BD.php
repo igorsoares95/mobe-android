@@ -20,7 +20,7 @@ class Funcoes_BD{
 		
 		$senha_criptografada = $this->criptoSenha($senha);
 		$token = md5(time());
-		$link = "http://projetocarro.zapto.org:888/manutencao_veicular/confirmacao.php?email=$email&token=$token";
+		$link = "http://danielfalsetti-001-site7.ftempurl.com:80/confirmacao.php?email=$email&token=$token";
 		
 		if(smtpmailer($email, 'guilhermerodrigues73@gmail.com', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar sua conta: ' .$link)){
 			
@@ -164,7 +164,7 @@ class Funcoes_BD{
 		if($usuario) {
 			
 			$token = $usuario['S_TOKEN'];
-			$link = "http://projetocarro.zapto.org:888/manutencao_veicular/confirmacao.php?email=$email&token=$token";
+			$link = "http://danielfalsetti-001-site7.ftempurl.com:80/confirmacao.php?email=$email&token=$token";
 			if(smtpmailer($email, 'guilhermerodrigues73@gmail', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar seu email: ' .$link)){
 				
 				return true;

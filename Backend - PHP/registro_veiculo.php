@@ -14,9 +14,6 @@
 		$usuario = $_POST['usuario'];
 		$dispositivo = $_POST['dispositivo'];
 		$km = $_POST['km'];
-
-
-		//android studio bugado
 		
 		
 		//checa se o veiculo existe		
