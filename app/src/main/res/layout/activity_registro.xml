@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#8B008B"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.example.guilherme.mobe.activity.RegistroActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:weightSum="1"
+        >
+
+        <EditText
+            android:id="@+id/nome_registro"
+            android:layout_width="fill_parent"
+            android:layout_height="54dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_inicio_registro_edittext"
+            android:hint="Nome Completo"
+            android:padding="10dp"
+            android:inputType="textCapWords"
+            android:textColor="@android:color/white"
+            android:textColorHint="#ffffff"
+            />
+
+        <EditText
+            android:id="@+id/email_registro"
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_inicio_registro_edittext"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="#ffffff"
+            />
+
+        <EditText
+            android:id="@+id/telefone_registro"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:inputType="phone"
+            android:ems="10"
+            android:layout_marginBottom="10dp"
+            android:hint="Telefone"
+            android:background="@drawable/bg_inicio_registro_edittext"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="#ffffff"
+            android:layout_weight="0.07"
+            />
+
+        <EditText
+            android:id="@+id/senha_registro"
+            android:layout_width="fill_parent"
+            android:layout_height="42dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_inicio_registro_edittext"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="#ffffff"
+            />
+
+        <EditText
+            android:id="@+id/confirma_senha_registro"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_inicio_registro_edittext"
+            android:hint="Confirmar Senha"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="#ffffff"
+            />
+
+        <Button
+            android:id="@+id/btn_registro"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/bg_botoes"
+            android:text="Cadastrar"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btnLinkLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:background="@null"
+            android:text="Já registrado? Entre"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

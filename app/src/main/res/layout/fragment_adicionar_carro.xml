@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_bg"
+    tools:context=".fragments.AdicionarCarroFragment">
+
+
+    <Spinner
+        android:id="@+id/Marcaspinner"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="78dp"
+        android:backgroundTint="@color/CorBotao"
+        android:popupBackground="@color/BordaEditText" />
+
+    <TextView
+        android:id="@+id/Marcatxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_marginTop="41dp"
+        android:text="Marca:"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Modelotxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_marginTop="117dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Modelo:"
+        android:textColor="@android:color/black"/>
+
+    <Spinner
+        android:id="@+id/Modelospinner"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginTop="153dp"
+        android:backgroundTint="@color/CorBotao"
+        android:popupBackground="@color/BordaEditText" />
+
+    <TextView
+        android:id="@+id/Anotxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_marginTop="193dp"
+        android:text="Ano:"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"/>
+
+    <Spinner
+        android:id="@+id/anos_spinner"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginTop="228dp"
+        android:backgroundTint="@color/CorBotao"
+        android:popupBackground="@color/BordaEditText" />
+
+    <Button
+        android:id="@+id/btn_proximo_adicionar_carro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/bg_botoes"
+        android:text="Próximo"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textview8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginTop="291dp"
+        android:text="Placa"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginBottom="221dp"
+        android:text="Quilometragem:"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txt_placa_adicionar_carro"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginBottom="281dp"
+        android:background="@drawable/bg_edittext"
+        android:ems="10"
+        android:hint="Placa"
+        android:inputType="text"
+        android:textColor="@android:color/white"
+        android:textColorHint="#222222" />
+
+    <EditText
+        android:id="@+id/txt_km_adicionar_veiculo"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginBottom="161dp"
+        android:background="@drawable/bg_edittext"
+        android:ems="10"
+        android:hint="Quilometragem atual"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textColorHint="#222222" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_marginBottom="125dp"
+        android:text="ID do Dispositivo:"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/txt_dispositivo_adicionar_veiculo"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Marcaspinner"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Marcaspinner"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/bg_edittext"
+        android:ems="10"
+        android:hint="Identificação do Dispositivo"
+        android:inputType="number"
+        android:textColor="@android:color/white"
+        android:textColorHint="#222222" />
+
+</RelativeLayout>
