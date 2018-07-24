@@ -35,7 +35,10 @@
         <activity android:name=".activity.AtivarUsuarioActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
-        <activity android:name=".activity.EsqueciSenhaActivity"/>
+        <activity android:name=".activity.EsqueciSenhaActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        </activity>
+
     </application>
 
 </manifest>
