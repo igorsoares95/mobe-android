@@ -132,11 +132,11 @@ public class ListaVeiculosFragment extends Fragment {
                             String modelo = (String) veiculoJSON.get("modelo");
                             String placa = (String) veiculoJSON.get("placa");
                             double km = veiculoJSON.getDouble("km");
-                            String dispositivo = (String) veiculoJSON.get("id_dispositivo");
+                            String dispositivo = (String) veiculoJSON.get("codigo_dispositivo");
 
                             veiculos.add(new Veiculo(modelo,placa,String.valueOf(km),dispositivo));
 
-                            Log.d(TAG, "Update user Response: " + modelo + placa + km + dispositivo);
+                            //Log.d(TAG, "Update user Response: " + modelo + placa + km + dispositivo);
 
                         }
 
@@ -168,7 +168,7 @@ public class ListaVeiculosFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idusuario",id_usuario);
+                params.put("id_usuario",id_usuario);
                 return params;
             }
 

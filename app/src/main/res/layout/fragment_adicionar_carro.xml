@@ -12,12 +12,10 @@
         android:id="@+id/Marcaspinner"
         android:layout_width="197dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="33dp"
         android:backgroundTint="@color/CorBotao"
         android:popupBackground="@color/BordaEditText" />
 
@@ -27,8 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/Marcaspinner"
-        android:layout_alignLeft="@+id/Marcaspinner"
-        android:layout_marginTop="41dp"
         android:text="Marca:"
         android:textColor="@android:color/black"
         android:textSize="18dp"
@@ -40,21 +36,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/Marcaspinner"
-        android:layout_alignLeft="@+id/Marcaspinner"
-        android:layout_marginTop="117dp"
-        android:textSize="18dp"
-        android:textStyle="bold"
+        android:layout_marginTop="66dp"
         android:text="Modelo:"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/Modelospinner"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Marcaspinner"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/Marcaspinner"
-        android:layout_marginTop="153dp"
+        android:layout_marginTop="99dp"
         android:backgroundTint="@color/CorBotao"
         android:popupBackground="@color/BordaEditText" />
 

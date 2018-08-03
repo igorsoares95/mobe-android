@@ -46,15 +46,15 @@ public class AdicionarCarroFragment extends Fragment {
     private EditText txt_dispositivo;
     private EditText txt_placa;
     private static final String TAG = AdicionarCarroFragment.class.getSimpleName();
-    private String marca_selecionada;
-    private String modelo_selecionado;
+    private int id_modelo_selecionado;
     private String ano_selecionado;
     private Button btn_proxima_etapa;
     private ProgressDialog pDialog;
     private SQLiteHandler bd;
     private String id_usuario;
 
-
+    private List lista_id_modelos = new ArrayList<>();
+    private List<String> lista_nome_modelos = new ArrayList<String>();
 
 
     public AdicionarCarroFragment() {
@@ -87,8 +87,12 @@ public class AdicionarCarroFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
 
-                marca_selecionada = parent.getItemAtPosition(posicao).toString();
-                obterModelos(marca_selecionada);
+                //marca_selecionada = parent.getItemAtPosition(posicao).toString();
+
+                int id_marca_selecionada = posicao + 1;
+                Log.d(TAG,String.valueOf(id_marca_selecionada));
+
+                obterModelos(id_marca_selecionada);
 
             }
 
@@ -104,7 +108,8 @@ public class AdicionarCarroFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
 
-                modelo_selecionado = parent.getItemAtPosition(posicao).toString();
+                //id_modelo_selecionado = parent.getItemAtPosition(posicao).toString();
+                id_modelo_selecionado = (int) lista_id_modelos.get(posicao);
                 obterAnos();
 
             }
@@ -135,7 +140,7 @@ public class AdicionarCarroFragment extends Fragment {
         btn_proxima_etapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adicionaVeiculo(marca_selecionada,modelo_selecionado,ano_selecionado,txt_placa.getText().toString(),id_usuario,txt_dispositivo.getText().toString(),txt_km.getText().toString());
+                adicionaVeiculo(ano_selecionado,txt_placa.getText().toString().trim(),txt_km.getText().toString().trim(),id_usuario,txt_dispositivo.getText().toString().trim(),String.valueOf(id_modelo_selecionado));
             }
         });
 
@@ -158,8 +163,11 @@ public class AdicionarCarroFragment extends Fragment {
 
     private void obterMarcas () {
 
+        final List<String> lista_nome_marcas = new ArrayList<String>();
+        final List lista_id_marcas = new ArrayList<>();
 
-        final List<String> lista_marcas = new ArrayList<String>();
+        //lista_id_marcas.removeAll(lista_id_marcas);
+        //lista_nome_marcas.removeAll(lista_nome_marcas);
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
                 AppConfig.URL_OBTER_MARCAS_VEICULOS, new Response.Listener<String>() {
@@ -175,12 +183,18 @@ public class AdicionarCarroFragment extends Fragment {
 
                     for(int i = 0; i < marcas.length() ; i++){
 
-                        String marca = (String) marcas.get(i);
-                        lista_marcas.add(marca);
-                        Log.d(TAG, marca);
+                        JSONObject marca = (JSONObject) marcas.get(i);
+                        int id_marca = (int) marca.get("ID");
+                        String nome_marca = (String) marca.get("MARCA");
+
+                        lista_id_marcas.add(id_marca);
+                        lista_nome_marcas.add(nome_marca);
+
+
+                        Log.d(TAG, nome_marca);
 
                         //popular o array no spinner logo apos obter do server
-                        spinnerMarcas.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, lista_marcas));
+                        spinnerMarcas.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, lista_nome_marcas));
 
                     }
 
@@ -217,10 +231,10 @@ public class AdicionarCarroFragment extends Fragment {
     }
 
 
-    private void obterModelos (final String marca) {
+    private void obterModelos (final int id_marca) {
 
-        final List<String> lista_modelos = new ArrayList<String>();
-
+        lista_id_modelos.removeAll(lista_id_modelos);
+        lista_nome_modelos.removeAll(lista_nome_modelos);
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_OBTER_MODELOS_VEICULOS, new Response.Listener<String>() {
@@ -232,17 +246,21 @@ public class AdicionarCarroFragment extends Fragment {
                 try {
                     JSONObject object = new JSONObject(response);
 
-                    JSONArray veiculos = object.getJSONArray("veiculos");
+                    JSONArray modelos = object.getJSONArray("modelos");
 
-                    for(int i = 0; i < veiculos.length() ; i++){
+                    for(int i = 0; i < modelos.length() ; i++){
 
-                        String marca = (String) veiculos.get(i);
-                        lista_modelos.add(marca);
+                        JSONObject modelo = (JSONObject) modelos.get(i);
+                        int id_modelo = (int) modelo.get("ID");
+                        String nome_modelo = (String) modelo.get("MODELO");
 
-                        Log.d(TAG, marca);
+                        lista_id_modelos.add(id_modelo);
+                        lista_nome_modelos.add(nome_modelo);
+
+                        Log.d(TAG, nome_modelo);
 
                         //popular o array no spinner logo apos obter do server
-                        spinnerModelos.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, lista_modelos));
+                        spinnerModelos.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, lista_nome_modelos));
 
                     }
 
@@ -268,7 +286,7 @@ public class AdicionarCarroFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("marca",marca);
+                params.put("id_marca",String.valueOf(id_marca));
                 return params;
             }
 
@@ -279,7 +297,7 @@ public class AdicionarCarroFragment extends Fragment {
     }
 
 
-    private void adicionaVeiculo(final String marca, final String modelo, final String ano, final String placa, final String usuario, final String dispositivo, final String km) {
+    private void adicionaVeiculo(final String ano, final String placa, final String km, final String id_usuario, final String codigo_dispositivo, final String id_modelo_veiculo) {
         pDialog.setMessage("Registrando...");
         showDialog();
 
@@ -327,14 +345,12 @@ public class AdicionarCarroFragment extends Fragment {
             protected Map<String, String> getParams(){
 
                 Map<String, String> params = new HashMap<>();
-                params.put("marca", marca);
-                params.put("modelo", modelo);
                 params.put("ano", ano);
                 params.put("placa", placa);
-                params.put("usuario", usuario);
-                params.put("dispositivo", dispositivo);
                 params.put("km", km);
-
+                params.put("id_usuario", id_usuario);
+                params.put("codigo_dispositivo", codigo_dispositivo);
+                params.put("id_modelo_veiculo", id_modelo_veiculo);
                 return params;
 
             }

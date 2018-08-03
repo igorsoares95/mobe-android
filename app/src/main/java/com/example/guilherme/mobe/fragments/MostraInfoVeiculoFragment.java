@@ -147,7 +147,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                         int ano = info_veiculo.getInt("ano");
                         String placa = info_veiculo.getString("placa");
                         int km = info_veiculo.getInt("km");
-                        String dispositivo = info_veiculo.getString("dispositivo");
+                        String dispositivo = info_veiculo.getString("codigo_dispositivo");
 
                         txtMarca.setText(marca);
                         txtModelo.setText(modelo);
@@ -182,7 +182,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("placa",placa);
-                params.put("usuario",id_usuario);
+                params.put("id_usuario",id_usuario);
                 return params;
             }
 

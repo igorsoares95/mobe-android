@@ -17,7 +17,7 @@ public class AppConfig {
 
 
 
-    /*
+
     public static String URL_LOGIN = "http://10.0.2.2:888/base_dados_mobe/login.php";
 
     public static String URL_REGISTRO = "http://10.0.2.2:888/base_dados_mobe/registro.php";
@@ -45,9 +45,10 @@ public class AppConfig {
     public static String URL_OBTER_MODELOS_VEICULOS = "http://10.0.2.2:888/base_dados_mobe/obter_modelos_por_marca_para_spinner.php";
 
     public static String URL_REGISTRAR_VEICULO = "http://10.0.2.2:888/base_dados_mobe/registro_veiculo.php";
-*/
 
 
+
+    /*
     public static String URL_LOGIN = "http://danielfalsetti-001-site7.ftempurl.com:80/login.php";
 
     public static String URL_REGISTRO = "http://danielfalsetti-001-site7.ftempurl.com:80/registro.php";
@@ -76,7 +77,7 @@ public class AppConfig {
 
     public static String URL_REGISTRAR_VEICULO = "http://danielfalsetti-001-site7.ftempurl.com:80/registro_veiculo.php";
 
-
+*/
 
 
 

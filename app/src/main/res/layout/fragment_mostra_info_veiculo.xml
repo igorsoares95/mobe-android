@@ -26,6 +26,7 @@
         android:layout_alignStart="@+id/textView8"
         android:layout_marginTop="40dp"
         android:background="@drawable/bg_edittext"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -49,6 +50,7 @@
         android:layout_alignStart="@+id/textView8"
         android:layout_marginTop="124dp"
         android:background="@drawable/bg_edittext"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -72,6 +74,7 @@
         android:layout_below="@+id/textView11"
         android:layout_marginTop="-190dp"
         android:background="@drawable/bg_edittext"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -116,6 +119,7 @@
         android:layout_alignStart="@+id/txt_marca_mostra_info_veiculo"
         android:layout_marginTop="210dp"
         android:background="@drawable/bg_edittext"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -160,6 +164,7 @@
         android:layout_alignTop="@+id/txt_modelo_mostra_info_veiculo"
         android:layout_toEndOf="@+id/txt_marca_mostra_info_veiculo"
         android:background="@drawable/bg_edittext"
+        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
