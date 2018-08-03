@@ -38,7 +38,7 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class AdicionarCarroFragment extends Fragment {
-
+    /*teste*/
     private Spinner spinnerMarcas;
     private Spinner spinnerModelos;
     private Spinner spinnerAnos;
