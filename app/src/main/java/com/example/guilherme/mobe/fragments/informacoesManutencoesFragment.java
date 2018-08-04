@@ -13,7 +13,7 @@ import com.example.guilherme.mobe.R;
  * A simple {@link Fragment} subclass.
  */
 public class informacoesManutencoesFragment extends Fragment {
-
+    /**/
 
     public informacoesManutencoesFragment() {
         // Required empty public constructor
