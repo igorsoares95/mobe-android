@@ -12,21 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/txt_km_mostra_info_veiculo"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="-30dp"
         android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
         android:text="Marca:"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/txt_marca_mostra_info_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_marginTop="40dp"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -37,20 +39,21 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/txt_km_mostra_info_veiculo"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textview8"
         android:layout_marginBottom="-114dp"
         android:text="Modelo:"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/txt_modelo_mostra_info_veiculo"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_marginTop="124dp"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -61,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_marginBottom="190dp"
         android:text="Placa:"
         android:textColor="@android:color/black"
@@ -71,10 +75,10 @@
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@+id/textview8"
         android:layout_below="@+id/textView11"
         android:layout_marginTop="-190dp"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -84,6 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_centerVertical="true"
         android:text="ID do Dispositivo:"
         android:textColor="@android:color/black"
@@ -94,6 +99,7 @@
         android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_below="@+id/textView12"
         android:background="@drawable/bg_edittext"
         android:ems="10"
@@ -106,6 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView8"
+        android:layout_alignLeft="@id/textView8"
         android:layout_marginTop="183dp"
         android:text="Quilometragem:"
         android:textColor="@android:color/black"
@@ -117,9 +124,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/txt_marca_mostra_info_veiculo"
+        android:layout_alignLeft="@id/txt_marca_mostra_info_veiculo"
         android:layout_marginTop="210dp"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />
@@ -133,7 +140,8 @@
         android:layout_marginBottom="81dp"
         android:background="@drawable/bg_botoes"
         android:text="Alterar dados do veículo"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btn_excluir_veiculo_mostra_info_veiculo"
@@ -144,7 +152,8 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/bg_botoes"
         android:text="Excluir Veículo"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView"
@@ -153,18 +162,19 @@
         android:layout_above="@+id/txt_modelo_mostra_info_veiculo"
         android:layout_marginBottom="-124dp"
         android:layout_toEndOf="@+id/txt_marca_mostra_info_veiculo"
+        android:layout_toRightOf="@id/txt_marca_mostra_info_veiculo"
         android:text="Ano:"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/txt_ano_mostra_info_veiculo"
         android:layout_width="119dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/txt_modelo_mostra_info_veiculo"
         android:layout_toEndOf="@+id/txt_marca_mostra_info_veiculo"
+        android:layout_toRightOf="@id/txt_marca_mostra_info_veiculo"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/black" />

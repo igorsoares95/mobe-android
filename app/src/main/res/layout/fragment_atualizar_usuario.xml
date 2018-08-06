@@ -30,7 +30,7 @@
         android:ems="10"
         android:padding="10dp"
         android:background="@drawable/bg_edittext"
-        android:textColor="#222222"
+        android:textColor="@android:color/black"
         android:id="@+id/nome_atualizaUsuario"
         android:layout_below="@+id/textView4"
         android:layout_alignLeft="@+id/textView4"
@@ -56,11 +56,10 @@
         android:layout_alignStart="@+id/textView5"
         android:layout_below="@+id/textView5"
         android:background="@drawable/bg_edittext"
-        android:editable="false"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:textColor="#222222" />
+        android:textColor="@android:color/black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +80,7 @@
         android:ems="10"
         android:padding="10dp"
         android:background="@drawable/bg_edittext"
-        android:textColor="#222222"
+        android:textColor="@android:color/black"
         android:id="@+id/telefone_atualizaUsuario"
         android:layout_below="@+id/textView6"
         android:layout_alignLeft="@+id/textView6"
@@ -94,7 +93,8 @@
         android:id="@+id/btnSalvar_atualizaUsuario"
         android:padding="15dp"
         android:background="@drawable/bg_botoes"
-        android:textColor="#ffffff"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
         android:layout_marginTop="56dp"
         android:layout_below="@+id/telefone_atualizaUsuario"
         android:layout_centerHorizontal="true" />
@@ -105,11 +105,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="111dp"
+        android:layout_marginBottom="169dp"
         android:background="@drawable/bg_botoes"
         android:padding="15dp"
         android:text="Alterar Senha"
-        android:textColor="#ffffff" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_desativar__atualizar_usuario"
@@ -117,9 +118,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="111dp"
         android:background="@drawable/bg_botoes"
         android:padding="15dp"
         android:text="Desativar Usuário"
-        android:textColor="#ffffff" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 </RelativeLayout>
