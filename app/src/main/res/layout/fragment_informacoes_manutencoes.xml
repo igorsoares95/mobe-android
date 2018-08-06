@@ -78,11 +78,12 @@
 
         <EditText
             android:id="@+id/txtkmAntecipacao_infoManutencoes"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edittext"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="3dp"
+            android:inputType="text"
             android:hint="Quilometragem de notificação"
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@android:color/black"/>
@@ -94,19 +95,62 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:textColor="@android:color/black"
-            android:text="Tempo de Notificação"
+            android:text="Tempo de Notificação:"
             android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/txttempoAntecipacao_infoManutencoes"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:background="@drawable/bg_edittext"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="3dp"
             android:hint="Tempo de notificação"
             android:textColorHint="@android:color/darker_gray"
             android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/lbldtUltimaManutencao_infoManutencoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Data - última manutenção:"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/txtdtUltimaManutencao_infoManutencoes"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:hint="Data da ultima manutenção"
+            android:textColorHint="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/lblkmUltimaManutencao_infoManutencoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Quilometragem - última manutenção:"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/txkmUltimaManutencao_infoManutencoes"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Quilometragem da última manutenção"
+            android:textColorHint="@android:color/darker_gray" />
 
         <Button
             android:id="@+id/btnFinalizar_infoManutencoes"
