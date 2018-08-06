@@ -10,11 +10,11 @@ function smtpmailer($para, $de, $de_nome, $assunto, $corpo) {
 	$mail->IsSMTP();		// Ativar SMTP
 	$mail->SMTPDebug = 0;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
 	$mail->SMTPAuth = true;		// Autenticação ativada
-	//$mail->SMTPSecure = 'ssl';	// SSL REQUERIDO pelo GMail
-	$mail->Host = 'mail.manutencaoveicular.com.br';	// SMTP utilizado
-	$mail->Port = 25;  		// A porta 587 deverá estar aberta em seu servidor
-	$mail->Username = 'noreply@manutencaoveicular.com.br'; //GUSER;
-	$mail->Password = 'D@aniel01'; //GPWD;
+	$mail->SMTPSecure = 'ssl';	// SSL REQUERIDO pelo GMail
+	$mail->Host = 'smtp.gmail.com';	// SMTP utilizado
+	$mail->Port = 465;  		// A porta 587 deverá estar aberta em seu servidor
+	$mail->Username = 'guilhermerodrigues73@gmail.com'; //GUSER;
+	$mail->Password = '@Guilherme73'; //GPWD;
 	$mail->SetFrom($de, $de_nome);
 	$mail->Subject = $assunto;
 	$mail->Body = $corpo;

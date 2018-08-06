@@ -7,9 +7,16 @@ class Funcoes_BD{
 	function __construct(){
 		require_once 'Conexao_BD.php';
 		require_once 'Email.php';
+		require_once 'firebase/firebase.php';
+		require_once 'firebase/push.php';
+		
 		
 		$bd = new Conexao_BD();
-		$this->conn = $bd->conexao();	
+		$this->conn = $bd->conexao();
+		
+        $firebase = new Firebase();
+        $push = new Push();
+		
 	}
 	
 	/* 	Armazena Usuário 
@@ -20,9 +27,9 @@ class Funcoes_BD{
 		
 		$senha_criptografada = $this->criptoSenha($senha);
 		$token = md5(time());
-		$link = "http://danielfalsetti-001-site7.ftempurl.com:80/confirmacao.php?email=$email&token=$token";
+		$link = "http://projetocarro.zapto.org:888/manutencao_veicular/confirmacao.php?email=$email&token=$token";
 		
-		if(smtpmailer($email, 'noreply@manutencaoveicular.com.br', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar sua conta: ' .$link)){
+		if(smtpmailer($email, 'guilhermerodrigues73@gmail.com', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar sua conta: ' .$link)){
 			
 			$stmt = $this->conn->prepare("INSERT INTO tb_usuario(S_NOME, S_EMAIL, N_TELEFONE, S_SENHA, D_DATA_CRIACAO, S_TOKEN) VALUES( ?, ?, ?, ?, NOW(), ?)");
 			$stmt->bind_param("sssss", $nome, $email, $telefone, $senha_criptografada, $token);
@@ -38,21 +45,85 @@ class Funcoes_BD{
 		
 	}
 	
-	public function armazenaVeiculo($marca, $modelo, $ano, $placa, $km, $usuario, $dispositivo) {
-		
-			$stmt = $this->conn->prepare("INSERT INTO tb_veiculo(S_MARCA, S_MODELO, D_ANO, S_PLACA, N_KM, I_USER, N_DISPOSITIVO) VALUES( ?, ?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("sssssss", $marca, $modelo, $ano, $placa, $km, $usuario, $dispositivo);
+	public function armazenaVeiculo($ano, $placa, $km, $id_usuario, $codigo_dispositivo, $id_modelo_veiculo) {
+					
+			$id_dispositivo = $this->obtemIDDispositivoPeloCodigo($codigo_dispositivo);
+
+			$stmt = $this->conn->prepare("INSERT INTO tb_veiculo_do_usuario(D_ANO, S_PLACA, N_KM, ID_USUARIO, ID_DISPOSITIVO, ID_MODELO_VEICULO) VALUES( ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("ssssss", $ano, $placa, $km, $id_usuario, $id_dispositivo, $id_modelo_veiculo);
 			
 			if($stmt->execute()) {
 				$stmt->close();
 				return true;				
 			} else {
+				$stmt->close();
 				return false;
 			}		
 	}
 	
+	public function criaManutencaoRecomendadaDoVeiculo($placa_veiculo_usuario, $id_manutencao_padrao, 
+											  $km_antecipacao, $tempo_antecipacao, $data_ultima_manutencao, $km_ultima_manutencao) {
+		
+		$id_veiculo_usuario = $this->obtemIDVeiculoDoUsuarioPelaPlaca($placa_veiculo_usuario);
+		
+		$stmt = $this->conn->prepare("SELECT S_NOME, N_LIMITE_KM, N_LIMITE_TEMPO_MESES from tb_manutencao_padrao WHERE ID = ?");
+		$stmt->bind_param("i", $id_manutencao_padrao);
+		$stmt->execute();
+		$manutencao_padrao = $stmt->get_result()->fetch_assoc();
+		$stmt->close();
+		$descricao = $manutencao_padrao['S_NOME'];
+		$limite_km = $manutencao_padrao['N_LIMITE_KM'];
+		$limite_tempo_meses = $manutencao_padrao['N_LIMITE_TEMPO_MESES'];
+		
+		
+		$stmt = $this->conn->prepare("INSERT INTO tb_manutencao_do_veiculo(ID_VEICULO_DO_USUARIO, ID_MANUTENCAO_PADRAO, S_DESCRICAO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES,
+									 N_KM_ANTECIPACAO, N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("sisiiiiss",$id_veiculo_usuario, $id_manutencao_padrao, $descricao, $limite_km, $limite_tempo_meses,
+						  $km_antecipacao, $tempo_antecipacao, $data_ultima_manutencao, $km_ultima_manutencao);
+		
+		if($stmt->execute()) {
+			$stmt->close();
+			return true;
+		} else {
+			$stmt->close();
+			return false;
+		}
+		
+	}
 	
+		public function criaManutencaoPersonalizadaDoVeiculo($placa_veiculo_usuario, $descricao, $limite_km, $limite_tempo_meses,
+											  $km_antecipacao, $tempo_antecipacao, $data_ultima_manutencao, $km_ultima_manutencao) {
+		
+		$id_veiculo_usuario = $this->obtemIDVeiculoDoUsuarioPelaPlaca($placa_veiculo_usuario);
+			
+		$stmt = $this->conn->prepare("INSERT INTO tb_manutencao_do_veiculo(ID_VEICULO_DO_USUARIO, ID_MANUTENCAO_PADRAO, S_DESCRICAO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES,
+									 N_KM_ANTECIPACAO, N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO) VALUES(?, NULL, ?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("ssiiiiss",$id_veiculo_usuario, $descricao, $limite_km, $limite_tempo_meses,
+						  $km_antecipacao, $tempo_antecipacao, $data_ultima_manutencao, $km_ultima_manutencao);
+		
+		if($stmt->execute()) {
+			$stmt->close();
+			return true;
+		} else {
+			$stmt->close();
+			return false;
+		}
+		
+	}
 	
+	public function obtemIDDispositivoPeloCodigo($codigo_dispositivo) {
+		
+		$stmt = $this->conn->prepare("SELECT ID FROM tb_dispositivo WHERE S_CODIGO = ?");
+		$stmt->bind_param("s",$codigo_dispositivo);
+		$stmt->execute();
+		
+		$dispositivo = $stmt->get_result()->fetch_assoc();
+		$stmt->close();
+		
+		return $dispositivo['ID'];
+				
+	}
+		
 	
 	/* Verifica e retorna Usuário atraves do email e senha*/
 	public function obtemUsuarioPorEmailESenha($email, $senha){
@@ -118,38 +189,68 @@ class Funcoes_BD{
         }
 	}
 	
-	public function verificaDispositivoEmUso($dispositivo){
+	public function verificaDispositivoExistente($codigo_dispositivo){
 		
-		$stmt = $this->conn->prepare("SELECT N_DISPOSITIVO from tb_veiculo WHERE N_DISPOSITIVO = ?");
-        $stmt->bind_param("s", $dispositivo);
+		$stmt = $this->conn->prepare("SELECT S_CODIGO from tb_dispositivo WHERE S_CODIGO = ?");
+        $stmt->bind_param("s", $codigo_dispositivo);
         $stmt->execute();
         $stmt->store_result();
 		
 		if ($stmt->num_rows > 0) {
-            // usuário existe
             $stmt->close();
             return true;
         } else {
-            // usuário não existe
             $stmt->close();
             return false;
         }
 	}
-		
 	
+	public function verificaDispositivoAtivo($codigo_dispositivo){
+		
+		$stmt = $this->conn->prepare("SELECT S_CODIGO from tb_dispositivo WHERE S_CODIGO = ? AND B_ATIVO = 1");
+        $stmt->bind_param("s", $codigo_dispositivo);
+        $stmt->execute();
+        $stmt->store_result();
+		
+		if ($stmt->num_rows > 0) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }
+	}
+	
+	public function verificaDispositivoEmUso($codigo_dispositivo) {
+		
+		
+		$stmt = $this->conn->prepare("SELECT b.S_CODIGO FROM tb_veiculo_do_usuario AS a INNER JOIN tb_dispositivo AS b ON a.ID_DISPOSITIVO = b.ID WHERE b.S_CODIGO = ?");
+		$stmt->bind_param("s",$codigo_dispositivo);
+		$stmt->execute();
+		$stmt->store_result();
+		
+		if ($stmt->num_rows > 0) {
+            $stmt->close();
+            return true;
+        } else {
+            $stmt->close();
+            return false;
+        }      
+	
+	}
+	
+			
 	public function verificaVeiculoExistente($placa) {
 		
-		$stmt = $this->conn->prepare("SELECT S_PLACA from tb_veiculo WHERE S_PLACA = ?");
+		$stmt = $this->conn->prepare("SELECT S_PLACA from tb_veiculo_do_usuario WHERE S_PLACA = ?");
         $stmt->bind_param("s", $placa);
         $stmt->execute();
         $stmt->store_result();
 		
 		if ($stmt->num_rows > 0) {
-            // veiculo existe
             $stmt->close();
             return true;
         } else {
-            // veiculo não existe
             $stmt->close();
             return false;
         }
@@ -164,8 +265,8 @@ class Funcoes_BD{
 		if($usuario) {
 			
 			$token = $usuario['S_TOKEN'];
-			$link = "http://danielfalsetti-001-site7.ftempurl.com:80/confirmacao.php?email=$email&token=$token";
-			if(smtpmailer($email, 'noreply@manutencaoveicular.com.br', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar seu email: ' .$link)){
+			$link = "http://projetocarro.zapto.org:888/manutencao_veicular/confirmacao.php?email=$email&token=$token";
+			if(smtpmailer($email, 'guilhermerodrigues73@gmail', 'Projeto Carro', 'Confirmacao Email', 'Clique no link para confirmar seu email: ' .$link)){
 				
 				return true;
 				
@@ -276,15 +377,87 @@ class Funcoes_BD{
 				return false;
 				
 			}
-			
 		}		
-
 	}
 	
-	public function obtemVeiculosPorUsuario($idusuario) {
+	public function atualizaInfoManutencaoDoVeiculo($id_manutencao_do_usuario, $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses,
+													$data_ultima_manutencao, $km_ultima_manutencao){
 		
-		$stmt = $this->conn->prepare("SELECT * FROM tb_veiculo WHERE I_USER = ?");
-		$stmt->bind_param("s", $idusuario);
+		$stmt = $this->conn->prepare("SELECT N_LIMITE_KM, N_LIMITE_TEMPO_MESES, N_KM_ANTECIPACAO, N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO
+									 FROM tb_manutencao_do_veiculo WHERE ID = ?");
+		$stmt->bind_param("i", $id_manutencao_do_usuario);
+		$stmt->execute();
+		$result = $stmt->get_result()->fetch_assoc();
+		$stmt->close();
+		
+		$limite_km_antigo = $result["N_LIMITE_KM"];
+		$limite_tempo_meses_antigo = $result["N_LIMITE_TEMPO_MESES"];
+		$km_antecipacao_antigo = $result["N_KM_ANTECIPACAO"];
+		$tempo_antecipacao_meses_antigo = $result["N_TEMPO_ANTECIPACAO_MESES"];
+		$data_ultima_manutencao_antigo = $result["D_DATA_ULTIMA_MANUTENCAO"];
+		$km_ultima_manutencao_antigo = $result["N_KM_ULTIMA_MANUTENCAO"];
+		
+		if($limite_km == $limite_km_antigo && $limite_tempo_meses == $limite_tempo_meses_antigo && $km_antecipacao == $km_antecipacao_antigo
+		   && $tempo_antecipacao_meses == $tempo_antecipacao_meses_antigo && $data_ultima_manutencao == $data_ultima_manutencao_antigo
+		   && $km_ultima_manutencao == $km_ultima_manutencao_antigo) {
+			
+			return false;
+		
+		} else {
+			
+			$stmt = $this->conn->prepare("UPDATE tb_manutencao_do_veiculo SET N_LIMITE_KM = ?, N_LIMITE_TEMPO_MESES = ?, N_KM_ANTECIPACAO = ?, N_TEMPO_ANTECIPACAO_MESES = ?, D_DATA_ULTIMA_MANUTENCAO = ?, N_KM_ULTIMA_MANUTENCAO = ?
+										 WHERE ID = ?");
+			$stmt->bind_param("iiiisii", $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses, $data_ultima_manutencao, $km_ultima_manutencao, $id_manutencao_do_usuario);
+			$result = $stmt->execute();
+			$stmt->close();
+			return true;
+		}		
+	}
+
+	
+	public function obtemManutencoesRecomendadas($id_modelo_veiculo) {
+		
+		$stmt = $this->conn->prepare("SELECT S_NOME, N_LIMITE_KM, N_LIMITE_TEMPO_MESES FROM tb_manutencao_padrao WHERE ID_MODELO_VEICULO = ?");
+		$stmt->bind_param("i", $id_modelo_veiculo);
+		$stmt->execute();
+		$result = $stmt->get_result();
+				
+		if(!empty($result)) {
+			
+			if($result->num_rows > 0) {
+				
+				$manutencoes = array();				
+				while($linha = $result->fetch_assoc()) {
+					
+					$manutencao = array();
+					$manutencao["nome"] = $linha["S_NOME"];
+					$manutencao["limite_km"] = $linha["N_LIMITE_KM"];
+					$manutencao["limite_tempo_meses"] = $linha["N_LIMITE_TEMPO_MESES"];
+					array_push($manutencoes,$manutencao);
+				}
+				$stmt->close();				
+				return $manutencoes;
+										
+			} else {
+				$stmt->close();
+				return false;
+			}
+			
+		} else {
+			$stmt->close();
+			return false;
+		}		
+	}
+	
+	
+	
+	public function obtemVeiculosPorUsuario($id_usuario) {
+		
+		$stmt = $this->conn->prepare("SELECT a.D_ANO, a.S_PLACA, a.N_KM, b.S_CODIGO, c.S_MODELO, d.S_MARCA FROM tb_veiculo_do_usuario AS a
+									 INNER JOIN tb_dispositivo AS b ON a.ID_DISPOSITIVO = b.ID
+									 INNER JOIN tb_modelo_de_veiculo AS c ON a.ID_MODELO_VEICULO = c.ID
+									 INNER JOIN tb_marca_de_veiculo AS d ON c.ID_MARCA = d.ID WHERE a.ID_USUARIO = ?");
+		$stmt->bind_param("s", $id_usuario);
 		$stmt->execute();
 		$result = $stmt->get_result();
 				
@@ -296,12 +469,12 @@ class Funcoes_BD{
 				while($linha = $result->fetch_assoc()) {
 					
 					$veiculo = array();
-					$veiculo["marca"] = $linha["S_MARCA"];
-					$veiculo["modelo"] = $linha["S_MODELO"];
 					$veiculo["ano"] = $linha["D_ANO"];
 					$veiculo["placa"] = $linha["S_PLACA"];
 					$veiculo["km"] = $linha["N_KM"];
-					$veiculo["id_dispositivo"] = $linha["N_DISPOSITIVO"];
+					$veiculo["codigo_dispositivo"] = $linha["S_CODIGO"];
+					$veiculo["modelo"] = $linha["S_MODELO"];
+					$veiculo["marca"] = $linha["S_MARCA"];
 					array_push($veiculos,$veiculo);
 				}
 				$stmt->close();				
@@ -318,48 +491,234 @@ class Funcoes_BD{
 		}		
 	}
 	
-	public function atualizaInfoVeiculo($marca, $modelo, $ano, $dispositivo, $placa) {
+	public function notificaManutencoesAtrasadasEProximas($codigo_dispositivo) {
 		
-		$stmt = $this->conn->prepare("SELECT S_MARCA, S_MODELO, D_ANO, N_DISPOSITIVO from tb_veiculo WHERE S_PLACA = ?");
-		$stmt->bind_param("s",$placa);
+		//----------------manutencoes proximas------------------------------
+		$manutencoes_atrasadas = array();
+		$manutencoes_proximas = array();				
+
+		$manutencoes_notificadas = array();
+		
+		$stmt = $this->conn->prepare("SELECT c.S_MODELO, b.S_PLACA, b.N_KM, a.S_DESCRICAO, a.N_KM_ULTIMA_MANUTENCAO, a.N_LIMITE_KM, a.D_DATA_ULTIMA_MANUTENCAO, a.N_LIMITE_TEMPO_MESES
+									FROM tb_manutencao_do_veiculo AS a
+									INNER JOIN tb_veiculo_do_usuario AS b ON a.ID_VEICULO_DO_USUARIO = b.ID
+                                    INNER JOIN tb_modelo_de_veiculo AS c ON b.ID_MODELO_VEICULO = c.ID
+                                    INNER JOIN tb_dispositivo AS d ON b.ID_DISPOSITIVO = d.ID
+									WHERE (d.S_CODIGO = ?) AND (b.N_KM >= a.N_KM_ULTIMA_MANUTENCAO + a.N_LIMITE_KM - a.N_KM_ANTECIPACAO AND b.N_KM < a.N_KM_ULTIMA_MANUTENCAO + a.N_LIMITE_KM)
+									OR (NOW() >= DATE_ADD(a.D_DATA_ULTIMA_MANUTENCAO, interval N_LIMITE_TEMPO_MESES-N_TEMPO_ANTECIPACAO_MESES month) AND NOW() < DATE_ADD(a.D_DATA_ULTIMA_MANUTENCAO, interval N_LIMITE_TEMPO_MESES month))");
+		$stmt->bind_param("s",$codigo_dispositivo);
 		$stmt->execute();
-		$result = $stmt->get_result()->fetch_assoc();
-		$stmt->close();
-		
-		$marca_antigo = $result["S_MARCA"];
-		$modelo_antigo = $result["S_MODELO"];
-		$ano_antigo = $result["D_ANO"];
-		$dispositivo_antigo = $result["N_DISPOSITIVO"];
-		
-		if($marca == $marca_antigo && $modelo == $modelo_antigo && $ano == $ano_antigo && $dispositivo == $dispositivo_antigo ) {
-			
-			return false;
-		
-		} else {
-			
-			$stmt = $this->conn->prepare("UPDATE tb_veiculo SET S_MARCA = ?, S_MODELO = ?, D_ANO = ?, N_DISPOSITIVO = ? WHERE S_PLACA = ?");
-			$stmt->bind_param("sssss", $marca, $modelo, $ano, $dispositivo, $placa);
-			
-			if($stmt->execute()) {
+		$result = $stmt->get_result();
 				
-				$stmt->close();			
-				return true;
+		if(!empty($result)) {
 			
+			if($result->num_rows > 0) {
+				
+				while($linha = $result->fetch_assoc()) {
+					
+					$manutencao_proxima = array();
+					$manutencao_proxima["modelo_veiculo"] = $linha["S_MODELO"];
+					$manutencao_proxima["placa"] = $linha["S_PLACA"];
+					$manutencao_proxima["km_atual"] = $linha["N_KM"];
+					$manutencao_proxima["descricao"] = $linha["S_DESCRICAO"];
+					$manutencao_proxima["km_ultima_manutencao"] = $linha["N_KM_ULTIMA_MANUTENCAO"];
+					$manutencao_proxima["km_proxima_manutencao"] = $linha["N_LIMITE_KM"] + $linha["N_KM_ULTIMA_MANUTENCAO"];
+					$manutencao_proxima["data_ultima_manutencao"] = $linha["D_DATA_ULTIMA_MANUTENCAO"];					
+					$tempo_limite_meses = $linha["N_LIMITE_TEMPO_MESES"];				
+					$manutencao_proxima["data_proxima_manutencao"] = date('Y-m-d', strtotime("+$tempo_limite_meses month", strtotime($linha["D_DATA_ULTIMA_MANUTENCAO"])));
+					
+					$manutencao_proxima["status"] = "proxima";
+					array_push($manutencoes_proximas,$manutencao_proxima);
+					
+				}
+				
+				array_push($manutencoes_notificadas, $manutencoes_proximas);
+			
+				$stmt->close();				
+										
 			} else {
-				
-				$stmt->close();			
-				return false;
-				
+				$stmt->close();
 			}
-						
+			
+		} else {
+			$stmt->close();
 		}
+		
+		//----------------manutencoes atrasadas------------------------------
+		
+		$stmt = $this->conn->prepare("SELECT c.S_MODELO, b.S_PLACA, b.N_KM, a.S_DESCRICAO, a.N_KM_ULTIMA_MANUTENCAO, a.N_LIMITE_KM, a.D_DATA_ULTIMA_MANUTENCAO, a.N_LIMITE_TEMPO_MESES
+									FROM tb_manutencao_do_veiculo AS a
+									INNER JOIN tb_veiculo_do_usuario AS b ON a.ID_VEICULO_DO_USUARIO = b.ID
+                                    INNER JOIN tb_modelo_de_veiculo AS c ON b.ID_MODELO_VEICULO = c.ID
+                                    INNER JOIN tb_dispositivo AS d ON b.ID_DISPOSITIVO = d.ID
+									WHERE d.S_CODIGO = ? AND b.N_KM >= a.N_KM_ULTIMA_MANUTENCAO + a.N_LIMITE_KM OR NOW() >= DATE_ADD(a.D_DATA_ULTIMA_MANUTENCAO, interval N_LIMITE_TEMPO_MESES month)");
+		$stmt->bind_param("s",$codigo_dispositivo);
+		$stmt->execute();
+		$result = $stmt->get_result();
+				
+		if(!empty($result)) {
+			
+			if($result->num_rows > 0) {
+				
+				while($linha = $result->fetch_assoc()) {
+					
+					$manutencao_atrasada = array();
+					$manutencao_atrasada["modelo_veiculo"] = $linha["S_MODELO"];
+					$manutencao_atrasada["placa"] = $linha["S_PLACA"];
+					$manutencao_atrasada["km_atual"] = $linha["N_KM"];
+					$manutencao_atrasada["descricao"] = $linha["S_DESCRICAO"];
+					$manutencao_atrasada["km_ultima_manutencao"] = $linha["N_KM_ULTIMA_MANUTENCAO"];
+					$manutencao_atrasada["km_proxima_manutencao"] = $linha["N_LIMITE_KM"] + $linha["N_KM_ULTIMA_MANUTENCAO"];
+					$manutencao_atrasada["data_ultima_manutencao"] = $linha["D_DATA_ULTIMA_MANUTENCAO"];					
+					$tempo_limite_meses = $linha["N_LIMITE_TEMPO_MESES"];				
+					$manutencao_atrasada["data_proxima_manutencao"] = date('Y-m-d', strtotime("+$tempo_limite_meses month", strtotime($linha["D_DATA_ULTIMA_MANUTENCAO"])));				
+					//acrescenta 1 mes em uma data
+					//$linha["D_DATA_ULTIMA_MANUTENCAO"] = date('Y-m-d', strtotime("+1 month", strtotime($linha["D_DATA_ULTIMA_MANUTENCAO"])));					
+					$manutencao_atrasada["status"] = "atrasada";
+					array_push($manutencoes_atrasadas,$manutencao_atrasada);
+				}
+									
+				array_push($manutencoes_notificadas, $manutencoes_atrasadas);
+
+				
+				$stmt->close();				
+										
+			} else {
+				$stmt->close();
+			}
+			
+		} else {
+			$stmt->close();
+		}
+		
+		/*
+		
+		require_once 'firebase/firebase.php';
+        require_once  'firebase/push.php';
+		
+		$firebase = new Firebase();
+        $push = new Push();
+
+			
+		$qtd_manutencoes_proximas = count($manutencoes_proximas);
+		$qtd_manutencoes_atrasadas = count($manutencoes_atrasadas);
+		
+		// optional payload
+		$payload = $manutencoes_notificadas;
+
+		// notification title
+		$title = "Mobe - Manutencao Veicular";
+				
+		// notification message
+		$message = "Voce tem $qtd_manutencoes_proximas manutencoes proximas e $qtd_manutencoes_atrasadas manutencoes atrasadas";
+		
+		// push type - single user / topic
+		$push_type = "individual";
+		
+		// whether to include to image or not
+		$include_image = FALSE;
+
+
+		$push->setTitle($title);
+		$push->setMessage($message);
+		if ($include_image) {
+			$push->setImage('http://api.androidhive.info/images/minion.jpg');
+		} else {
+			$push->setImage('');
+		}
+		$push->setIsBackground(FALSE);
+		$push->setPayload($payload);
+
+
+		$json = '';
+		$response = '';
+
+		if ($push_type == 'topic') {
+			$json = $push->getPush();
+			$response = $firebase->sendToTopic('global', $json);
+		} else if ($push_type == 'individual') {
+			$json = $push->getPush();
+			$regId = "cLQigKKr4As:APA91bE8P4ZviaSTCVzX6tO25GNiiMHotu4ZKElBVlUgPrpD-bTHmfJTQxcF3yU1rc2hgV6aIdQgPvUZ0-8oGFbNSzdThyw5WEY9G5PfdlhcHNlgay4mghABoS74vdKi1TDUlxRBlk9AAYTQaeQRIiVmiEOo5BBjgQ";
+			$response = $firebase->send($regId, $json);
+		}
+		
+		*/
+
+				
+		return $manutencoes_notificadas;
 		
 	}
 	
-	public function somaKmDoVeiculo($km, $dispositivo) {
+	
+	public function obtemManutencoesDoVeiculo($id_veiculo_usuario) {
 		
-		$stmt = $this->conn->prepare("UPDATE tb_veiculo SET N_KM = N_KM + ? WHERE N_DISPOSITIVO = ?");
-		$stmt->bind_param("ds", $km, $dispositivo);
+		$stmt = $this->conn->prepare("SELECT ID, S_DESCRICAO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES, N_KM_ANTECIPACAO,
+									 N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO FROM tb_manutencao_do_veiculo
+									 WHERE ID_VEICULO_DO_USUARIO = ?");
+		$stmt->bind_param("i", $id_veiculo_usuario);
+		$stmt->execute();
+		$result = $stmt->get_result();
+				
+		if(!empty($result)) {
+			
+			if($result->num_rows > 0) {
+				
+				$manutencoes = array();				
+				while($linha = $result->fetch_assoc()) {
+					
+					$manutencao = array();
+					$manutencao["id"] = $linha["ID"];
+					$manutencao["descricao"] = $linha["S_DESCRICAO"];
+					$manutencao["limite_km"] = $linha["N_LIMITE_KM"];
+					$manutencao["limite_tempo_meses"] = $linha["N_LIMITE_TEMPO_MESES"];
+					$manutencao["km_antecipacao"] = $linha["N_KM_ANTECIPACAO"];
+					$manutencao["tempo_antecipacao_meses"] = $linha["N_TEMPO_ANTECIPACAO_MESES"];
+					$manutencao["data_ultima_manutencao"] = $linha["D_DATA_ULTIMA_MANUTENCAO"];
+					$manutencao["km_ultima_manutencao"] = $linha["N_KM_ULTIMA_MANUTENCAO"];
+					array_push($manutencoes,$manutencao);
+				}
+				$stmt->close();				
+				return $manutencoes;
+										
+			} else {
+				$stmt->close();
+				return false;
+			}
+			
+		} else {
+			$stmt->close();
+			return false;
+		}		
+	}
+	
+	public function modificaDispositivoDoVeiculo($codigo_dispositivo, $placa) {
+		
+		$id_dispositivo = $this->obtemIDDispositivoPeloCodigo($codigo_dispositivo);			
+		$stmt = $this->conn->prepare("UPDATE tb_veiculo_do_usuario SET ID_DISPOSITIVO = ? WHERE S_PLACA = ?");
+		$stmt->bind_param("is",$id_dispositivo, $placa);
+		
+		if($stmt->execute()) {
+			
+			$stmt->close();			
+			return true;
+		
+		} else {
+			
+			$stmt->close();			
+			return false;
+			
+		}
+						
+		
+	}
+	
+	public function somaKmDoVeiculo($km, $codigo_dispositivo) {
+		
+		
+		$id_dispositivo = $this->obtemIDDispositivoPeloCodigo($codigo_dispositivo);
+		
+		$stmt = $this->conn->prepare("UPDATE tb_veiculo_do_usuario SET N_KM = N_KM + ? WHERE ID_DISPOSITIVO = ?");
+		$stmt->bind_param("ds", $km, $id_dispositivo);
 		
         if ($stmt->execute()) {
             $stmt->close();
@@ -372,10 +731,34 @@ class Funcoes_BD{
 				
 	}
 	
-	public function mostraInfoVeiculo($placa, $usuario) {
+	public function gravaKmRecebidaNoLog($codigo_dispositivo, $km, $host) {
+		
+		
+		$id_dispositivo = $this->obtemIDDispositivoPeloCodigo($codigo_dispositivo);
+		$stmt = $this->conn->prepare("INSERT INTO tb_km_recebida(ID_DISPOSITIVO, D_DATA_HORA_RECEBIDA, N_KM, S_HOST) VALUES( ?, NOW(), ?, ?)");
+		$stmt->bind_param("sds",$id_dispositivo, $km, $host);
+		
+		if($stmt->execute()) {
+			
+			$stmt->close();
+			return true;
+		
+		} else {
+			
+			$stmt->close();
+			return flase;
+		}
 
-		$stmt = $this->conn->prepare("SELECT * FROM tb_veiculo WHERE S_PLACA = ? AND I_USER = ?");
-		$stmt->bind_param("ss", $placa, $usuario);
+	}
+	
+	
+	public function mostraInfoVeiculo($placa, $id_usuario) {
+
+		$stmt = $this->conn->prepare("SELECT a.ID, a.D_ANO, a.S_PLACA, a.N_KM, b.S_CODIGO, c.S_MODELO, d.S_MARCA FROM tb_veiculo_do_usuario AS a
+									 INNER JOIN tb_dispositivo AS b ON a.ID_DISPOSITIVO = b.ID
+									 INNER JOIN tb_modelo_de_veiculo AS c ON a.ID_MODELO_VEICULO = c.ID
+									 INNER JOIN tb_marca_de_veiculo AS d ON c.ID_MARCA = d.ID WHERE a.ID_USUARIO = ? AND a.S_PLACA = ?");
+		$stmt->bind_param("ss", $id_usuario, $placa);
 			
 		if($stmt->execute()) {
 			
@@ -387,9 +770,27 @@ class Funcoes_BD{
 			
 			return false;
 			
-		}		
-		
+		}				
 	}
+	
+	public function mostraInfoManutencaoDoVeiculo($id_manutencao_do_veiculo) {
+
+		$stmt = $this->conn->prepare("SELECT ID, S_DESCRICAO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES, N_KM_ANTECIPACAO, N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO
+									 FROM tb_manutencao_do_veiculo WHERE ID = ?");
+		$stmt->bind_param("i", $id_manutencao_do_veiculo);
+			
+		if($stmt->execute()) {
+			
+			$manutencao = $stmt->get_result()->fetch_assoc();
+			$stmt->close();
+			return $manutencao;
+		
+		} else {
+			
+			return false;
+			
+		}				
+	}	
 	
 	
 	public function enviaNovaSenha($email) {
@@ -397,7 +798,7 @@ class Funcoes_BD{
 		$senha_nova = substr(time(),0,8);
 		$senha_nova_criptografada = $this->criptoSenha($senha_nova);
 		
-		if(smtpmailer($email, 'noreply@manutencaoveicular.com.br', 'Projeto Carro', 'Sua nova senha','Sua nova senha e: '.$senha_nova )) {
+		if(smtpmailer($email, 'guilhermerodrigues73@gmail.com', 'Projeto Carro', 'Sua nova senha','Sua nova senha e: '.$senha_nova )) {
                     
 			$stmt = $this->conn->prepare("UPDATE tb_usuario SET S_SENHA = ? WHERE S_EMAIL = ?");
             $stmt->bind_param("ss", $senha_nova_criptografada, $email);
@@ -458,7 +859,7 @@ class Funcoes_BD{
 		
 		if($stmt->execute()) {
 			
-			smtpmailer($email, 'noreply@manutencaoveicular.com.br', 'Projeto Carro', 'Desativacao de conta', 'Sua conta foi desativada com sucesso, caso necessite ativar novamente acesse o app.');
+			smtpmailer($email, 'guilhermerodrigues73@gmail', 'Projeto Carro', 'Desativacao de conta', 'Sua conta foi desativada com sucesso, caso necessite ativar novamente acesse o app.');
 			$stmt->close();
 			return true;
 			
@@ -471,7 +872,7 @@ class Funcoes_BD{
 	
 	public function modificaKmManualmente($placa, $km) {
 		
-		$stmt = $this->conn->prepare("UPDATE tb_veiculo SET N_KM = ? WHERE S_PLACA = ?");
+		$stmt = $this->conn->prepare("UPDATE tb_veiculo_do_usuario SET N_KM = ? WHERE S_PLACA = ?");
 		$stmt->bind_param("ss", $km, $placa);
 		
 		if($stmt->execute()) {
@@ -487,11 +888,29 @@ class Funcoes_BD{
 		
 	}
 	
-	
+	public function inserirManutencaoPadraoManualmente() {
+		
+		$s_nome = "Rodizio de pneus";
+		$n_limite_km = 10000;
+		$n_limite_tempo_meses = 14;
+		
+		$cont = 2287;
+		
+		while ($cont <= 2370) {
+			
+			$stmt = $this->conn->prepare("INSERT INTO tb_manutencao_padrao(S_NOME, ID_MODELO_VEICULO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES) VALUES(?, ?, ?, ?)");
+			$stmt->bind_param("siss", $s_nome, $cont, $n_limite_km, $n_limite_tempo_meses);
+			$stmt->execute();
+			$stmt->close();
+			$cont++;
+			
+		}
+		
+	}
 	
 	public function excluiVeiculo($placa) {
 		
-		$stmt = $this->conn->prepare("DELETE FROM tb_veiculo WHERE S_PLACA = ?");
+		$stmt = $this->conn->prepare("DELETE FROM tb_veiculo_do_usuario WHERE S_PLACA = ?");
 		$stmt->bind_param("s",$placa);
 		
 		if($stmt->execute()) {
@@ -500,8 +919,21 @@ class Funcoes_BD{
 			return true;
 		} else {
 			return false;
-		}
+		}	
+	}
+	
+	public function excluiManutencaoDoVeiculo($id_manutencao_do_veiculo) {
 		
+		$stmt = $this->conn->prepare("DELETE FROM tb_manutencao_do_veiculo WHERE ID = ?");
+		$stmt->bind_param("i",$id_manutencao_do_veiculo);
+		
+		if($stmt->execute()) {
+			
+			$stmt->close();
+			return true;
+		} else {
+			return false;
+		}	
 	}
 	
 	
@@ -535,7 +967,7 @@ class Funcoes_BD{
 	
 	public function obtemMarcasParaSpinner() {
 		
-		$stmt = $this->conn->prepare("SELECT S_MARCA FROM tb_exemplos_marcas");
+		$stmt = $this->conn->prepare("SELECT * FROM tb_marca_de_veiculo");
 		$stmt->execute();
 		$result = $stmt->get_result();
 				
@@ -545,10 +977,10 @@ class Funcoes_BD{
 				
 				$marcas = array();				
 				while($linha = $result->fetch_assoc()) {
-										
-					$marcas[] = $linha["S_MARCA"];
-					//$marca["marca"] = $linha["S_MARCA"];
-					//array_push($marcas,$marca);
+					$marca = array();					
+					$marca["ID"] = $linha["ID"];
+					$marca["MARCA"] = $linha["S_MARCA"];
+					array_push($marcas,$marca);
 				}
 				$stmt->close();				
 				return $marcas;
@@ -563,16 +995,23 @@ class Funcoes_BD{
 			return false;
 		}				
 	}
+		
 	
-	public function obtemModelosPorMarcaParaSpinner($marca) {
+	public function obtemIDVeiculoDoUsuarioPelaPlaca($placa) {
 		
-		$stmt = $this->conn->prepare("SELECT ID_MARCA FROM tb_exemplos_marcas WHERE S_MARCA = ?");
-		$stmt->bind_param("s",$marca);
+		$stmt = $this->conn->prepare("SELECT ID from tb_veiculo_do_usuario WHERE S_PLACA = ?");
+		$stmt->bind_param("s",$placa);
 		$stmt->execute();
-		$result = $stmt->get_result()->fetch_assoc();
-		$id_marca = $result["ID_MARCA"];
+		$veiculo_do_usuario = $stmt->get_result()->fetch_assoc();
+		$stmt->close();		
+		return $veiculo_do_usuario['ID'];
+				
+	}
+	
+	
+	public function obtemModelosPorIDMarcaParaSpinner($id_marca) {
 		
-		$stmt = $this->conn->prepare("SELECT S_MODELO FROM tb_exemplos_veiculos WHERE ID_MARCA = ?");
+		$stmt = $this->conn->prepare("SELECT * FROM tb_modelo_de_veiculo WHERE ID_MARCA = ?");
 		$stmt->bind_param("i",$id_marca);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -583,7 +1022,10 @@ class Funcoes_BD{
 			
 			while($linha = $result->fetch_assoc()) {
 				
-				$modelos[] = $linha["S_MODELO"];
+				$modelo = array();
+				$modelo["ID"] = $linha["ID"];
+				$modelo["MODELO"] = $linha["S_MODELO"];
+				array_push($modelos,$modelo);
 				
 			}
 			

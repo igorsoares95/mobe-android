@@ -6,21 +6,21 @@
 	//cria um array JSON
 	$response = array("error" => FALSE);
 	
-	if(isset($_POST['id_usuario'])){
+	if(isset($_POST['id_modelo_veiculo'])){
 		
 		//recebe senha e email via POST
-		$id_usuario = $_POST['id_usuario'];
+		$id_modelo_veiculo = $_POST['id_modelo_veiculo'];
 		
-		if($bd->obtemVeiculosPorUsuario($id_usuario)) {
+		if($bd->obtemManutencoesRecomendadas($id_modelo_veiculo)) {
 			
-			$response["veiculos"] = $bd->obtemVeiculosPorUsuario($id_usuario);
+			$response["manutencoes"] = $bd->obtemManutencoesRecomendadas($id_modelo_veiculo);
 			$response["error"] = FALSE;			
 			echo json_encode($response);
 			
 		} else {
 			
 			$response["error"] = TRUE;
-			$response["error_msg"] = "Não foi encontrado veículos para esse usuário";
+			$response["error_msg"] = "Não foi encontrada manutencoes recomendadas para esse modelo";
 			echo json_encode($response);
 			
 		}

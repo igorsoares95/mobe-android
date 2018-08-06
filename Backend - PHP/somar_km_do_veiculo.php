@@ -1,21 +1,33 @@
 <?php
 	require_once 'include/Funcoes_BD.php';
 	$bd = new Funcoes_BD();
-	$response = array("error" => FALSE);
+	$response = array();
 	
-	if(isset($_POST['km']) && isset($_POST['id_dispositivo'])) {
+	if(isset($_POST['km']) && isset($_POST['codigo_dispositivo']) && isset($_POST['host'])) {
 	
 		$km = $_POST['km'];
-		$id_dispositivo = $_POST['id_dispositivo'];
+		$codigo_dispositivo = $_POST['codigo_dispositivo'];
+		$host = $_POST['host'];
 		
 		
-		if($bd->verificaDispositivoEmUso($id_dispositivo)) {
+		if($bd->verificaDispositivoEmUso($codigo_dispositivo)) {
 			
-			if($bd->somaKmDoVeiculo($km, $id_dispositivo)) {
+			if($bd->gravaKmRecebidaNoLog($codigo_dispositivo, $km, $host)) {
 				
-				$response["error"] = FALSE;
-				echo json_encode($response);
-				return true;
+				if($bd->somaKmDoVeiculo($km, $codigo_dispositivo)) {
+										
+					$response["manutencoes"] = $bd->notificaManutencoesAtrasadasEProximas($codigo_dispositivo);
+					echo json_encode($response);
+					return true;
+					
+				} else {
+					
+					$response["error"] = TRUE;;
+					echo json_encode($response);
+					return false;				
+										
+				}
+
 			   
 		    } else {
 			   

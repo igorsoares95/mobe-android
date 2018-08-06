@@ -5,22 +5,23 @@
 	
 	$response = array("error" => FALSE);
 	
-	if(isset($_POST['placa']) && isset($_POST['usuario'])) {
+	if(isset($_POST['placa']) && isset($_POST['id_usuario'])) {
 		
 		$placa = $_POST['placa'];
-		$usuario = $_POST['usuario'];
+		$id_usuario = $_POST['id_usuario'];
 				
-		$veiculo = $bd->mostraInfoVeiculo($placa, $usuario);
+		$veiculo = $bd->mostraInfoVeiculo($placa, $id_usuario);
 		
 		if($veiculo) {
 		
 			$response["error"] = FALSE;
-			$response["veiculo"]["marca"] = $veiculo["S_MARCA"];
-			$response["veiculo"]["modelo"] = $veiculo["S_MODELO"];
+			$response["veiculo"]["id"] = $veiculo["ID"];
 			$response["veiculo"]["ano"] = $veiculo["D_ANO"];
 			$response["veiculo"]["placa"] = $veiculo["S_PLACA"];
 			$response["veiculo"]["km"] = $veiculo["N_KM"];
-			$response["veiculo"]["dispositivo"] = $veiculo["N_DISPOSITIVO"];
+			$response["veiculo"]["codigo_dispositivo"] = $veiculo["S_CODIGO"];
+			$response["veiculo"]["modelo"] = $veiculo["S_MODELO"];
+			$response["veiculo"]["marca"] = $veiculo["S_MARCA"];
 			echo json_encode($response);
 			
 		} else {

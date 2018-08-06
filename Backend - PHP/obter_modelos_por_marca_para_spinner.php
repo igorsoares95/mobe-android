@@ -6,14 +6,14 @@
 	//cria um array JSON
 	$response = array();
 	
-	if(isset($_POST['marca'])){
+	if(isset($_POST['id_marca'])){
 		
 		//recebe senha e email via POST
-		$marca = $_POST['marca'];
+		$id_marca = $_POST['id_marca'];
 		
 		
-		if($bd->obtemModelosPorMarcaParaSpinner($marca)) {
-			$response["veiculos"] = $bd->obtemModelosPorMarcaParaSpinner($marca);		
+		if($bd->obtemModelosPorIDMarcaParaSpinner($id_marca)) {
+			$response["modelos"] = $bd->obtemModelosPorIDMarcaParaSpinner($id_marca);		
 			echo json_encode($response);
 			
 		} else {
