@@ -31,9 +31,7 @@ import java.util.List;
 import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.app.Config;
 
-/**
- * Created by Ravi on 31/03/15.
- */
+
 public class NotificationUtils {
 
     private static String TAG = NotificationUtils.class.getSimpleName();
