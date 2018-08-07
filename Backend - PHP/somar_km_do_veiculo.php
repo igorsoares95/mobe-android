@@ -16,7 +16,7 @@
 				
 				if($bd->somaKmDoVeiculo($km, $codigo_dispositivo)) {
 										
-					$response["manutencoes"] = $bd->notificaManutencoesAtrasadasEProximas($codigo_dispositivo);
+					$response = $bd->notificaManutencoesAtrasadasEProximas($codigo_dispositivo);
 					echo json_encode($response);
 					return true;
 					

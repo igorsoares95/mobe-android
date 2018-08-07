@@ -6,11 +6,12 @@
 	//cria um array JSON
 	$response = array("error" => FALSE);
 	
-	if( isset($_POST['email']) && isset($_POST['senha'])){
+	if( isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['reg_id']) ){
 		
-		//recebe senha e email via POST
+		//recebe senha e email e reg_id via POST
 		$email = $_POST['email'];
 		$senha = $_POST['senha'];
+		$reg_id = $_POST['reg_id'];
 		$usuario = $bd->obtemUsuarioPorEmailESenha($email, $senha);
 		
 		if($usuario){
@@ -19,12 +20,23 @@
 				
 				if(!$bd->verificaUsuarioInativo($email)) {
 				
-					$response["error"] = FALSE;
-					$response["usuario"]["id"] = $usuario["ID"];
-					$response["usuario"]["nome"] = $usuario["S_NOME"];
-					$response["usuario"]["email"] = $usuario["S_EMAIL"];
-					$response["usuario"]["telefone"] = $usuario["N_TELEFONE"];			
-					echo json_encode($response);
+					if($bd->gravaRedIdFirebaseDoUsuario($email,$reg_id)) {
+						$response["error"] = FALSE;
+						$response["usuario"]["id"] = $usuario["ID"];
+						$response["usuario"]["nome"] = $usuario["S_NOME"];
+						$response["usuario"]["email"] = $usuario["S_EMAIL"];
+						$response["usuario"]["telefone"] = $usuario["N_TELEFONE"];			
+						echo json_encode($response);				
+					
+					} else {
+						
+						$response["error"] = TRUE;
+						$response["usuario"]["inativo"] = $usuario["B_INATIVO"];
+						$response["error_msg"] = "Não foi possível armazenar o Reg ID do Usuario";
+						echo json_encode($response);					
+											
+					}
+
 				} else {
 					
 					$response["error"] = TRUE;			

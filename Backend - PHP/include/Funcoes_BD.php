@@ -7,16 +7,11 @@ class Funcoes_BD{
 	function __construct(){
 		require_once 'Conexao_BD.php';
 		require_once 'Email.php';
-		require_once 'firebase/firebase.php';
-		require_once 'firebase/push.php';
-		
-		
+
+			
 		$bd = new Conexao_BD();
 		$this->conn = $bd->conexao();
-		
-        $firebase = new Firebase();
-        $push = new Push();
-		
+				
 	}
 	
 	/* 	Armazena Usuário 
@@ -496,8 +491,6 @@ class Funcoes_BD{
 		//----------------manutencoes proximas------------------------------
 		$manutencoes_atrasadas = array();
 		$manutencoes_proximas = array();				
-
-		$manutencoes_notificadas = array();
 		
 		$stmt = $this->conn->prepare("SELECT c.S_MODELO, b.S_PLACA, b.N_KM, a.S_DESCRICAO, a.N_KM_ULTIMA_MANUTENCAO, a.N_LIMITE_KM, a.D_DATA_ULTIMA_MANUTENCAO, a.N_LIMITE_TEMPO_MESES
 									FROM tb_manutencao_do_veiculo AS a
@@ -531,9 +524,7 @@ class Funcoes_BD{
 					array_push($manutencoes_proximas,$manutencao_proxima);
 					
 				}
-				
-				array_push($manutencoes_notificadas, $manutencoes_proximas);
-			
+							
 				$stmt->close();				
 										
 			} else {
@@ -577,10 +568,7 @@ class Funcoes_BD{
 					$manutencao_atrasada["status"] = "atrasada";
 					array_push($manutencoes_atrasadas,$manutencao_atrasada);
 				}
-									
-				array_push($manutencoes_notificadas, $manutencoes_atrasadas);
-
-				
+													
 				$stmt->close();				
 										
 			} else {
@@ -591,12 +579,20 @@ class Funcoes_BD{
 			$stmt->close();
 		}
 		
+		
+		
+        error_reporting(-1);
+        ini_set('display_errors', 'On');
+
 		/*
+        require_once __DIR__ . '/firebase.php';
+        require_once __DIR__ . '/push.php';
+        */
 		
 		require_once 'firebase/firebase.php';
-        require_once  'firebase/push.php';
-		
-		$firebase = new Firebase();
+		require_once 'firebase/push.php';
+
+        $firebase = new Firebase();
         $push = new Push();
 
 			
@@ -604,13 +600,21 @@ class Funcoes_BD{
 		$qtd_manutencoes_atrasadas = count($manutencoes_atrasadas);
 		
 		// optional payload
-		$payload = $manutencoes_notificadas;
+		$payload = $manutencoes_atrasadas + $manutencoes_proximas;
+		
+		/*
+        $payload = array();
+        $payload['id'] = '1';
+        $payload['manutencao'] = 'Troca de Oleo';
+        */
+        
+        
 
 		// notification title
-		$title = "Mobe - Manutencao Veicular";
+		$title = 'Mobe - Manutencao Veicular';
 				
 		// notification message
-		$message = "Voce tem $qtd_manutencoes_proximas manutencoes proximas e $qtd_manutencoes_atrasadas manutencoes atrasadas";
+		$message = "Voce tem $qtd_manutencoes_proximas man prox e $qtd_manutencoes_atrasadas man atrasadas";
 		
 		// push type - single user / topic
 		$push_type = "individual";
@@ -638,14 +642,48 @@ class Funcoes_BD{
 			$response = $firebase->sendToTopic('global', $json);
 		} else if ($push_type == 'individual') {
 			$json = $push->getPush();
-			$regId = "cLQigKKr4As:APA91bE8P4ZviaSTCVzX6tO25GNiiMHotu4ZKElBVlUgPrpD-bTHmfJTQxcF3yU1rc2hgV6aIdQgPvUZ0-8oGFbNSzdThyw5WEY9G5PfdlhcHNlgay4mghABoS74vdKi1TDUlxRBlk9AAYTQaeQRIiVmiEOo5BBjgQ";
+			$regId = "eXBcZXKUWoU:APA91bEa6GABpYK45LUOncMJg0WS5Gu7TJcIZyCRJqflVfqwhBQPIlM6qPdCnQSesqAVzhH0si-VckmWUxwLy51nV5FymaCtJcNVEeoIGNV5O7lb9BO3tsDG1CDGj3ywmrdXfDHnBXtDDD99HkcMcz9V6c50CFUHeQ";
 			$response = $firebase->send($regId, $json);
 		}
 		
-		*/
+		
 
 				
-		return $manutencoes_notificadas;
+		return $manutencoes_atrasadas + $manutencoes_proximas;
+		//return $json;
+		
+	}
+	
+	
+	public function gravaRedIdFirebaseDoUsuario($email_usuario, $reg_id_firebase) {
+		
+		$stmt = $this->conn->prepare("UPDATE tb_usuario SET S_FIREBASE_REG_ID = ? WHERE S_EMAIL = ?");
+		$stmt->bind_param("ss", $reg_id_firebase, $email_usuario);
+		
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        }
+        else {
+			$stmt->close();
+            return false;
+        } 		
+		
+	}
+	
+	public function removeRegIdFirebaseDoUsuario($email_usuario) {
+		
+		$stmt = $this->conn->prepare("UPDATE tb_usuario SET S_FIREBASE_REG_ID = NULL WHERE S_EMAIL = ?");
+		$stmt->bind_param("s", $email_usuario);
+		
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        }
+        else {
+			$stmt->close();
+            return false;
+        } 	
 		
 	}
 	

@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity
     private Button btnLogout;
     private Button btnDesativarConta;
     private ProgressDialog pDialog;
+    String nome_usuario_main;
+    String email_usuario_main;
     private NavigationView navigationView;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
@@ -85,11 +87,12 @@ public class MainActivity extends AppCompatActivity
 
         bd = new SQLiteHandler(this.getApplicationContext());
         session = new SessionManager(this.getApplicationContext());
-
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
         HashMap<String, String> usuario = bd.getUserDetails();
-        String nome_usuario_main = usuario.get("S_NOME");
-        String email_usuario_main = usuario.get("S_EMAIL");
+        nome_usuario_main = usuario.get("S_NOME");
+        email_usuario_main = usuario.get("S_EMAIL");
 
         // Adicionar nome e email do usuario no nav_header_main
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -120,8 +123,6 @@ public class MainActivity extends AppCompatActivity
                     // now subscribe to `global` topic to receive app wide notifications
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
-                    displayFirebaseRegId();
-
 
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     // new push notification is received
@@ -134,17 +135,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         };
-
-        displayFirebaseRegId();
-    }
-
-    // Fetches reg id from shared preferences
-    // and displays on the screen
-    private void displayFirebaseRegId() {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
-        String regId = pref.getString("regId", null);
-
-        Log.e(TAG, "Firebase reg id: " + regId);
 
     }
 
@@ -175,12 +165,57 @@ public class MainActivity extends AppCompatActivity
 
     private void logoutUsuario() {
 
-        session.setLogin(false);
-        bd.deleteUsers();
+        pDialog.setMessage("Saindo ...");
+        showDialog();
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_LOGOUT_USUARIO, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Logout Response: " + response);
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+
+                        session.setLogin(false);
+                        bd.deleteUsers();
+
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Logout error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email_usuario_main);
+                return params;
+            }
+
+        };
+
+        AppController.getInstance().addToRequestQueue(strReq);
+
     }
 
 
@@ -270,5 +305,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showDialog() {
+        if(!pDialog.isShowing()) {
+            pDialog.show();
+        }
+    }
+
+    private void hideDialog() {
+        if(pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
     }
 }

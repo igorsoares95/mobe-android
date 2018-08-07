@@ -46,6 +46,9 @@ public class AppConfig {
 
     public static String URL_REGISTRAR_VEICULO = "http://10.0.2.2:888/base_dados_mobe/registro_veiculo.php";
 
+    public static String URL_LOGOUT_USUARIO = "http://10.0.2.2:888/base_dados_mobe/logout_usuario.php";
+
+
 
 
     /*
