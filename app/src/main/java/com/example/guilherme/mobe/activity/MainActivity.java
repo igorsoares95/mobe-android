@@ -2,11 +2,17 @@ package com.example.guilherme.mobe.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +27,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.support.v4.content.LocalBroadcastManager;
+
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,6 +42,11 @@ import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
 import com.example.guilherme.mobe.fragments.ManutencoesAtrasadasFragment;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.helper.SessionManager;
+import com.example.guilherme.mobe.app.Config;
+
+
+import com.example.guilherme.mobe.util.NotificationUtils;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,6 +67,8 @@ public class MainActivity extends AppCompatActivity
     private Button btnDesativarConta;
     private ProgressDialog pDialog;
     private NavigationView navigationView;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +85,7 @@ public class MainActivity extends AppCompatActivity
 
         bd = new SQLiteHandler(this.getApplicationContext());
         session = new SessionManager(this.getApplicationContext());
+
 
         HashMap<String, String> usuario = bd.getUserDetails();
         String nome_usuario_main = usuario.get("S_NOME");
@@ -91,7 +108,70 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(null).commit();
         }
 
+        //--------teste------------
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                    displayFirebaseRegId();
+
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    String message = intent.getStringExtra("message");
+
+                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+
+                }
+            }
+        };
+
+        displayFirebaseRegId();
     }
+
+    // Fetches reg id from shared preferences
+    // and displays on the screen
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e(TAG, "Firebase reg id: " + regId);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+    //---------------teste-------------------------------
 
     private void logoutUsuario() {
 
