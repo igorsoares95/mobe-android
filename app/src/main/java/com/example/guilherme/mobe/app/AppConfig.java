@@ -48,6 +48,12 @@ public class AppConfig {
 
     public static String URL_LOGOUT_USUARIO = "http://10.0.2.2:888/base_dados_mobe/logout_usuario.php";
 
+    public static String URL_ALTERAR_KM_MANUALMENTE = "http://10.0.2.2:888/base_dados_mobe/modificar_km_manualmente.php";
+
+    public static String URL_ALTERAR_DISPOSITIVO_DO_VEICULO = "http://10.0.2.2:888/base_dados_mobe/modificar_dispositivo_veiculo.php";
+
+
+
 
 
 

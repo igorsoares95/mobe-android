@@ -44,13 +44,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private TextView txtMarca;
     private TextView txtModelo;
     private EditText txtKm;
-    private EditText txtPlaca;
+    private TextView txtPlaca;
     private EditText txtDispositivo;
     private TextView txtAno;
     private String placa;
     private String id_usuario;
-    private Button btn_alterar_dados_veiculo;
+    private Button btn_alterar_km_veiculo, btn_alterar_dispositivo_veiculo;
     private Button btn_excluir_veiculo;
+    private String km_no_momento_da_abertura_da_fragment, dispositivo_no_momento_da_abertura_da_fragment;
 
 
     public MostraInfoVeiculoFragment() {
@@ -76,19 +77,53 @@ public class MostraInfoVeiculoFragment extends Fragment {
         txtMarca = (TextView) view.findViewById(R.id.txt_marca_mostra_info_veiculo);
         txtModelo = (TextView) view.findViewById(R.id.txt_modelo_mostra_info_veiculo);
         txtKm = (EditText) view.findViewById(R.id.txt_km_mostra_info_veiculo);
-        txtPlaca = (EditText) view.findViewById(R.id.txt_placa_mostra_info_veiculo);
+        txtPlaca = (TextView) view.findViewById(R.id.txt_placa_mostra_info_veiculo);
         txtDispositivo = (EditText) view.findViewById(R.id.txt_dispositivo_mostra_info_veiculo);
         txtAno = (TextView) view.findViewById(R.id.txt_ano_mostra_info_veiculo);
-        btn_alterar_dados_veiculo = (Button) view.findViewById(R.id.btn_alterar_dados_veiculo_mostra_info_veiculo);
+        btn_alterar_km_veiculo = (Button) view.findViewById(R.id.btn_alterar_km_mostra_info_veiculo);
+        btn_alterar_dispositivo_veiculo = (Button) view.findViewById(R.id.btn_alterar_dispositivo_mostra_info_veiculo);
         btn_excluir_veiculo = (Button) view.findViewById(R.id.btn_excluir_veiculo_mostra_info_veiculo);
 
         mostraInfoVeiculo();
 
-        btn_alterar_dados_veiculo.setOnClickListener(new View.OnClickListener() {
+        btn_alterar_km_veiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                atualizaInfoVeiculo(txtMarca.getText().toString(),txtModelo.getText().toString(),txtAno.getText().toString(),txtDispositivo.getText().toString(),placa);
+                if(km_no_momento_da_abertura_da_fragment.equals(txtKm.getText().toString())) {
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtKm.getText().toString());
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_container, new ListaVeiculosFragment())
+                            .commit();
+
+                }
+
+            }
+        });
+
+        btn_alterar_dispositivo_veiculo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtDispositivo.getText().toString())) {
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o código do dispositivo", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    alterarDispositivoDoVeiculo(txtDispositivo.getText().toString(), txtPlaca.getText().toString());
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_container, new ListaVeiculosFragment())
+                            .commit();
+
+                }
 
             }
         });
@@ -158,6 +193,9 @@ public class MostraInfoVeiculoFragment extends Fragment {
                         txtKm.setText(String.valueOf(km));
                         txtDispositivo.setText(dispositivo);
 
+                        km_no_momento_da_abertura_da_fragment = String.valueOf(km);
+                        dispositivo_no_momento_da_abertura_da_fragment = dispositivo;
+
                     }
 
 
@@ -195,14 +233,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
     }
 
-    private void atualizaInfoVeiculo(final String marca, final String modelo,final String ano, final String dispositivo, final String placa) {
+    private void alterarDispositivoDoVeiculo(final String codigo_dispositivo, final String placa) {
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_ATUALIZAR_INFO_VEICULO, new Response.Listener<String>() {
+                AppConfig.URL_ALTERAR_DISPOSITIVO_DO_VEICULO, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Atualizar info veiculo Response: " + response.toString());
+                Log.d(TAG, "Alterar dispositivo Response: " + response.toString());
 
                 try {
                     JSONObject object = new JSONObject(response);
@@ -211,7 +249,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                     if(!error) {
 
-                        Toast.makeText(getActivity().getApplicationContext(), "As informações do veículo foram alteradas com sucesso!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "A dispositivo foi alterado com sucesso!", Toast.LENGTH_LONG).show();
 
                     } else {
 
@@ -233,7 +271,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Update Error: " + error.getMessage());
+                Log.e(TAG, "modificar dispositivo Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -243,11 +281,68 @@ public class MostraInfoVeiculoFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("marca",marca);
-                params.put("modelo",modelo);
-                params.put("ano",ano);
-                params.put("dispositivo",dispositivo);
+                params.put("codigo_dispositivo",codigo_dispositivo);
                 params.put("placa",placa);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+
+    }
+
+    private void alterarKmVeiculoManualmente(final String placa, final String km) {
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_ALTERAR_KM_MANUALMENTE, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Alterar km manualmente Response: " + response.toString());
+
+                try {
+                    JSONObject object = new JSONObject(response);
+
+                    boolean error = object.getBoolean("error");
+
+                    if(!error) {
+
+                        Toast.makeText(getActivity().getApplicationContext(), "A quilometragem do veículo foi alterada com sucesso!", Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        String errorMsg = object.getString("error_msg");
+                        Toast.makeText(getActivity().getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "modificar km Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("placa",placa);
+                params.put("km",km);
                 return params;
             }
 

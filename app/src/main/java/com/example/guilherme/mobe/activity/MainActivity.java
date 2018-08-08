@@ -7,12 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,8 +23,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.support.v4.content.LocalBroadcastManager;
-
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,7 +33,7 @@ import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.fragments.AtualizarUsuarioFragment;
 import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
-import com.example.guilherme.mobe.fragments.ManutencoesAtrasadasFragment;
+import com.example.guilherme.mobe.fragments.MostraManutencoesAtrasadasDoUsuario;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.helper.SessionManager;
 import com.example.guilherme.mobe.app.Config;
@@ -107,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         if(savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.frame_container, new ManutencoesAtrasadasFragment())
+                    .add(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuario())
                     .addToBackStack(null).commit();
         }
 
@@ -261,7 +255,7 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_container, new ManutencoesAtrasadasFragment())
+                    .replace(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuario())
                     .addToBackStack(null).commit();
 
         } else if (id == R.id.nav_man_fut) {
