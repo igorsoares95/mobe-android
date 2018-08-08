@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "176817093807",
+    "firebase_url": "https://mobe-manutencao-veicular.firebaseio.com",
+    "project_id": "mobe-manutencao-veicular",
+    "storage_bucket": "mobe-manutencao-veicular.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176817093807:android:9d3e9166b98942ac",
+        "android_client_info": {
+          "package_name": "com.example.guilherme.mobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176817093807-qaj3kha6lk5t860h56sb8d67g8vqhcvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBujAacczZjA3XDBvnejaClEJUT1_pjwuM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176817093807:android:4297c09526c529fd",
+        "android_client_info": {
+          "package_name": "firebasenotifications.androidhive.info.firebasenotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176817093807-qaj3kha6lk5t860h56sb8d67g8vqhcvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBujAacczZjA3XDBvnejaClEJUT1_pjwuM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
