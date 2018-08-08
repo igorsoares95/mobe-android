@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.guilherme.mobe">
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.AppController"
         android:allowBackup="true"
@@ -32,12 +34,12 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.RegistroActivity" />
-        <activity android:name=".activity.AtivarUsuarioActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        </activity>
-        <activity android:name=".activity.EsqueciSenhaActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        </activity>
+        <activity
+            android:name=".activity.AtivarUsuarioActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+        <activity
+            android:name=".activity.EsqueciSenhaActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
 
         <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
@@ -52,6 +54,10 @@
         </service>
         <!-- ./Firebase Notifications -->
 
+        <activity
+            android:name=".activity.ClickNotificationMostrarManutencoes"
+            android:label="@string/title_activity_click_notification_mostrar_manutencoes"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

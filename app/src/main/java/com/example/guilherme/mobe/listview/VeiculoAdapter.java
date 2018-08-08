@@ -22,7 +22,7 @@ public class VeiculoAdapter extends ArrayAdapter<Veiculo> {
 
     public VeiculoAdapter(Context context, ArrayList<Veiculo> elementos) {
 
-        super(context, R.layout.linha,elementos);
+        super(context, R.layout.linha_list_view_veiculo,elementos);
         this.context = context;
         this.elementos = elementos;
 
@@ -31,11 +31,11 @@ public class VeiculoAdapter extends ArrayAdapter<Veiculo> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView= inflater.inflate(R.layout.linha, parent, false);
+        View rowView= inflater.inflate(R.layout.linha_list_view_veiculo, parent, false);
 
-        TextView txtModelo = (TextView) rowView.findViewById(R.id.txt_modelo);
-        TextView txtPlaca = (TextView) rowView.findViewById(R.id.txt_placa);
-        TextView txtKm = (TextView) rowView.findViewById(R.id.txt_km);
+        TextView txtModelo = (TextView) rowView.findViewById(R.id.txt_modelo_clicknotification);
+        TextView txtPlaca = (TextView) rowView.findViewById(R.id.txt_placa_clicknotification);
+        TextView txtKm = (TextView) rowView.findViewById(R.id.txt_km_atual_clicknotification);
         TextView txtDispositivo = (TextView) rowView.findViewById(R.id.txt_dispositivo);
 
         txtModelo.setText(elementos.get(position).getModelo());

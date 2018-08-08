@@ -6,8 +6,10 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.guilherme.mobe.activity.ClickNotificationMostrarManutencoes;
 import com.example.guilherme.mobe.activity.MainActivity;
 import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
+import com.example.guilherme.mobe.listview.ManutencaoAtrasadaOuProxima;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -17,6 +19,9 @@ import org.json.JSONObject;
 
 import com.example.guilherme.mobe.app.Config;
 import com.example.guilherme.mobe.util.NotificationUtils;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Created by Ravi Tamada on 08/08/16.
@@ -83,6 +88,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String timestamp = data.getString("timestamp");
             JSONArray payload = data.getJSONArray("payload");
 
+
             Log.e(TAG, "title: " + title);
             Log.e(TAG, "message: " + message);
             Log.e(TAG, "isBackground: " + isBackground);
@@ -103,7 +109,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // app is in background, show the notification in notification tray
 
                 //quando clicar na notification será aberto a MainActivity e será enviado como extra o payload
-                Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent resultIntent = new Intent(getApplicationContext(), ClickNotificationMostrarManutencoes.class);
                 resultIntent.putExtra("payload", payload.toString());
 
                 // check for image attachment
