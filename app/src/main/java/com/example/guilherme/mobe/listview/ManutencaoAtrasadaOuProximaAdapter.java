@@ -57,6 +57,10 @@ public class ManutencaoAtrasadaOuProximaAdapter extends ArrayAdapter<ManutencaoA
             txtDescricaoManutencao.setTextColor(Color.RED);
             lblDescricaoManutencao.setTextColor(Color.RED);
 
+        } else if(elementos.get(position).getStatus().equals("proxima")) {
+
+            txtDescricaoManutencao.setTextColor(Color.YELLOW);
+            lblDescricaoManutencao.setTextColor(Color.YELLOW);
         }
 
 

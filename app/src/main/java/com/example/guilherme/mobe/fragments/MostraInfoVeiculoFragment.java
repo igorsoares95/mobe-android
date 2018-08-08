@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +29,7 @@ import com.example.guilherme.mobe.listview.VeiculoAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,12 +41,12 @@ import java.util.Map;
 public class MostraInfoVeiculoFragment extends Fragment {
 
     private static final String TAG = MostraInfoVeiculoFragment.class.getSimpleName();
-    private EditText txtMarca;
-    private EditText txtModelo;
+    private TextView txtMarca;
+    private TextView txtModelo;
     private EditText txtKm;
     private EditText txtPlaca;
     private EditText txtDispositivo;
-    private EditText txtAno;
+    private TextView txtAno;
     private String placa;
     private String id_usuario;
     private Button btn_alterar_dados_veiculo;
@@ -71,12 +73,12 @@ public class MostraInfoVeiculoFragment extends Fragment {
         id_usuario = dados_do_veiculo.getString("id_usuario");
         //--------------------------------------------------------------------------
 
-        txtMarca = (EditText) view.findViewById(R.id.txt_marca_mostra_info_veiculo);
-        txtModelo = (EditText) view.findViewById(R.id.txt_modelo_mostra_info_veiculo);
+        txtMarca = (TextView) view.findViewById(R.id.txt_marca_mostra_info_veiculo);
+        txtModelo = (TextView) view.findViewById(R.id.txt_modelo_mostra_info_veiculo);
         txtKm = (EditText) view.findViewById(R.id.txt_km_mostra_info_veiculo);
         txtPlaca = (EditText) view.findViewById(R.id.txt_placa_mostra_info_veiculo);
         txtDispositivo = (EditText) view.findViewById(R.id.txt_dispositivo_mostra_info_veiculo);
-        txtAno = (EditText) view.findViewById(R.id.txt_ano_mostra_info_veiculo);
+        txtAno = (TextView) view.findViewById(R.id.txt_ano_mostra_info_veiculo);
         btn_alterar_dados_veiculo = (Button) view.findViewById(R.id.btn_alterar_dados_veiculo_mostra_info_veiculo);
         btn_excluir_veiculo = (Button) view.findViewById(R.id.btn_excluir_veiculo_mostra_info_veiculo);
 

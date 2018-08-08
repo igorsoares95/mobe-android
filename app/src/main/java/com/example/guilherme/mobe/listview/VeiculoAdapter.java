@@ -33,10 +33,10 @@ public class VeiculoAdapter extends ArrayAdapter<Veiculo> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView= inflater.inflate(R.layout.linha_list_view_veiculo, parent, false);
 
-        TextView txtModelo = (TextView) rowView.findViewById(R.id.txt_modelo_clicknotification);
-        TextView txtPlaca = (TextView) rowView.findViewById(R.id.txt_placa_clicknotification);
-        TextView txtKm = (TextView) rowView.findViewById(R.id.txt_km_atual_clicknotification);
-        TextView txtDispositivo = (TextView) rowView.findViewById(R.id.txt_dispositivo);
+        TextView txtModelo = (TextView) rowView.findViewById(R.id.txt_modelo_lista_veiculo);
+        TextView txtPlaca = (TextView) rowView.findViewById(R.id.txt_placa_lista_veiculo);
+        TextView txtKm = (TextView) rowView.findViewById(R.id.txt_km_atual_lista_veiculo);
+        TextView txtDispositivo = (TextView) rowView.findViewById(R.id.txt_dispositivo_lista_veiculo);
 
         txtModelo.setText(elementos.get(position).getModelo());
         txtPlaca.setText(elementos.get(position).getPlaca());

@@ -4,45 +4,45 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txt_modelo_clicknotification"
+        android:id="@+id/txt_modelo_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_modelo_clicknotification"
+        android:layout_alignTop="@+id/lbl_modelo_lista_veiculo"
         android:layout_marginEnd="-136dp"
-        android:layout_toStartOf="@+id/lbl_km_atual_clicknotification"
+        android:layout_toStartOf="@+id/lbl_km_atual_lista_veiculo"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/txt_placa_clicknotification"
+        android:id="@+id/txt_placa_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_placa"
-        android:layout_toEndOf="@+id/lbl_modelo_clicknotification"
+        android:layout_alignTop="@+id/lbl_placa_lista_veiculo"
+        android:layout_toEndOf="@+id/lbl_modelo_lista_veiculo"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/txt_km_atual_clicknotification"
+        android:id="@+id/txt_km_atual_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txt_placa_clicknotification"
+        android:layout_alignTop="@+id/txt_placa_lista_veiculo"
         android:layout_centerHorizontal="true"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/txt_dispositivo"
+        android:id="@+id/txt_dispositivo_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/txt_placa_clicknotification"
+        android:layout_alignTop="@+id/txt_placa_lista_veiculo"
         android:layout_marginEnd="14dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/lbl_modelo_clicknotification"
+        android:id="@+id/lbl_modelo_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -52,29 +52,29 @@
         android:text="Modelo:" />
 
     <TextView
-        android:id="@+id/lbl_placa"
+        android:id="@+id/lbl_placa_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_modelo_clicknotification"
+        android:layout_alignStart="@+id/lbl_modelo_lista_veiculo"
         android:layout_marginTop="45dp"
         android:text="Placa:" />
 
     <TextView
-        android:id="@+id/lbl_km_atual_clicknotification"
+        android:id="@+id/lbl_km_atual_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/lbl_placa"
+        android:layout_alignTop="@+id/lbl_placa_lista_veiculo"
         android:layout_marginStart="136dp"
         android:text="Km:" />
 
     <TextView
-        android:id="@+id/lbl_dispositivo"
+        android:id="@+id/lbl_dispositivo_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/txt_placa_clicknotification"
+        android:layout_alignTop="@+id/txt_placa_lista_veiculo"
         android:layout_marginEnd="82dp"
         android:text="Dispositivo:" />
 </RelativeLayout>
