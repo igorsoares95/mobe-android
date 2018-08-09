@@ -7,18 +7,21 @@
         android:id="@+id/txt_modelo_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_modelo_lista_veiculo"
-        android:layout_marginEnd="-136dp"
-        android:layout_toStartOf="@+id/lbl_km_atual_lista_veiculo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textStyle="bold"
         android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/txt_placa_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/lbl_placa_lista_veiculo"
-        android:layout_toEndOf="@+id/lbl_modelo_lista_veiculo"
+        android:layout_marginStart="59dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
 
@@ -40,7 +43,7 @@
         android:layout_marginEnd="14dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
-
+    <!--
     <TextView
         android:id="@+id/lbl_modelo_lista_veiculo"
         android:layout_width="wrap_content"
@@ -50,13 +53,14 @@
         android:layout_marginStart="17dp"
         android:layout_marginTop="15dp"
         android:text="Modelo:" />
+       -->
 
     <TextView
         android:id="@+id/lbl_placa_lista_veiculo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_modelo_lista_veiculo"
+        android:layout_alignStart="@+id/txt_modelo_lista_veiculo"
         android:layout_marginTop="45dp"
         android:text="Placa:" />
 

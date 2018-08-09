@@ -2,6 +2,7 @@ package com.example.guilherme.mobe.fragments;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,11 +42,12 @@ import java.util.Map;
 public class MostraInfoVeiculoFragment extends Fragment {
 
     private static final String TAG = MostraInfoVeiculoFragment.class.getSimpleName();
+    final MostraInfoVeiculoFragment context = this;
     private TextView txtMarca;
     private TextView txtModelo;
-    private EditText txtKm;
+    private TextView txtKm;
     private TextView txtPlaca;
-    private EditText txtDispositivo;
+    private TextView txtDispositivo;
     private TextView txtAno;
     private String placa;
     private String id_usuario;
@@ -76,9 +78,9 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
         txtMarca = (TextView) view.findViewById(R.id.txt_marca_mostra_info_veiculo);
         txtModelo = (TextView) view.findViewById(R.id.txt_modelo_mostra_info_veiculo);
-        txtKm = (EditText) view.findViewById(R.id.txt_km_mostra_info_veiculo);
+        txtKm = (TextView) view.findViewById(R.id.txt_km_mostra_info_veiculo);
         txtPlaca = (TextView) view.findViewById(R.id.txt_placa_mostra_info_veiculo);
-        txtDispositivo = (EditText) view.findViewById(R.id.txt_dispositivo_mostra_info_veiculo);
+        txtDispositivo = (TextView) view.findViewById(R.id.txt_dispositivo_mostra_info_veiculo);
         txtAno = (TextView) view.findViewById(R.id.txt_ano_mostra_info_veiculo);
         btn_alterar_km_veiculo = (Button) view.findViewById(R.id.btn_alterar_km_mostra_info_veiculo);
         btn_alterar_dispositivo_veiculo = (Button) view.findViewById(R.id.btn_alterar_dispositivo_mostra_info_veiculo);
@@ -89,42 +91,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
         btn_alterar_km_veiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(km_no_momento_da_abertura_da_fragment.equals(txtKm.getText().toString())) {
-
-                    Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
-
-                } else {
-
-                    alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtKm.getText().toString());
-                    getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.frame_container, new ListaVeiculosFragment())
-                            .commit();
-
-                }
-
+                showInputDialog(1);
             }
         });
 
         btn_alterar_dispositivo_veiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtDispositivo.getText().toString())) {
-
-                    Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o código do dispositivo", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    alterarDispositivoDoVeiculo(txtDispositivo.getText().toString(), txtPlaca.getText().toString());
-                    getFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.frame_container, new ListaVeiculosFragment())
-                            .commit();
-
-                }
-
+                showInputDialog(2);
             }
         });
 
@@ -158,6 +132,80 @@ public class MostraInfoVeiculoFragment extends Fragment {
         });
 
         return view;
+
+    }
+
+    private void showInputDialog(int i) {
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View promptView = layoutInflater.inflate(R.layout.input_dialog,null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setView(promptView);
+
+        final EditText txtInput = (EditText) promptView.findViewById(R.id.editTextInput);
+        if (i == 1) {
+            String titulo = "Insira a nova Quilometragem";
+            alertDialogBuilder.setCancelable(false).setTitle(titulo)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(km_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString())) {
+
+                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
+
+                            } else {
+
+                                alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtInput.getText().toString());
+                                txtDispositivo.setText(txtInput.getText().toString());
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.frame_container, new ListaVeiculosFragment())
+                                        .commit();
+
+                            }
+
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+        } else {
+            String titulo = "Insira o novo Dispositivo";
+            alertDialogBuilder.setCancelable(false).setTitle(titulo)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString())) {
+
+                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o código do dispositivo", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                alterarDispositivoDoVeiculo(txtInput.getText().toString(), txtPlaca.getText().toString());
+                                txtDispositivo.setText(txtInput.getText().toString());
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.frame_container, new ListaVeiculosFragment())
+                                        .commit();
+
+                            }
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+        }
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
 
     }
 
