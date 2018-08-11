@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_man_atras"
+            android:id="@+id/nav_man_prox"
             android:icon="@drawable/ic_menu_list"
             android:title="Manutenções Próximas" />
         <item
-            android:id="@+id/nav_man_fut"
+            android:id="@+id/nav_man_atras"
             android:icon="@drawable/ic_menu_list"
             android:title="Manutenções Atrasadas" />
         <item

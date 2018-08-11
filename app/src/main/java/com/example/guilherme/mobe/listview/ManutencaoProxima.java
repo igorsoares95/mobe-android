@@ -2,14 +2,33 @@ package com.example.guilherme.mobe.listview;
 
 public class ManutencaoProxima {
 
-    private String descricao, veiculo, placa, km_proxima_manutencao, data_proxima_manutencao;
+    private String id, descricao, veiculo, placa, km_atual ,km_proxima_manutencao, data_proxima_manutencao;
 
-    public ManutencaoProxima(String descricao, String veiculo, String placa, String km_proxima_manutencao, String data_proxima_manutencao) {
+    public ManutencaoProxima(String id, String descricao, String veiculo, String placa, String km_atual, String km_proxima_manutencao, String data_proxima_manutencao) {
+        this.id = id;
         this.descricao = descricao;
         this.veiculo = veiculo;
         this.placa = placa;
+        this.km_atual = km_atual;
         this.km_proxima_manutencao = km_proxima_manutencao;
         this.data_proxima_manutencao = data_proxima_manutencao;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getKm_atual() {
+        return km_atual;
+    }
+
+    public void setKm_atual(String km_atual) {
+        this.km_atual = km_atual;
     }
 
     public String getDescricao() {

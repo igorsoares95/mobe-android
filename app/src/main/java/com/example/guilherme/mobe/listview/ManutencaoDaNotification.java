@@ -1,6 +1,6 @@
 package com.example.guilherme.mobe.listview;
 
-public class ManutencaoAtrasadaOuProxima {
+public class ManutencaoDaNotification {
 
     private String modelo;
     private String placa;
@@ -84,7 +84,7 @@ public class ManutencaoAtrasadaOuProxima {
         this.status = status;
     }
 
-    public ManutencaoAtrasadaOuProxima(String modelo, String placa, String km_atual, String descricao_manutencao, String km_ultima_manutencao, String km_proxima_manutencao, String data_ultima_manutencao, String data_proxima_manutencao, String status) {
+    public ManutencaoDaNotification(String modelo, String placa, String km_atual, String descricao_manutencao, String km_ultima_manutencao, String km_proxima_manutencao, String data_ultima_manutencao, String data_proxima_manutencao, String status) {
         this.modelo = modelo;
         this.placa = placa;
         this.km_atual = km_atual;

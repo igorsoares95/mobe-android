@@ -65,6 +65,10 @@ public class AdicionarCarroFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Adicionar Veículo");
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_adicionar_carro,container,false);
 

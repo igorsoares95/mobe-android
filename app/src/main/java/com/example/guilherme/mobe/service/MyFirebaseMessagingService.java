@@ -7,9 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.guilherme.mobe.activity.ClickNotificationMostrarManutencoes;
-import com.example.guilherme.mobe.activity.MainActivity;
-import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
-import com.example.guilherme.mobe.listview.ManutencaoAtrasadaOuProxima;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -19,9 +16,6 @@ import org.json.JSONObject;
 
 import com.example.guilherme.mobe.app.Config;
 import com.example.guilherme.mobe.util.NotificationUtils;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Created by Ravi Tamada on 08/08/16.

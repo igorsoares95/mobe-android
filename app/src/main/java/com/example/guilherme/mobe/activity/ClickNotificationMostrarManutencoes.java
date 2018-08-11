@@ -2,21 +2,15 @@ package com.example.guilherme.mobe.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.guilherme.mobe.R;
-import com.example.guilherme.mobe.listview.ManutencaoAtrasadaOuProxima;
-import com.example.guilherme.mobe.listview.ManutencaoAtrasadaOuProximaAdapter;
-import com.example.guilherme.mobe.listview.VeiculoAdapter;
-import com.example.guilherme.mobe.service.MyFirebaseMessagingService;
+import com.example.guilherme.mobe.listview.ManutencaoDaNotification;
+import com.example.guilherme.mobe.listview.ManutencaoDaNotificationAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,7 +62,7 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
     private void adicionaManutencoesAtrasadasEProximasNoListView(String payload_string) {
 
 
-        final ArrayList<ManutencaoAtrasadaOuProxima> manutencoes_atrasadas_ou_proximas = new ArrayList<ManutencaoAtrasadaOuProxima>();
+        final ArrayList<ManutencaoDaNotification> manutencoes_atrasadas_ou_proximas = new ArrayList<ManutencaoDaNotification>();
 
         try {
 
@@ -88,11 +82,11 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
                 String data_proxima_manutencao = manutencao.getString("data_proxima_manutencao");
                 String status = manutencao.getString("status");
 
-                manutencoes_atrasadas_ou_proximas.add(new ManutencaoAtrasadaOuProxima(modelo_veiculo,placa,km_atual, descricao, km_ultima_manutencao, km_proxima_manutencao, data_ultima_manutencao, data_proxima_manutencao, status));
+                manutencoes_atrasadas_ou_proximas.add(new ManutencaoDaNotification(modelo_veiculo,placa,km_atual, descricao, km_ultima_manutencao, km_proxima_manutencao, data_ultima_manutencao, data_proxima_manutencao, status));
 
             }
 
-            ArrayAdapter adapter = new ManutencaoAtrasadaOuProximaAdapter(ClickNotificationMostrarManutencoes.this,manutencoes_atrasadas_ou_proximas);
+            ArrayAdapter adapter = new ManutencaoDaNotificationAdapter(ClickNotificationMostrarManutencoes.this,manutencoes_atrasadas_ou_proximas);
             list_view_click_notification.setAdapter(adapter);
 
 

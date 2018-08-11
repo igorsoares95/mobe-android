@@ -33,7 +33,8 @@ import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.fragments.AtualizarUsuarioFragment;
 import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
-import com.example.guilherme.mobe.fragments.MostraManutencoesAtrasadasDoUsuario;
+import com.example.guilherme.mobe.fragments.MostraManutencoesAtrasadasDoUsuarioFragment;
+import com.example.guilherme.mobe.fragments.MostraManutencoesProximasDoUsuarioFragment;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.helper.SessionManager;
 import com.example.guilherme.mobe.app.Config;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         if(savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuario())
+                    .add(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuarioFragment())
                     .addToBackStack(null).commit();
         }
 
@@ -255,10 +256,16 @@ public class MainActivity extends AppCompatActivity
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuario())
+                    .replace(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuarioFragment())
                     .addToBackStack(null).commit();
 
-        } else if (id == R.id.nav_man_fut) {
+        } else if (id == R.id.nav_man_prox) {
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_container, new MostraManutencoesProximasDoUsuarioFragment())
+                    .addToBackStack(null).commit();
+
 
         } else if (id == R.id.nav_meus_veiculos) {
 

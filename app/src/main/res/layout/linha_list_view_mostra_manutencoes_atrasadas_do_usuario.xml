@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="17dp"
+        android:text="Descrição:" />
+
+    <TextView
+        android:id="@+id/lbl_veiculo_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginTop="43dp"
+        android:text="Veículo:" />
+
+    <TextView
+        android:id="@+id/lbl_placa_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginTop="70dp"
+        android:text="Placa:" />
+
+    <TextView
+        android:id="@+id/lbl_km_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginTop="125dp"
+        android:text="Km próxima manutenção:" />
+
+    <TextView
+        android:id="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginTop="153dp"
+        android:text="Data próxima manutenção:" />
+
+    <TextView
+        android:id="@+id/txt_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginStart="106dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txt_veiculo_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lbl_veiculo_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_toEndOf="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txt_placa_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/lbl_placa_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_toEndOf="@+id/lbl_veiculo_list_view_manutencoes_atrasadas_do_usuario"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txt_km_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/lbl_km_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginEnd="72dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txt_data_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txt_km_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_alignTop="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_atrasadas_do_usuario"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_km_atual_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_marginTop="96dp"
+        android:text="Km atual:" />
+
+    <TextView
+        android:id="@+id/txt_km_atual_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txt_descricao_list_view_manutencoes_atrasadas_do_usuario"
+        android:layout_alignTop="@+id/lbl_km_atual_list_view_manutencoes_atrasadas_do_usuario"
+        android:text="TextView" />
+</RelativeLayout>

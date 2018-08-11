@@ -4,6 +4,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class MaskEditUtil {
 
@@ -62,6 +66,19 @@ public class MaskEditUtil {
 
     public static String unmask(final String s) {
         return s.replaceAll("[.]", "").replaceAll("[-]", "").replaceAll("[/]", "").replaceAll("[(]", "").replaceAll("[ ]","").replaceAll("[:]", "").replaceAll("[)]", "");
+    }
+
+    public static String formatarData(String _data_sem_formatacao, String _formato_origem, String _formato_destino) {
+        SimpleDateFormat sdf = new SimpleDateFormat(_formato_origem);
+        String data_com_formatacao = "";
+        try {
+            Date data_sem_formatacao = sdf.parse(_data_sem_formatacao);
+            data_com_formatacao = new SimpleDateFormat(_formato_destino).format(data_sem_formatacao);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return data_com_formatacao;
     }
 
 }

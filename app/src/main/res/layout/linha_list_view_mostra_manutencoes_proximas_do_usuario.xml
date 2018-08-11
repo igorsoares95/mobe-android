@@ -12,8 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="14dp"
         android:layout_marginTop="11dp"
-        android:text="TextView"
-        tools:text="Descrição" />
+        android:text="Descrição:" />
 
     <TextView
         android:id="@+id/lbl_veiculo_list_view_manutencoes_proximas_do_usuario"
@@ -22,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
         android:layout_marginTop="37dp"
-        android:text="Veículo" />
+        android:text="Veículo:" />
 
     <TextView
         android:id="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
@@ -31,8 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
         android:layout_marginTop="64dp"
-        android:text="TextView"
-        tools:text="Placa" />
+        android:text="Placa:" />
 
     <TextView
         android:id="@+id/lbl_km_atual_list_view_manutencoes_proximas_do_usuario"
@@ -41,8 +39,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
         android:layout_marginEnd="131dp"
-        android:text="TextView"
-        tools:text="Km Atual" />
+        android:text="Km Atual:" />
 
     <TextView
         android:id="@+id/lbl_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
@@ -51,8 +48,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
         android:layout_marginTop="91dp"
-        android:text="TextView"
-        tools:text="Km próxima manutenção" />
+        android:text="Km próxima manutenção:" />
 
     <TextView
         android:id="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"

@@ -56,6 +56,9 @@ public class ListaVeiculosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        getActivity().setTitle("Meus veículos");
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_veiculos,container,false);
 
@@ -114,7 +117,7 @@ public class ListaVeiculosFragment extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Update user Response: " + response.toString());
+                Log.d(TAG, "obter veiculos Response: " + response.toString());
 
                 try {
                     JSONObject object = new JSONObject(response);
@@ -158,7 +161,7 @@ public class ListaVeiculosFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Update Error: " + error.getMessage());
+                Log.e(TAG, "obter veiculos Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
             }

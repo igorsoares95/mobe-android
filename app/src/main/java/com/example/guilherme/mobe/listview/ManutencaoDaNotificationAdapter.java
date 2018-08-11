@@ -9,15 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.guilherme.mobe.R;
+import com.example.guilherme.mobe.helper.MaskEditUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class ManutencaoAtrasadaOuProximaAdapter extends ArrayAdapter<ManutencaoAtrasadaOuProxima> {
+public class ManutencaoDaNotificationAdapter extends ArrayAdapter<ManutencaoDaNotification> {
 
     private final Context context;
-    private final ArrayList<ManutencaoAtrasadaOuProxima> elementos;
+    private final ArrayList<ManutencaoDaNotification> elementos;
 
-    public ManutencaoAtrasadaOuProximaAdapter(Context context, ArrayList<ManutencaoAtrasadaOuProxima> elementos) {
+    public ManutencaoDaNotificationAdapter(Context context, ArrayList<ManutencaoDaNotification> elementos) {
 
         super(context, R.layout.linha_list_view_manutencoes_atrasadas_proximas_clicknotification,elementos);
         this.context = context;
@@ -42,15 +46,29 @@ public class ManutencaoAtrasadaOuProximaAdapter extends ArrayAdapter<ManutencaoA
         TextView lblDescricaoManutencao = (TextView) rowView.findViewById(R.id.lbl_manutencao_clicknotification);
 
 
+        /*
+        //Formatar data para dd/MM/yyyy
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String data_ultima_manutencao_com_formatacao = "";
+        String data_proxima_manutencao_com_formatacao = "";
+        try {
+            Date data_ultima_manutencao_sem_formatacao = sdf.parse(elementos.get(position).getData_ultima_manutencao());
+            Date data_proxima_manutencao_sem_formatacao = sdf.parse(elementos.get(position).getData_proxima_manutencao());
+            data_ultima_manutencao_com_formatacao = new SimpleDateFormat("dd/MM/yyyy").format(data_ultima_manutencao_sem_formatacao);
+            data_proxima_manutencao_com_formatacao = new SimpleDateFormat("dd/MM/yyyy").format(data_proxima_manutencao_sem_formatacao);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        */
+
         txtModelo.setText(elementos.get(position).getModelo());
         txtPlaca.setText(elementos.get(position).getPlaca());
         txtKmAtual.setText(elementos.get(position).getKm_atual());
         txtDescricaoManutencao.setText(elementos.get(position).getDescricao_manutencao());
         txtKmUltimaManutencao.setText(elementos.get(position).getKm_ultima_manutencao());
         txtKmProximaManutencao.setText(elementos.get(position).getKm_proxima_manutencao());
-        txtDataUltimaManutencao.setText(elementos.get(position).getData_ultima_manutencao());
-        txtDataProximaManutencao.setText(elementos.get(position).getData_proxima_manutencao());
-
+        txtDataUltimaManutencao.setText(MaskEditUtil.formatarData(elementos.get(position).getData_ultima_manutencao(),"yyyy-MM-dd","dd/MM/yyyy"));
+        txtDataProximaManutencao.setText(MaskEditUtil.formatarData(elementos.get(position).getData_proxima_manutencao(),"yyyy-MM-dd","dd/MM/yyyy"));
 
         if(elementos.get(position).getStatus().equals("atrasada")) {
 

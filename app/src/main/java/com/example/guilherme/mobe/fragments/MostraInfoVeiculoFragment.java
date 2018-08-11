@@ -65,10 +65,10 @@ public class MostraInfoVeiculoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        getActivity().setTitle("Informações do veículo");
+
+
         View view = inflater.inflate(R.layout.fragment_mostra_info_veiculo,container,false);
-
-
-
 
         //Obter dados da fragment anterior
         Bundle dados_do_veiculo = getArguments();
