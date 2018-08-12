@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.helper.MaskEditUtil;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.listview.ManutencaoAtrasada;
+import com.example.guilherme.mobe.listview.ManutencaoAtrasadaAdapter;
 import com.example.guilherme.mobe.listview.ManutencaoProxima;
 import com.example.guilherme.mobe.listview.ManutencaoProximaAdapter;
 
@@ -38,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,9 +51,12 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
 
     private static final String TAG = MostraManutencoesProximasDoUsuarioFragment.class.getSimpleName();
     ListView lista;
+    Spinner spinner_filtro;
     private SQLiteHandler bd;
     private String id_usuario;
     private String id_manutencao_do_veiculo_selecionada;
+    final List lista_id_veiculos_do_usuario = new ArrayList<>();
+    final List<String> lista_itens_do_spinner = new ArrayList<String>();
 
     public MostraManutencoesProximasDoUsuarioFragment() {
         // Required empty public constructor
@@ -71,10 +77,9 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
         HashMap<String, String> usuario = bd.getUserDetails();
         id_usuario = usuario.get("ID_USUARIO");
 
+        adicionaVeiculosDoUsuarioNoSpinner(id_usuario);
+
         lista = (ListView) view.findViewById(R.id.list_view_manutencoes_proximas_do_usuario);
-
-        adicionaManutencoesProximasDoUsuarioNoListView();
-
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,6 +110,31 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
 
                 AlertDialog alertDialog = alerta.create();
                 alertDialog.show();
+
+            }
+        });
+
+        spinner_filtro = (Spinner) view.findViewById(R.id.spinner_mostra_manutencoes_proximas_do_usuario);
+        spinner_filtro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int posicao, long id) {
+
+                if(posicao == 0) {
+
+                    adicionaTodasManutencoesProximasDoUsuarioNoListView();
+
+                } else {
+
+                    //obtem o id do veiculo selecionado e envia pro metodo
+                    adicionaTodasManutencoesProximasDoVeiculoDoUsuarioNoListView(lista_id_veiculos_do_usuario.get(posicao).toString());
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -215,7 +245,6 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
 
     }
 
-
     private void realizaManutencao(final String data_ultima_manutencao, final String km_ultima_manutencao, final String id_manutencao_do_veiculo) {
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -289,7 +318,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
 
     }
 
-    private void adicionaManutencoesProximasDoUsuarioNoListView() {
+    private void adicionaTodasManutencoesProximasDoUsuarioNoListView() {
 
         final ArrayList<ManutencaoProxima> manutencoes_proximas = new ArrayList<ManutencaoProxima>();
 
@@ -367,6 +396,164 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(strReq);
 
     }
+
+    private void adicionaTodasManutencoesProximasDoVeiculoDoUsuarioNoListView(final String id_veiculo_do_usuario) {
+
+        final ArrayList<ManutencaoProxima> manutencoes_proximas = new ArrayList<ManutencaoProxima>();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_OBTER_MANUTENCOES_PROXIMAS_DO_VEICULO_DO_USUARIO, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Obter manutencoes proximas do veiculo Response: " + response.toString());
+
+                try {
+                    JSONObject object = new JSONObject(response);
+
+                    boolean error = object.getBoolean("error");
+
+                    if(!error) {
+
+                        JSONArray manutencoes_proximasJSON = object.getJSONArray("manutencoes_proximas");
+
+                        for (int i = 0; i < manutencoes_proximasJSON.length(); i++) {
+
+                            JSONObject manutencao_proximaJSON = (JSONObject) manutencoes_proximasJSON.get(i);
+
+                            int id_manutencao_do_veiculo =  manutencao_proximaJSON.getInt("id_manutencao_do_veiculo");
+                            String modelo_veiculo = (String) manutencao_proximaJSON.get("modelo_veiculo");
+                            String placa = (String) manutencao_proximaJSON.get("placa");
+                            double km_atual = manutencao_proximaJSON.getDouble("km_atual");
+                            String descricao = (String) manutencao_proximaJSON.get("descricao");
+                            double km_proxima_manutencao = manutencao_proximaJSON.getDouble("km_proxima_manutencao");
+                            String data_proxima_manutencao = (String) manutencao_proximaJSON.get("data_proxima_manutencao");
+
+                            manutencoes_proximas.add(new ManutencaoProxima(String.valueOf(id_manutencao_do_veiculo), descricao, modelo_veiculo, placa, String.valueOf(km_atual), String.valueOf(km_proxima_manutencao), data_proxima_manutencao));
+
+                        }
+
+                    } else {
+
+                        Toast.makeText(getActivity(), "Não foi encontrado manutenções proximas para esse veículo", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    ArrayAdapter adapter = new ManutencaoProximaAdapter(getActivity(),manutencoes_proximas);
+                    lista.setAdapter(adapter);
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Obter manutencoes atrasadas do veiculo Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_veiculo_do_usuario",id_veiculo_do_usuario);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+
+    }
+
+    private void adicionaVeiculosDoUsuarioNoSpinner(final String id_usuario) {
+
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_OBTER_VEICULOS_POR_USUARIO, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Obter veiculos do usuario Response: " + response.toString());
+
+                try {
+                    JSONObject object = new JSONObject(response);
+
+                    boolean error = object.getBoolean("error");
+
+                    if(!error) {
+
+                        JSONArray veiculos_JSON = object.getJSONArray("veiculos");
+
+                        lista_itens_do_spinner.add("Todos os veiculos");
+                        lista_id_veiculos_do_usuario.add(0);
+
+                        for (int i = 0; i < veiculos_JSON.length(); i++) {
+
+                            JSONObject veiculo_JSON = (JSONObject) veiculos_JSON.get(i);
+
+                            int id_veiculo_do_usuario =  veiculo_JSON.getInt("id_veiculo_do_usuario");
+                            String modelo_veiculo = (String) veiculo_JSON.get("modelo");
+                            String placa = (String) veiculo_JSON.get("placa");
+
+                            lista_id_veiculos_do_usuario.add(id_veiculo_do_usuario);
+                            lista_itens_do_spinner.add(modelo_veiculo + " - " + placa);
+
+                        }
+
+                        spinner_filtro.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, lista_itens_do_spinner));
+
+
+                    } else {
+
+                        Toast.makeText(getActivity(), "Não foi encontrado veiculos para esse usuario", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Obter veiculos do usuario Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_usuario",id_usuario);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq);
+
+    }
+
 
 
 }

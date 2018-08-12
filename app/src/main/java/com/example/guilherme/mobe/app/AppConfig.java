@@ -56,7 +56,12 @@ public class AppConfig {
 
     public static String URL_OBTER_MANUTENCOES_PROXIMAS_DO_USUARIO = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_proximas_do_usuario.php";
 
+    public static String URL_OBTER_MANUTENCOES_PROXIMAS_DO_VEICULO_DO_USUARIO = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_proximas_do_veiculo_do_usuario.php";
+
+    public static String URL_OBTER_MANUTENCOES_ATRASADAS_DO_VEICULO_DO_USUARIO = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_atrasadas_do_veiculo_do_usuario.php";
+
     public static String URL_REALIZAR_MANUTENCAO = "http://10.0.2.2:888/base_dados_mobe/realizar_manutencao.php";
+
 
 
 

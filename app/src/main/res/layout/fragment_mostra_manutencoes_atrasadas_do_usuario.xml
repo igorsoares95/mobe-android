@@ -10,9 +10,27 @@
     <ListView
         android:id="@+id/list_view_manutencoes_atrasadas_do_usuario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="506dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="61dp"
         tools:ignore="InvalidId" />
+
+    <Spinner
+        android:id="@+id/spinner_mostra_manutencoes_atrasadas_do_usuario"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        android:id="@+id/lbl_filtro_mostra_manutencoes_atrasadas_do_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/spinner_mostra_manutencoes_atrasadas_do_usuario"
+        android:text="Filtro:" />
 
 </RelativeLayout>

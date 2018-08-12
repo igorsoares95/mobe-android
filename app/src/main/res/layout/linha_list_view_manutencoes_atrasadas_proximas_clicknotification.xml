@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/lbl_placa_clicknotification"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="117dp"
         android:text="TextView"
         android:textColor="@android:color/black" />
 

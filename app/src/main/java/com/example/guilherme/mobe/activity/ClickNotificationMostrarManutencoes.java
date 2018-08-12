@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,24 +38,11 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-
-
         Intent intent = getIntent();
         payload_string = intent.getStringExtra("payload");
         adicionaManutencoesAtrasadasEProximasNoListView(payload_string);
 
-
-        /*
-        btn_abrir_pagina_inicial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        */
-
+        //Log.i(TAG, payload_string);
 
     }
 
@@ -67,11 +55,9 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
         try {
 
             JSONArray manutencoes = new JSONArray(payload_string);
-
-            for (int i = 0; i < manutencoes.length(); i++) {
+            for(int i = 0; i < manutencoes.length(); i++) {
 
                 JSONObject manutencao = (JSONObject) manutencoes.get(i);
-
                 String modelo_veiculo = (String) manutencao.get("modelo_veiculo");
                 String placa = (String) manutencao.get("placa");
                 String km_atual = manutencao.getString("km_atual");
@@ -81,8 +67,9 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
                 String data_ultima_manutencao = manutencao.getString("data_ultima_manutencao");
                 String data_proxima_manutencao = manutencao.getString("data_proxima_manutencao");
                 String status = manutencao.getString("status");
-
                 manutencoes_atrasadas_ou_proximas.add(new ManutencaoDaNotification(modelo_veiculo,placa,km_atual, descricao, km_ultima_manutencao, km_proxima_manutencao, data_ultima_manutencao, data_proxima_manutencao, status));
+
+                //Log.i(TAG, manutencao_atrasada.toString());
 
             }
 
