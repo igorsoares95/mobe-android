@@ -14,16 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:background="@drawable/splash_img"
             />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:textSize="36dp"
-            android:textColor="@color/CorBotao"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"
-            android:text="Mobe App"
-            android:textStyle="bold"/>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
