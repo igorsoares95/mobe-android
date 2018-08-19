@@ -294,7 +294,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Realizar manutencao Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -378,7 +378,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter manutencoes atrasadas Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -457,7 +457,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter manutencoes atrasadas do veiculo Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -535,7 +535,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter veiculos do usuario Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 

@@ -297,8 +297,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Realizar manutencao Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),"Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -379,8 +378,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter manutencoes atrasadas Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -458,8 +456,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter manutencoes atrasadas do veiculo Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -479,7 +476,6 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
     }
 
     private void adicionaVeiculosDoUsuarioNoSpinner(final String id_usuario) {
-
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_OBTER_VEICULOS_POR_USUARIO, new Response.Listener<String>() {
@@ -536,8 +532,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Obter veiculos do usuario Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),"Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 

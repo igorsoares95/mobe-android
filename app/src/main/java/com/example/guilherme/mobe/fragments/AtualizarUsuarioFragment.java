@@ -185,10 +185,6 @@ public class AtualizarUsuarioFragment extends Fragment {
 
                         Toast.makeText(getActivity().getApplicationContext(), "Usuário atualizado com sucesso!", Toast.LENGTH_LONG).show();
 
-
-
-
-
                     } else {
 
                         String errorMsg = jObj.getString("error_msg");
@@ -208,7 +204,7 @@ public class AtualizarUsuarioFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 Log.e(TAG, "Erro de atualização: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
                 //hideDialog();
             }
         }) {
@@ -227,7 +223,6 @@ public class AtualizarUsuarioFragment extends Fragment {
     }
 
     private void desativaUsuario(final String email) {
-
 
         pDialog.setMessage("Desativando...");
         showDialog();
@@ -271,8 +266,7 @@ public class AtualizarUsuarioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),"Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {
@@ -303,7 +297,6 @@ public class AtualizarUsuarioFragment extends Fragment {
         startActivity(intent);
 
     }
-
 
     private void showDialog() {
 

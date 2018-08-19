@@ -58,7 +58,6 @@ public class ListaVeiculosFragment extends Fragment {
 
         getActivity().setTitle("Meus veículos");
 
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_veiculos,container,false);
 
@@ -99,7 +98,6 @@ public class ListaVeiculosFragment extends Fragment {
                 //------------------------------------------------------------------------------------
 
                 getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_info_veiculo_fragment).addToBackStack(null).commit();
-
 
             }
         });
@@ -162,8 +160,9 @@ public class ListaVeiculosFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "obter veiculos Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+
+                //Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -181,6 +180,5 @@ public class ListaVeiculosFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(strReq);
 
     }
-
 
 }

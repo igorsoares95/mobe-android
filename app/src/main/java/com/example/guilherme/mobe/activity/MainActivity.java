@@ -33,6 +33,7 @@ import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.fragments.AtualizarUsuarioFragment;
+import com.example.guilherme.mobe.fragments.InicioFragment;
 import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
 import com.example.guilherme.mobe.fragments.MostraManutencoesAtrasadasDoUsuarioFragment;
 import com.example.guilherme.mobe.fragments.MostraManutencoesProximasDoUsuarioFragment;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         if(savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.frame_container, new MostraManutencoesAtrasadasDoUsuarioFragment())
+                    .add(R.id.frame_container, new InicioFragment())
                     .addToBackStack(null).commit();
         }
 
@@ -256,7 +257,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_man_atras) {
+        if (id == R.id.nav_inicio) {
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_container, new InicioFragment())
+                    .addToBackStack(null).commit();
+
+        }
+
+        else if (id == R.id.nav_man_atras) {
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -306,6 +316,7 @@ public class MainActivity extends AppCompatActivity
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.show();
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

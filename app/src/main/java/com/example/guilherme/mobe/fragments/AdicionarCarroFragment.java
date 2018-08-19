@@ -217,7 +217,7 @@ public class AdicionarCarroFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -233,7 +233,6 @@ public class AdicionarCarroFragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq);
     }
-
 
     private void obterModelos (final int id_marca) {
 
@@ -282,7 +281,7 @@ public class AdicionarCarroFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -299,7 +298,6 @@ public class AdicionarCarroFragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq);
     }
-
 
     private void adicionaVeiculo(final String ano, final String placa, final String km, final String id_usuario, final String codigo_dispositivo, final String id_modelo_veiculo) {
         pDialog.setMessage("Registrando...");
@@ -340,7 +338,7 @@ public class AdicionarCarroFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 Log.e(TAG, "Erro Registro: " + error.getMessage());
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
                 hideDialog();
 
             }
