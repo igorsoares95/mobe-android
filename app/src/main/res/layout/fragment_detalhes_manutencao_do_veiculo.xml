@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.DetalhesManutencaoDoVeiculoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/lbl_descricao_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/txt_limite_km_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Limite km" />
+
+    <EditText
+        android:id="@+id/txt_limite_tempo_meses_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Limite tempo meses" />
+
+    <EditText
+        android:id="@+id/txt_km_antecipacao_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Km antecipacao" />
+
+    <EditText
+        android:id="@+id/txt_tempo_antecipacao_meses_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Tempo antecipacao meses" />
+
+    <EditText
+        android:id="@+id/txt_data_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Data ultima manutencao" />
+
+    <EditText
+        android:id="@+id/txt_km_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Km ultima manutencao" />
+
+    <Button
+        android:id="@+id/btn_salvar_alteracao_fragment_detalhes_manutencao_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar alteracoes" />
+
+
+</LinearLayout>

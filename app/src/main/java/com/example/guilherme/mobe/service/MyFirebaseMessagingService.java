@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.guilherme.mobe.activity.ClickNotificationMostrarManutencoes;
+import com.example.guilherme.mobe.helper.SessionManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -27,9 +28,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private NotificationUtils notificationUtils;
 
+    private SessionManager session;
+
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e(TAG, "From: " + remoteMessage.getFrom());
+
+        session = new SessionManager(getApplicationContext());
+
 
         if (remoteMessage == null)
             return;
@@ -40,7 +47,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             handleNotification(remoteMessage.getNotification().getBody());
         }
         // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
+        if (remoteMessage.getData().size() > 0 && session.isLoggedIn()) { // verifica se o usuario está logado para receber a notificacao
             Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
 
             try {

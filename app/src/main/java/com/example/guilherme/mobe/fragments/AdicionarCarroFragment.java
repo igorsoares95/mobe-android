@@ -2,6 +2,7 @@ package com.example.guilherme.mobe.fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
+import com.example.guilherme.mobe.listview.Veiculo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +49,7 @@ public class AdicionarCarroFragment extends Fragment {
     private EditText txt_placa;
     private static final String TAG = AdicionarCarroFragment.class.getSimpleName();
     private int id_modelo_selecionado;
+    private String nome_modelo_selecionado;
     private String ano_selecionado;
     private Button btn_proxima_etapa;
     private ProgressDialog pDialog;
@@ -114,6 +117,7 @@ public class AdicionarCarroFragment extends Fragment {
 
                 //id_modelo_selecionado = parent.getItemAtPosition(posicao).toString();
                 id_modelo_selecionado = (int) lista_id_modelos.get(posicao);
+                nome_modelo_selecionado = lista_nome_modelos.get(posicao);
                 obterAnos();
 
             }
@@ -145,6 +149,7 @@ public class AdicionarCarroFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adicionaVeiculo(ano_selecionado,txt_placa.getText().toString().trim(),txt_km.getText().toString().trim(),id_usuario,txt_dispositivo.getText().toString().trim(),String.valueOf(id_modelo_selecionado));
+
             }
         });
 
@@ -239,6 +244,8 @@ public class AdicionarCarroFragment extends Fragment {
         lista_id_modelos.removeAll(lista_id_modelos);
         lista_nome_modelos.removeAll(lista_nome_modelos);
 
+
+
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_OBTER_MODELOS_VEICULOS, new Response.Listener<String>() {
 
@@ -270,7 +277,7 @@ public class AdicionarCarroFragment extends Fragment {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Não foi encontrado modelos para a marca selecionada", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -317,7 +324,16 @@ public class AdicionarCarroFragment extends Fragment {
                     if (!error) {
 
                         Toast.makeText(getActivity(), "Veículo registrado com sucesso!", Toast.LENGTH_LONG).show();
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).addToBackStack(null).commit();
+
+                        //enviar veiculo adicionado para a proxima fragment
+                        Bundle dados_veiculo_adicionado = new Bundle();
+                        dados_veiculo_adicionado.putString("modelo_veiculo",String.valueOf(nome_modelo_selecionado));
+                        dados_veiculo_adicionado.putString("placa_veiculo",placa);
+                        dados_veiculo_adicionado.putString("km_veiculo",km);
+
+                        MostraManutencoesRecomendadasDoVeiculo mostra_manutencoes_recomendadas_do_veiculo = new MostraManutencoesRecomendadasDoVeiculo();
+                        mostra_manutencoes_recomendadas_do_veiculo.setArguments(dados_veiculo_adicionado);
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_recomendadas_do_veiculo).commit();
 
 
                     } else {

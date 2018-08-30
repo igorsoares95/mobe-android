@@ -14,7 +14,6 @@ public class ManutencaoProxima {
         this.data_proxima_manutencao = data_proxima_manutencao;
     }
 
-
     public String getId() {
         return id;
     }

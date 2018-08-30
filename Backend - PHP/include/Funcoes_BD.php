@@ -375,12 +375,11 @@ class Funcoes_BD{
 		}		
 	}
 	
-	public function atualizaInfoManutencaoDoVeiculo($id_manutencao_do_usuario, $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses,
-													$data_ultima_manutencao, $km_ultima_manutencao){
+	public function atualizaInfoManutencaoDoVeiculo($id_manutencao_do_veiculo, $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses, $data_ultima_manutencao, $km_ultima_manutencao){
 		
 		$stmt = $this->conn->prepare("SELECT N_LIMITE_KM, N_LIMITE_TEMPO_MESES, N_KM_ANTECIPACAO, N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO
 									 FROM tb_manutencao_do_veiculo WHERE ID = ?");
-		$stmt->bind_param("i", $id_manutencao_do_usuario);
+		$stmt->bind_param("i", $id_manutencao_do_veiculo);
 		$stmt->execute();
 		$result = $stmt->get_result()->fetch_assoc();
 		$stmt->close();
@@ -402,18 +401,72 @@ class Funcoes_BD{
 			
 			$stmt = $this->conn->prepare("UPDATE tb_manutencao_do_veiculo SET N_LIMITE_KM = ?, N_LIMITE_TEMPO_MESES = ?, N_KM_ANTECIPACAO = ?, N_TEMPO_ANTECIPACAO_MESES = ?, D_DATA_ULTIMA_MANUTENCAO = ?, N_KM_ULTIMA_MANUTENCAO = ?
 										 WHERE ID = ?");
-			$stmt->bind_param("iiiisii", $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses, $data_ultima_manutencao, $km_ultima_manutencao, $id_manutencao_do_usuario);
+			$stmt->bind_param("iiiisii", $limite_km, $limite_tempo_meses, $km_antecipacao, $tempo_antecipacao_meses, $data_ultima_manutencao, $km_ultima_manutencao, $id_manutencao_do_veiculo);
 			$result = $stmt->execute();
 			$stmt->close();
 			return true;
 		}		
 	}
+	
+	public function excluiManutencaoRecomendadaDoVeiculo($placa_veiculo_usuario, $id_manutencao_padrao) {
+		
+		$stmt = $this->conn->prepare("DELETE a.* FROM tb_manutencao_do_veiculo AS a
+									 INNER JOIN tb_veiculo_do_usuario AS b ON a.ID_VEICULO_DO_USUARIO = b.ID
+									 WHERE b.S_PLACA = ? AND a.ID_MANUTENCAO_PADRAO = ?");
+		$stmt->bind_param("ss", $placa_veiculo_usuario, $id_manutencao_padrao);
+		
+		if($stmt->execute()) {
+			
+			$stmt->close();
+			return true;
+		} else {
+			return false;
+		}	
+		
+	}
 
 	
-	public function obtemManutencoesRecomendadas($id_modelo_veiculo) {
+	public function obtemManutencoesRecomendadas($placa_veiculo_do_usuario) {
+
+		$manutencoes_recomendadas_ja_cadastradas = array();		
+
 		
-		$stmt = $this->conn->prepare("SELECT ID, S_NOME, N_LIMITE_KM, N_LIMITE_TEMPO_MESES FROM tb_manutencao_padrao WHERE ID_MODELO_VEICULO = ?");
-		$stmt->bind_param("i", $id_modelo_veiculo);
+		//verifica quais sao as manutencoes recomendadas que ja sao cadastradas
+		$stmt = $this->conn->prepare("SELECT a.ID, a.ID_VEICULO_DO_USUARIO, a.ID_MANUTENCAO_PADRAO, a.S_DESCRICAO FROM tb_manutencao_do_veiculo AS a
+									 INNER JOIN tb_veiculo_do_usuario AS b ON a.ID_VEICULO_DO_USUARIO = b.ID
+									 WHERE b.S_PLACA = ? AND a.ID_MANUTENCAO_PADRAO IS NOT NULL");
+		$stmt->bind_param("s", $placa_veiculo_do_usuario);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		
+		if(!empty($result)) {
+			
+			if($result->num_rows > 0) {
+							
+				while($linha = $result->fetch_assoc()) {
+
+					$manutencoes_recomendadas_ja_cadastradas[] = $linha["ID_MANUTENCAO_PADRAO"];
+				}
+				$stmt->close();				
+										
+			} else {
+				$stmt->close();
+			}
+			
+		} else {
+			$stmt->close();
+		}
+		
+		//--apos descobrir quais sao as manutencoes recomendadas ja cadastradas o sistema mostra as manutencoes recomendadas com o campo ja_cadastrado true ou false
+		
+		
+		$stmt = $this->conn->prepare("SELECT a.ID, a.S_NOME, a.N_LIMITE_KM, a.N_LIMITE_TEMPO_MESES FROM tb_manutencao_padrao AS a
+									 INNER JOIN tb_veiculo_do_usuario AS b ON a.ID_MODELO_VEICULO = b.ID_MODELO_VEICULO
+									 WHERE b.S_PLACA = ?");
+		
+		//$stmt = $this->conn->prepare("SELECT ID, S_NOME, N_LIMITE_KM, N_LIMITE_TEMPO_MESES FROM tb_manutencao_padrao WHERE ID_MODELO_VEICULO = ?");
+		
+		$stmt->bind_param("s", $placa_veiculo_do_usuario);
 		$stmt->execute();
 		$result = $stmt->get_result();
 				
@@ -421,14 +474,29 @@ class Funcoes_BD{
 			
 			if($result->num_rows > 0) {
 				
+				
 				$manutencoes = array();				
 				while($linha = $result->fetch_assoc()) {
+					
+					$contador_manutencoes_recomendadas_ja_cadastradas = 0;
 					
 					$manutencao = array();
 					$manutencao["id_manutencao_padrao"] = $linha["ID"];
 					$manutencao["nome"] = $linha["S_NOME"];
 					$manutencao["limite_km"] = $linha["N_LIMITE_KM"];
 					$manutencao["limite_tempo_meses"] = $linha["N_LIMITE_TEMPO_MESES"];
+					$manutencao["ja_cadastrado"] = false;
+					
+					while($contador_manutencoes_recomendadas_ja_cadastradas < count($manutencoes_recomendadas_ja_cadastradas)) {
+						
+						if($manutencao["id_manutencao_padrao"] == $manutencoes_recomendadas_ja_cadastradas[$contador_manutencoes_recomendadas_ja_cadastradas]) {
+							$manutencao["ja_cadastrado"] = true;
+						}
+						
+						$contador_manutencoes_recomendadas_ja_cadastradas++;
+				
+					}
+					
 					array_push($manutencoes,$manutencao);
 				}
 				$stmt->close();				
@@ -442,7 +510,8 @@ class Funcoes_BD{
 		} else {
 			$stmt->close();
 			return false;
-		}		
+		}
+		
 	}
 	
 	public function realizaManutencao($data_ultima_manutencao, $km_ultima_manutencao, $id_manutencao_do_veiculo) {
@@ -913,7 +982,9 @@ class Funcoes_BD{
 	}
 	
 	
-	public function obtemManutencoesDoVeiculo($id_veiculo_usuario) {
+	public function obtemManutencoesDoVeiculo($placa_veiculo_do_usuario) {
+		
+		$id_veiculo_usuario = $this->obtemIDVeiculoDoUsuarioPelaPlaca($placa_veiculo_do_usuario);
 		
 		$stmt = $this->conn->prepare("SELECT ID, S_DESCRICAO, N_LIMITE_KM, N_LIMITE_TEMPO_MESES, N_KM_ANTECIPACAO,
 									 N_TEMPO_ANTECIPACAO_MESES, D_DATA_ULTIMA_MANUTENCAO, N_KM_ULTIMA_MANUTENCAO FROM tb_manutencao_do_veiculo
@@ -1171,7 +1242,25 @@ class Funcoes_BD{
 		
 	}
 	
+	public function excluiTodasManutencoesDoVeiculo($id_veiculo_do_usuario) {
+		
+		$stmt = $this->conn->prepare("DELETE FROM tb_manutencao_do_veiculo WHERE ID_VEICULO_DO_USUARIO = ? ");
+		$stmt->bind_param("i",$id_veiculo_do_usuario);
+		
+		if($stmt->execute()) {
+			
+			$stmt->close();
+			return true;
+		} else {
+			return false;
+		}	
+		
+	}
+	
 	public function excluiVeiculo($placa) {
+		
+		$id_veiculo_do_usuario = $this->obtemIDVeiculoDoUsuarioPelaPlaca($placa);
+		$this->excluiTodasManutencoesDoVeiculo($id_veiculo_do_usuario);
 		
 		$stmt = $this->conn->prepare("DELETE FROM tb_veiculo_do_usuario WHERE S_PLACA = ?");
 		$stmt->bind_param("s",$placa);

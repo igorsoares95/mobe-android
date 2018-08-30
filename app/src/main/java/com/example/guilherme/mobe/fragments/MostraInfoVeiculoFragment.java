@@ -53,6 +53,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private String id_usuario;
     private Button btn_alterar_km_veiculo, btn_alterar_dispositivo_veiculo;
     private Button btn_excluir_veiculo;
+    private Button btn_criar_manutencao;
+    private Button btn_ver_manutencoes;
     private String km_no_momento_da_abertura_da_fragment, dispositivo_no_momento_da_abertura_da_fragment;
 
 
@@ -84,6 +86,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
         btn_alterar_km_veiculo = (Button) view.findViewById(R.id.btn_alterar_km_mostra_info_veiculo);
         btn_alterar_dispositivo_veiculo = (Button) view.findViewById(R.id.btn_alterar_dispositivo_mostra_info_veiculo);
         btn_excluir_veiculo = (Button) view.findViewById(R.id.btn_excluir_veiculo_mostra_info_veiculo);
+        btn_criar_manutencao = (Button) view.findViewById(R.id.btn_criar_manutencao_fragment_mostra_info_veiculo);
+        btn_ver_manutencoes = (Button) view.findViewById(R.id.btn_ver_manutencoes_fragment_mostra_info_veiculo);
 
         mostraInfoVeiculo();
 
@@ -100,6 +104,68 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 showInputDialog(2);
             }
         });
+
+        btn_ver_manutencoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //envia dados do veiculo para a proxima fragment
+                Bundle dados_do_veiculo = new Bundle();
+                dados_do_veiculo.putString("placa_veiculo",txtPlaca.getText().toString().trim());
+
+                MostraManutencoesDoVeiculo mostra_manutencoes_do_veiculo = new MostraManutencoesDoVeiculo();
+                mostra_manutencoes_do_veiculo.setArguments(dados_do_veiculo);
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_do_veiculo).addToBackStack(null).commit();
+
+            }
+        });
+
+        btn_criar_manutencao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+                alerta.setTitle("Adicionar Manutenção");
+                alerta.setMessage("Deseja criar manutenção para esse veículo?");
+                alerta.setCancelable(false);
+                alerta.setNegativeButton("Personalizada", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //envia dados do veiculo para a proxima fragment
+                        Bundle dados_do_veiculo = new Bundle();
+                        dados_do_veiculo.putString("modelo_veiculo",txtModelo.getText().toString().trim());
+                        dados_do_veiculo.putString("km_veiculo",txtKm.getText().toString().trim());
+                        dados_do_veiculo.putString("placa_veiculo",txtPlaca.getText().toString().trim());
+
+                        AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
+                        adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container, adicionar_manutencao_personalizada).addToBackStack(null).commit();
+
+                    }
+                }) ;
+
+                alerta.setPositiveButton("Recomendada", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Bundle dados_do_veiculo = new Bundle();
+                        dados_do_veiculo.putString("modelo_veiculo",txtModelo.getText().toString().trim());
+                        dados_do_veiculo.putString("km_veiculo",txtKm.getText().toString().trim());
+                        dados_do_veiculo.putString("placa_veiculo",txtPlaca.getText().toString().trim());
+
+                        MostraManutencoesRecomendadasDoVeiculo mostra_manutencoes_recomendadas_do_veiculo = new MostraManutencoesRecomendadasDoVeiculo();
+                        mostra_manutencoes_recomendadas_do_veiculo.setArguments(dados_do_veiculo);
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_recomendadas_do_veiculo).addToBackStack(null).commit();
+
+                    }
+                });
+
+                AlertDialog alertDialog = alerta.create();
+                alertDialog.show();
+
+            }
+        });
+
 
         btn_excluir_veiculo.setOnClickListener(new View.OnClickListener() {
             @Override

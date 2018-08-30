@@ -141,11 +141,10 @@ public class ListaVeiculosFragment extends Fragment {
 
                         }
 
+                        ArrayAdapter adapter = new VeiculoAdapter(getActivity(),veiculos);
+                        lista.setAdapter(adapter);
+
                     }
-
-                    ArrayAdapter adapter = new VeiculoAdapter(getActivity(),veiculos);
-                    lista.setAdapter(adapter);
-
 
                 } catch (JSONException e) {
                     // JSON error

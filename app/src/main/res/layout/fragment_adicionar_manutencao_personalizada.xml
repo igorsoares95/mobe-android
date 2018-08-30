@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AdicionarManutencaoPersonalizadaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/lbl_modelo_veiculo_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_km_veiculo_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_placa_veiculo_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/txt_descricao_manutencao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Descricao Manutencao"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txt_limite_km_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Limite KM" />
+
+    <EditText
+        android:id="@+id/txt_limite_tempo_meses_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Limite tempo meses" />
+
+    <EditText
+        android:id="@+id/txt_km_antecipacao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Km antecipacao" />
+
+    <EditText
+        android:id="@+id/txt_tempo_antecipacao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Tempo antecipacao meses" />
+
+    <EditText
+        android:id="@+id/txt_data_ultima_manutencao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Data ultima manutencao" />
+
+    <EditText
+        android:id="@+id/txt_km_ultima_manutencao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Km ultima manutencao"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btn_criar_manutencao_fragment_adicionar_manutencao_personalizada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar" />
+</LinearLayout>

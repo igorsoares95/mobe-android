@@ -62,6 +62,21 @@ public class AppConfig {
 
     public static String URL_REALIZAR_MANUTENCAO = "http://10.0.2.2:888/base_dados_mobe/realizar_manutencao.php";
 
+    public static String URL_OBTER_MANUTENCOES_RECOMENDADAS = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_recomendadas.php";
+
+    public static String URL_CRIAR_MANUTENCAO_RECOMENDADA_VEICULO = "http://10.0.2.2:888/base_dados_mobe/criar_manutencao_recomendada_veiculo.php";
+
+    public static String URL_CRIAR_MANUTENCAO_PERSONALIZADA_VEICULO = "http://10.0.2.2:888/base_dados_mobe/criar_manutencao_personalizada_veiculo.php";
+
+    public static String URL_EXCLUIR_MANUTENCAO_RECOMENDADA_VEICULO = "http://10.0.2.2:888/base_dados_mobe/excluir_manutencao_recomendada_do_veiculo.php";
+
+    public static String URL_OBTER_MANUTENCOES_DO_VEICULO = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_do_veiculo.php";
+
+    public static String URL_ALTERAR_INFORMACOES_MANUTENCAO_DO_VEICULO = "http://10.0.2.2:888/base_dados_mobe/atualiza_info_manutencao_do_veiculo.php";
+
+
+
+
 
 
 

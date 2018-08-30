@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.MostraManutencoesRecomendadasDoVeiculo">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/lbl_modelo_mostra_manutencoes_recomendadas_do_veiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_km_mostra_manutencoes_recomendadas_do_veiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_placa_mostra_manutencoes_recomendadas_do_veiculo"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_placa_mostra_manutencoes_recomendadas_do_veiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_modelo_mostra_manutencoes_recomendadas_do_veiculo"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btn_proximo_mostra_manutencoes_recomendadas_do_veiculo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_km_mostra_manutencoes_recomendadas_do_veiculo"
+        android:layout_centerHorizontal="true"
+        android:text="Próximo" />
+
+    <ListView
+        android:id="@+id/list_view_manutencoes_recomendadas_do_veiculo"
+        android:layout_width="match_parent"
+        android:layout_height="438dp" />
+
+</LinearLayout>

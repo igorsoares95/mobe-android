@@ -6,14 +6,14 @@
 	//cria um array JSON
 	$response = array("error" => FALSE);
 	
-	if(isset($_POST['id_veiculo_usuario'])){
+	if(isset($_POST['placa_veiculo_do_usuario'])){
 		
 		//recebe senha e email via POST
-		$id_veiculo_usuario = $_POST['id_veiculo_usuario'];
+		$placa_veiculo_do_usuario = $_POST['placa_veiculo_do_usuario'];
 		
-		if($bd->obtemManutencoesDoVeiculo($id_veiculo_usuario)) {
+		if($bd->obtemManutencoesDoVeiculo($placa_veiculo_do_usuario)) {
 			
-			$response["manutencoes"] = $bd->obtemManutencoesDoVeiculo($id_veiculo_usuario);
+			$response["manutencoes"] = $bd->obtemManutencoesDoVeiculo($placa_veiculo_do_usuario);
 			$response["error"] = FALSE;			
 			echo json_encode($response);
 			

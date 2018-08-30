@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.DetalhesManutencaoRecomendadaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/lbl_modelo_veiculo_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_km_veiculo_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_placa_veiculo_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_descricao_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_limite_km_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lbl_limite_tempo_meses_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/txt_km_antecipacao_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Km Antecipacao" />
+
+    <EditText
+        android:id="@+id/txt_tempo_antecipacao_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Tempo Antecipacao meses" />
+
+    <EditText
+        android:id="@+id/txt_data_ultima_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:hint="Data ultima manutencao" />
+
+
+    <EditText
+        android:id="@+id/txt_km_ultima_manutencao_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Km ultima manutencao"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btn_salvar_detalhes_manutencao_recomendada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
+        android:text="Salvar" />
+
+</LinearLayout>
