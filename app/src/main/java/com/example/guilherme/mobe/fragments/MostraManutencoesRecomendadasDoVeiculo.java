@@ -1,6 +1,8 @@
 package com.example.guilherme.mobe.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -96,8 +98,10 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
 
                 ArrayList<ManutencaoRecomendada> lista_manutencoes_recomendadas = manutencao_recomendada_adapter.lista_manutencoes_recomendadas;
                 for(int i=0;i<lista_manutencoes_recomendadas.size();i++){
+
                     ManutencaoRecomendada manutencao_recomendada = lista_manutencoes_recomendadas.get(i);
                     ManutencaoRecomendada manutencao_recomendada_na_abertura_da_fragment = primeiro_estado_das_manutencoes_recomendadas.get(i);
+
                     if(manutencao_recomendada.isSelecionado() && !manutencao_recomendada_na_abertura_da_fragment.isSelecionado()){
                         responseText.append("\n" + manutencao_recomendada.getDescricao());
                         lista_manutencoes_selecionadas.add(manutencao_recomendada);
@@ -176,6 +180,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                         Toast.makeText(getActivity(), "Não foi encontrado manutenções recomendadas", Toast.LENGTH_SHORT).show();
                         //esconder o botao pois nao tem nenhuma manutencao recomendada
                         btn_proximo.setVisibility(View.GONE);
+                        perguntaSeDesejaManutencaoPersonalizada();
 
                     }
 
@@ -260,6 +265,41 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq);
 
+    }
+
+    public void perguntaSeDesejaManutencaoPersonalizada() {
+        AlertDialog.Builder alerta = new AlertDialog.Builder(getContext());
+        alerta.setTitle("Manutencão personalizada");
+        alerta.setMessage("Deseja criar uma manutenção personalizada?");
+        alerta.setCancelable(false);
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                getActivity().finish();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
+
+            }
+        });
+
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //envia dados do veiculo para a proxima fragment
+                Bundle dados_do_veiculo = new Bundle();
+                dados_do_veiculo.putString("modelo_veiculo",modelo_veiculo);
+                dados_do_veiculo.putString("km_veiculo",km_veiculo);
+                dados_do_veiculo.putString("placa_veiculo",placa_veiculo);
+
+                AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
+                adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
+                getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
+
+            }
+        });
+
+        AlertDialog alertDialog = alerta.create();
+        alertDialog.show();
     }
 
 

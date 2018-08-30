@@ -1,6 +1,7 @@
 package com.example.guilherme.mobe.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.guilherme.mobe.R;
+import com.example.guilherme.mobe.activity.AdicionarVeiculoActivity;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
@@ -75,8 +77,9 @@ public class ListaVeiculosFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new AdicionarCarroFragment()).addToBackStack(null).commit();
-
+                //getFragmentManager().beginTransaction().replace(R.id.frame_container, new AdicionarCarroFragment()).addToBackStack(null).commit();
+                Intent intent = new Intent(getActivity(), AdicionarVeiculoActivity.class);
+                startActivity(intent);
 
             }
         });

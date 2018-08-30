@@ -186,6 +186,7 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
         alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_container, new InicioFragment())
@@ -204,7 +205,7 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
 
                 AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
                 adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, adicionar_manutencao_personalizada).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
 
             }
         });

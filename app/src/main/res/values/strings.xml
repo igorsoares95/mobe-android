@@ -12,4 +12,5 @@
     <string name="title_activity_click_notification_mostrar_manutencoes">
         ClickNotificationMostrarManutencoes
     </string>
+    <string name="title_activity_adicionar_veiculo">AdicionarVeiculoActivity</string>
 </resources>

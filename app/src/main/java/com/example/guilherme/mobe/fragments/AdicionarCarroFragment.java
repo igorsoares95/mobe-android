@@ -333,7 +333,7 @@ public class AdicionarCarroFragment extends Fragment {
 
                         MostraManutencoesRecomendadasDoVeiculo mostra_manutencoes_recomendadas_do_veiculo = new MostraManutencoesRecomendadasDoVeiculo();
                         mostra_manutencoes_recomendadas_do_veiculo.setArguments(dados_veiculo_adicionado);
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_recomendadas_do_veiculo).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, mostra_manutencoes_recomendadas_do_veiculo).commit();
 
 
                     } else {
