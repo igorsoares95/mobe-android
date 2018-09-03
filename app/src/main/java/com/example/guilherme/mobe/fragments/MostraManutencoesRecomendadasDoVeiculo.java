@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.guilherme.mobe.R;
+import com.example.guilherme.mobe.activity.AdicionarVeiculoActivity;
+import com.example.guilherme.mobe.activity.MainActivity;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.listview.ManutencaoRecomendada;
@@ -47,7 +50,9 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
     String modelo_veiculo, placa_veiculo, km_veiculo;
     TextView lbl_modelo_veiculo, lbl_placa_veiculo, lbl_km_veiculo;
     Button btn_proximo;
+    String tag_fragment_anterior;
     ArrayList<ManutencaoRecomendada> primeiro_estado_das_manutencoes_recomendadas = new ArrayList<>();
+    String nome_activity_atual;
 
     public MostraManutencoesRecomendadasDoVeiculo() {
         // Required empty public constructor
@@ -59,6 +64,8 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mostra_manutencoes_recomendadas_do_veiculo,container,false);
+
+        nome_activity_atual = getActivity().getClass().getSimpleName();
 
         lbl_modelo_veiculo = (TextView) view.findViewById(R.id.lbl_modelo_mostra_manutencoes_recomendadas_do_veiculo);
         lbl_placa_veiculo = (TextView) view.findViewById(R.id.lbl_placa_mostra_manutencoes_recomendadas_do_veiculo);
@@ -127,10 +134,19 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
 
                     DetalhesManutencaoRecomendadaFragment detalhes_manutencao_recomendada_fragment = new DetalhesManutencaoRecomendadaFragment();
                     detalhes_manutencao_recomendada_fragment.setArguments(manutencoes_selecionadas);
-                    getFragmentManager().beginTransaction().replace(R.id.frame_container, detalhes_manutencao_recomendada_fragment).commit();
+
+                    //Verifica qual é a acitivity atual, para assim, abrir a fragment com o frame container correto
+                    if(nome_activity_atual.equals("AdicionarVeiculoActivity")) {
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, detalhes_manutencao_recomendada_fragment).commit();
+                    }
+                    else if (nome_activity_atual.equals("MostraInfoVeiculoActivity")) {
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, detalhes_manutencao_recomendada_fragment).commit();
+                    }
 
                 } else {
-                    getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
+
+                    getActivity().finish();
+
                 }
 
             }
@@ -277,7 +293,8 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 getActivity().finish();
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
+
+                //getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
 
             }
         });
@@ -293,6 +310,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
 
                 AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
                 adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
+
                 getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
 
             }

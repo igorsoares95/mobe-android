@@ -192,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         String regId = pref.getString("regId", null);
 
-        Log.e(TAG, "Firebase reg id: " + regId);
+        Log.i(TAG, "Firebase reg id: " + regId);
 
         return regId;
 

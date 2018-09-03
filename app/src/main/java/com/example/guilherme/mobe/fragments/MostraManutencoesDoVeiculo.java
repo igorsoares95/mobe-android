@@ -83,7 +83,7 @@ public class MostraManutencoesDoVeiculo extends Fragment {
                 detalhes_manutencao_do_veiculo.setArguments(dados_da_manutencao);
                 //------------------------------------------------------------------------------------
 
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, detalhes_manutencao_do_veiculo).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, detalhes_manutencao_do_veiculo).addToBackStack(null).commit();
 
             }
         });

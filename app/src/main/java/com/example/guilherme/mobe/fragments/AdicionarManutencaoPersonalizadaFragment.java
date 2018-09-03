@@ -109,8 +109,9 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
                             txt_limite_tempo_meses.getText().toString(), txt_km_antecipacao.getText().toString(), txt_tempo_antecipacao.getText().toString(),
                             MaskEditUtil.formatarData(txt_data_ultima_manutencao.getText().toString(), "dd/MM/yyyy", "yyyy-MM-dd"), txt_km_ultima_manutencao.getText().toString());
 
-                    getFragmentManager().beginTransaction().replace(R.id.frame_container, new InicioFragment()).commit();
 
+                    Toast.makeText(getContext(), "Manutenção personalizada criada com sucesso!", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
 
                 } else {
 

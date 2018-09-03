@@ -60,7 +60,13 @@
             android:name=".activity.ClickNotificationMostrarManutencoes"
             android:label="@string/title_activity_click_notification_mostrar_manutencoes"
             android:theme="@style/AppTheme" />
-        <activity android:name=".activity.AdicionarVeiculoActivity"></activity>
+
+        <activity android:name=".activity.AdicionarVeiculoActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+
+        <activity android:name=".activity.MostraInfoVeiculoActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+
     </application>
 
 </manifest>

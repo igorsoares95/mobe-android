@@ -194,6 +194,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
         };
 
+        /*
         txtInput.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -201,6 +202,23 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
                 new DatePickerDialog(getActivity(), date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        */
+
+        //setOnFocusChangeListener é o evento usado para ao clicar na caixa abrir o datapicker
+        txtInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus) {
+
+                    new DatePickerDialog(getContext(), date, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+                }
             }
         });
 

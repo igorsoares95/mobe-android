@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -56,6 +57,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private Button btn_criar_manutencao;
     private Button btn_ver_manutencoes;
     private String km_no_momento_da_abertura_da_fragment, dispositivo_no_momento_da_abertura_da_fragment;
+    private String nome_activity_atual;
 
 
     public MostraInfoVeiculoFragment() {
@@ -66,6 +68,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        nome_activity_atual = getActivity().getClass().getSimpleName();
 
         getActivity().setTitle("Informações do veículo");
 
@@ -115,7 +119,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                 MostraManutencoesDoVeiculo mostra_manutencoes_do_veiculo = new MostraManutencoesDoVeiculo();
                 mostra_manutencoes_do_veiculo.setArguments(dados_do_veiculo);
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_do_veiculo).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, mostra_manutencoes_do_veiculo).addToBackStack(null).commit();
 
             }
         });
@@ -140,7 +144,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                         AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
                         adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container, adicionar_manutencao_personalizada).addToBackStack(null).commit();
+
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, adicionar_manutencao_personalizada).addToBackStack(null).commit();
 
                     }
                 }) ;
@@ -155,7 +160,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                         MostraManutencoesRecomendadasDoVeiculo mostra_manutencoes_recomendadas_do_veiculo = new MostraManutencoesRecomendadasDoVeiculo();
                         mostra_manutencoes_recomendadas_do_veiculo.setArguments(dados_do_veiculo);
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_manutencoes_recomendadas_do_veiculo).addToBackStack(null).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, mostra_manutencoes_recomendadas_do_veiculo).addToBackStack(null).commit();
 
                     }
                 });
@@ -185,7 +190,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         excluiVeiculo(placa);
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
+                       // getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
+                        getActivity().finish();
 
                     }
                 });
@@ -223,10 +229,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                                 alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtInput.getText().toString());
                                 txtDispositivo.setText(txtInput.getText().toString());
-                                getFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.frame_container, new ListaVeiculosFragment())
-                                        .commit();
+                                getActivity().finish();
 
                             }
 

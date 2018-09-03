@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.activity.AdicionarVeiculoActivity;
+import com.example.guilherme.mobe.activity.MostraInfoVeiculoActivity;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
@@ -96,16 +97,29 @@ public class ListaVeiculosFragment extends Fragment {
                 dados_do_veiculo.putString("placa", veiculo_selecionado.getPlaca());
                 dados_do_veiculo.putString("id_usuario",id_usuario);
 
-                MostraInfoVeiculoFragment mostra_info_veiculo_fragment = new MostraInfoVeiculoFragment();
-                mostra_info_veiculo_fragment.setArguments(dados_do_veiculo);
+                //MostraInfoVeiculoFragment mostra_info_veiculo_fragment = new MostraInfoVeiculoFragment();
+               // mostra_info_veiculo_fragment.setArguments(dados_do_veiculo);
                 //------------------------------------------------------------------------------------
 
-                getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_info_veiculo_fragment).addToBackStack(null).commit();
+                //getFragmentManager().beginTransaction().replace(R.id.frame_container, mostra_info_veiculo_fragment).addToBackStack(null).commit();
+
+
+                Intent intent = new Intent(getActivity(), MostraInfoVeiculoActivity.class);
+                intent.putExtras(dados_do_veiculo);
+                startActivity(intent);
+
 
             }
         });
 
         return view;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adicionaVeiculosNoListView();
 
     }
 

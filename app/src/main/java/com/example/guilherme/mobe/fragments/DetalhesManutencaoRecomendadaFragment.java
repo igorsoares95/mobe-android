@@ -47,6 +47,7 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
     Button btn_salvar;
     String modelo_veiculo, km_veiculo, placa_veiculo;
     int contador_manutencoes = 0;
+    String nome_activity_atual;
 
     public DetalhesManutencaoRecomendadaFragment() {
         // Required empty public constructor
@@ -59,6 +60,7 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_detalhes_manutencao_recomendada,container,false);
 
+        nome_activity_atual = getActivity().getClass().getSimpleName();
 
         lbl_modelo_veiculo = view.findViewById(R.id.lbl_modelo_veiculo_detalhes_manutencao_recomendada);
         lbl_km_veiculo = view.findViewById(R.id.lbl_km_veiculo_detalhes_manutencao_recomendada);
@@ -187,10 +189,8 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_container, new InicioFragment())
-                        .commit();
+                getActivity().finish();
+
             }
         });
 
@@ -205,7 +205,15 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
 
                 AdicionarManutencaoPersonalizadaFragment adicionar_manutencao_personalizada = new AdicionarManutencaoPersonalizadaFragment();
                 adicionar_manutencao_personalizada.setArguments(dados_do_veiculo);
-                getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
+
+                //Verifica qual é a acitivity atual, para assim, abrir a fragment com o frame container correto
+                if(nome_activity_atual.equals("AdicionarVeiculoActivity")) {
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
+                }
+                else if (nome_activity_atual.equals("MostraInfoVeiculoActivity")) {
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, adicionar_manutencao_personalizada).commit();
+                }
+
 
             }
         });
