@@ -38,10 +38,10 @@
         <activity android:name=".activity.RegistroActivity" />
         <activity
             android:name=".activity.AtivarUsuarioActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/TemaActionBar" />
         <activity
             android:name=".activity.EsqueciSenhaActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/TemaActionBar" />
 
         <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
@@ -62,10 +62,13 @@
             android:theme="@style/AppTheme" />
 
         <activity android:name=".activity.AdicionarVeiculoActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+            android:theme="@style/TemaActionBar"/>
 
         <activity android:name=".activity.MostraInfoVeiculoActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+            android:theme="@style/TemaActionBar"></activity>
+
+        <activity android:name=".activity.AlterarSenhaActivity"
+            android:theme="@style/TemaActionBar"></activity>
 
     </application>
 

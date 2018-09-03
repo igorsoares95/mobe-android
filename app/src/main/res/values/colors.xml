@@ -10,4 +10,6 @@
     <color name="yellow">#FFFF00</color>
     <color name="orange">#FFA500</color>
     <color name="red">#FF0000</color>
+    <color name="CordeFundoActivity">#FFFFF0</color>
+    <color name="CorFundoLinearLayout">#8B008B</color>
 </resources>

@@ -8,13 +8,13 @@
     android:paddingRight="25dp"
     android:paddingTop="16dp"
     tools:context="com.example.guilherme.mobe.activity.EsqueciSenhaActivity"
-    android:background="#D3D3D3">
+    android:background="@drawable/activity_bg">
 
     <EditText
         android:id="@+id/email_esqueci_senha"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_inicio_registro_edittext"
+        android:background="@drawable/bg_edittext"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="10dp"

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,7 +53,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private TextView txtAno;
     private String placa;
     private String id_usuario;
-    private Button btn_alterar_km_veiculo, btn_alterar_dispositivo_veiculo;
+    private AppCompatImageButton btn_alterar_km_veiculo, btn_alterar_dispositivo_veiculo;
     private Button btn_excluir_veiculo;
     private Button btn_criar_manutencao;
     private Button btn_ver_manutencoes;
@@ -81,15 +82,15 @@ public class MostraInfoVeiculoFragment extends Fragment {
         id_usuario = dados_do_veiculo.getString("id_usuario");
         //--------------------------------------------------------------------------
 
-        txtMarca = (TextView) view.findViewById(R.id.txt_marca_mostra_info_veiculo);
-        txtModelo = (TextView) view.findViewById(R.id.txt_modelo_mostra_info_veiculo);
-        txtKm = (TextView) view.findViewById(R.id.txt_km_mostra_info_veiculo);
-        txtPlaca = (TextView) view.findViewById(R.id.txt_placa_mostra_info_veiculo);
-        txtDispositivo = (TextView) view.findViewById(R.id.txt_dispositivo_mostra_info_veiculo);
-        txtAno = (TextView) view.findViewById(R.id.txt_ano_mostra_info_veiculo);
-        btn_alterar_km_veiculo = (Button) view.findViewById(R.id.btn_alterar_km_mostra_info_veiculo);
-        btn_alterar_dispositivo_veiculo = (Button) view.findViewById(R.id.btn_alterar_dispositivo_mostra_info_veiculo);
-        btn_excluir_veiculo = (Button) view.findViewById(R.id.btn_excluir_veiculo_mostra_info_veiculo);
+        txtMarca = (TextView) view.findViewById(R.id.txt_marca_fragment_mostra_info_veiculo);
+        txtModelo = (TextView) view.findViewById(R.id.txt_modelo_fragment_mostra_info_veiculo);
+        txtKm = (TextView) view.findViewById(R.id.txt_km_fragment_mostra_info_veiculo);
+        txtPlaca = (TextView) view.findViewById(R.id.txt_placa_fragment_mostra_info_veiculo);
+        txtDispositivo = (TextView) view.findViewById(R.id.txt_dispositivo_fragment_mostra_info_veiculo);
+        txtAno = (TextView) view.findViewById(R.id.txt_ano_fragment_mostra_info_veiculo);
+        btn_alterar_km_veiculo = (AppCompatImageButton) view.findViewById(R.id.btn_alterar_km_fragment_mostra_info_veiculo);
+        btn_alterar_dispositivo_veiculo = (AppCompatImageButton) view.findViewById(R.id.btn_alterar_dispositivo_fragment_mostra_info_veiculo);
+        btn_excluir_veiculo = (Button) view.findViewById(R.id.btn_excluir_veiculo_fragment_mostra_info_veiculo);
         btn_criar_manutencao = (Button) view.findViewById(R.id.btn_criar_manutencao_fragment_mostra_info_veiculo);
         btn_ver_manutencoes = (Button) view.findViewById(R.id.btn_ver_manutencoes_fragment_mostra_info_veiculo);
 
@@ -191,7 +192,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         excluiVeiculo(placa);
                        // getFragmentManager().beginTransaction().replace(R.id.frame_container, new ListaVeiculosFragment()).commit();
-                        getActivity().finish();
+
 
                     }
                 });
@@ -221,7 +222,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            if(km_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString())) {
+                            if(km_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
                                 Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
 
@@ -247,7 +248,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString())) {
+                            if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
                                 Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o código do dispositivo", Toast.LENGTH_SHORT).show();
 
@@ -482,7 +483,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                     if(!error) {
 
-                        Toast.makeText(getActivity().getApplicationContext(), "Veículo removido com sucesso!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Veículo removido com sucesso!", Toast.LENGTH_LONG).show();
+                        getActivity().finish();
 
                     } else {
 
@@ -495,7 +497,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
 
@@ -505,7 +507,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),"Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
         }) {
 

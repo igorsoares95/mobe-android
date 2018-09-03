@@ -1,127 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="30dp"
-    android:paddingRight="64dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/activity_bg"
     tools:context="com.example.guilherme.mobe.fragments.AtualizarUsuarioFragment">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/darker_gray"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome:"
-        android:id="@+id/textView4"
-        android:textSize="18dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
+    <LinearLayout
+        android:id="@+id/container_nome_email_atualiza_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:padding="10dp"
-        android:background="@drawable/bg_edittext"
-        android:textColor="@android:color/black"
-        android:id="@+id/nome_atualizaUsuario"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email: "
-        android:id="@+id/textView5"
-        android:textSize="18dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_below="@+id/nome_atualizaUsuario"
-        android:layout_alignLeft="@+id/nome_atualizaUsuario"
-        android:layout_alignStart="@+id/nome_atualizaUsuario" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/nav_header_desc"
+            app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <TextView
-        android:id="@+id/email_atualizaUsuario"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
+
+            <TextView
+                android:id="@+id/txtNome_atualiza_usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtEmail_atualiza_usuario"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black"
+                android:textStyle="italic"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5"
-        android:layout_below="@+id/textView5"
-        android:background="@drawable/bg_edittext"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Telefone: "
-        android:id="@+id/textView6"
-        android:textSize="18dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_below="@+id/email_atualizaUsuario"
-        android:layout_alignLeft="@+id/email_atualizaUsuario"
-        android:layout_alignStart="@+id/email_atualizaUsuario" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:padding="10dp"
-        android:background="@drawable/bg_edittext"
-        android:textColor="@android:color/black"
-        android:id="@+id/telefone_atualizaUsuario"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Salvar Dados"
-        android:id="@+id/btnSalvar_atualizaUsuario"
         android:padding="15dp"
-        android:background="@drawable/bg_botoes"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="56dp"
-        android:layout_below="@+id/telefone_atualizaUsuario"
-        android:layout_centerHorizontal="true" />
+        android:paddingRight="0dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnAlterarSenha_atualizaUsuario"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informações pessoais: "
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_alterar_senha_mostra_info_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:theme="@style/BotaoSemBorda"
+            android:text="Alterar Senha"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="151dp"
-        android:background="@drawable/bg_botoes"
-        android:padding="15dp"
-        android:text="Alterar Senha"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:background="@android:color/white">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone: "
+                android:textColor="@android:color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtTelefone_atualiza_usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:padding="3dp"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:background="@drawable/bg_botao_alterar_senha_mostra_info_usuario"
+                android:textColor="@android:color/black" />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/btnAlterarTelefone_mostra_info_usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_edit_black_24dp"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@android:color/darker_gray"/>
 
     <Button
         android:id="@+id/btn_desativar__atualizar_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="58dp"
-        android:background="@drawable/bg_botoes"
+        android:theme="@style/BotaoSemBorda"
+        style="@style/Widget.AppCompat.Button"
         android:padding="15dp"
+        android:layout_marginVertical="@android:dimen/app_icon_size"
+        android:layout_gravity="center_horizontal"
         android:text="Desativar Usuário"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
-</RelativeLayout>
+
+</LinearLayout>

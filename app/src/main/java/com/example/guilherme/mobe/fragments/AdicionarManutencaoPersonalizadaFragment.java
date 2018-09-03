@@ -87,7 +87,7 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
         km_veiculo = dados_do_veiculo.getString("km_veiculo");
 
         lbl_modelo_veiculo.setText(modelo_veiculo);
-        lbl_km_veiculo.setText(km_veiculo);
+        lbl_km_veiculo.setText(km_veiculo + " Km");
         lbl_placa_veiculo.setText(placa_veiculo);
 
         btn_criar_manutencao.setOnClickListener(new View.OnClickListener() {

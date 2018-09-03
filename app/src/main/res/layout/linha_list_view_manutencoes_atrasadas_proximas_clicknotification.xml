@@ -1,150 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:paddingTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txt_modelo_clicknotification"
-        android:layout_width="241dp"
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@android:color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/lbl_modelo_clicknotification"
-        android:layout_marginEnd="39dp"
-        android:text="TextView"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
-    <TextView
-        android:id="@+id/txt_placa_clicknotification"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/lbl_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Manutenção:" />
+
+        <TextView
+            android:id="@+id/txt_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/lbl_placa_clicknotification"
-        android:layout_marginStart="117dp"
-        android:text="TextView"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
-    <TextView
-        android:id="@+id/txt_km_atual_clicknotification"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txt_modelo_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lbl_placa_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Placa:" />
+
+        <TextView
+            android:id="@+id/txt_placa_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/txt_placa_clicknotification"
-        android:layout_marginEnd="77dp"
-        android:text="TextView"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
-    <TextView
-        android:id="@+id/txt_manutencao_clicknotification"
-        android:layout_width="202dp"
+
+        <TextView
+            android:id="@+id/lbl_km_atual_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Km atual:" />
+
+        <TextView
+            android:id="@+id/txt_km_atual_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/lbl_manutencao_clicknotification"
-        android:layout_marginEnd="57dp"
-        android:text="TextView"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
+        <TextView
+            android:id="@+id/lbl_km_ultima_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Km ultima manutenção:" />
+
+        <TextView
+            android:id="@+id/txt_km_ultima_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/lbl_km_proxima_manutencao_clicknotification"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Km próxima manutenção:" />
+
+        <TextView
+            android:id="@+id/txt_km_proxima_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/lbl_data_ultima_manutencao_clicknotification"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Data ultima manutenção:" />
+
+        <TextView
+            android:id="@+id/txt_data_ultima_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/lbl_data_proxima_manutencao_clicknotification"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Data próxima manutenção:" />
+
+
+
+        <TextView
+            android:id="@+id/txt_data_proxima_manutencao_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@android:color/black"/>
+
+
+    <!--
     <TextView
         android:id="@+id/lbl_modelo_clicknotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_km_ultima_manutencao_clicknotification"
-        android:layout_marginTop="50dp"
-        android:text="Modelo:" />
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Modelo:" /> -->
 
-    <TextView
-        android:id="@+id/lbl_placa_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_modelo_clicknotification"
-        android:layout_marginTop="88dp"
-        android:text="Placa:" />
-
-    <TextView
-        android:id="@+id/lbl_km_atual_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/txt_placa_clicknotification"
-        android:layout_toStartOf="@+id/txt_km_atual_clicknotification"
-        android:text="Km atual:" />
-
-    <TextView
-        android:id="@+id/lbl_manutencao_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_modelo_clicknotification"
-        android:layout_marginTop="14dp"
-        android:text="Manutenção:" />
-
-    <TextView
-        android:id="@+id/lbl_km_ultima_manutencao_clicknotification"
-        android:layout_width="168dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_km_proxima_manutencao_clicknotification"
-        android:layout_marginTop="121dp"
-        android:text="Km ultima manutenção:" />
-
-    <TextView
-        android:id="@+id/txt_km_ultima_manutencao_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txt_km_proxima_manutencao_clicknotification"
-        android:layout_alignTop="@+id/lbl_km_ultima_manutencao_clicknotification"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/lbl_km_proxima_manutencao_clicknotification"
-        android:layout_width="167dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_data_ultima_manutencao_clicknotification"
-        android:layout_marginTop="157dp"
-        android:text="Km próxima manutenção:" />
-
-    <TextView
-        android:id="@+id/txt_km_proxima_manutencao_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txt_data_proxima_manutencao_clicknotification"
-        android:layout_alignTop="@+id/lbl_km_proxima_manutencao_clicknotification"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/lbl_data_ultima_manutencao_clicknotification"
-        android:layout_width="171dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="192dp"
-        android:layout_toStartOf="@+id/lbl_km_atual_clicknotification"
-        android:text="Data ultima manutenção:" />
-
-    <TextView
-        android:id="@+id/lbl_data_proxima_manutencao_clicknotification"
-        android:layout_width="176dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_modelo_clicknotification"
-        android:layout_marginTop="229dp"
-        android:text="Data próxima manutenção:" />
-
-    <TextView
-        android:id="@+id/txt_data_ultima_manutencao_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txt_km_proxima_manutencao_clicknotification"
-        android:layout_alignTop="@+id/lbl_data_ultima_manutencao_clicknotification"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/txt_data_proxima_manutencao_clicknotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/lbl_data_proxima_manutencao_clicknotification"
-        android:layout_marginEnd="94dp"
-        android:text="TextView" />
-
-</RelativeLayout>
+</LinearLayout>

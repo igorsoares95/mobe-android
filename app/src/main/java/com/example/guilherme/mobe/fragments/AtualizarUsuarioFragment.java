@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.guilherme.mobe.R;
+import com.example.guilherme.mobe.activity.AlterarSenhaActivity;
 import com.example.guilherme.mobe.activity.LoginActivity;
 import com.example.guilherme.mobe.activity.MainActivity;
 import com.example.guilherme.mobe.app.AppConfig;
@@ -54,10 +56,10 @@ public class AtualizarUsuarioFragment extends Fragment {
     private static final String TAG = AtualizarUsuarioFragment.class.getSimpleName();
     private SQLiteHandler bd;
     private SessionManager session;
-    private EditText atualizaNome;
+    private TextView atualizaNome;
     private TextView atualizaEmail;
     private EditText atualizaTelefone;
-    private Button btnSalvar;
+    private AppCompatImageButton btnAlterarTelefone;
     private Button btnAlterarSenha;
     private Button btnDesativarUsuario;
     private ProgressDialog pDialog;
@@ -75,11 +77,11 @@ public class AtualizarUsuarioFragment extends Fragment {
 
 
 
-        atualizaNome = view.findViewById(R.id.nome_atualizaUsuario);
-        atualizaEmail = (TextView) view.findViewById(R.id.email_atualizaUsuario);
-        atualizaTelefone = (EditText) view.findViewById(R.id.telefone_atualizaUsuario);
-        btnSalvar = (Button) view.findViewById(R.id.btnSalvar_atualizaUsuario);
-        btnAlterarSenha = (Button) view.findViewById(R.id.btnAlterarSenha_atualizaUsuario);
+        atualizaNome = (TextView) view.findViewById(R.id.txtNome_atualiza_usuario);
+        atualizaEmail = (TextView) view.findViewById(R.id.txtEmail_atualiza_usuario);
+        atualizaTelefone = (EditText) view.findViewById(R.id.txtTelefone_atualiza_usuario);
+        btnAlterarSenha = (Button) view.findViewById(R.id.btn_alterar_senha_mostra_info_usuario);
+        btnAlterarTelefone = (AppCompatImageButton) view.findViewById(R.id.btnAlterarTelefone_mostra_info_usuario);
         btnDesativarUsuario = (Button) view.findViewById(R.id.btn_desativar__atualizar_usuario);
         pDialog = new ProgressDialog(getActivity());
         bd = new SQLiteHandler(getActivity().getApplicationContext());
@@ -92,6 +94,7 @@ public class AtualizarUsuarioFragment extends Fragment {
 
         atualizaNome.setText(nome);
         atualizaEmail.setText(email);
+        atualizaTelefone.setEnabled(false);
         atualizaTelefone.setText(telefone);
 
         atualizaTelefone.addTextChangedListener(MaskEditUtil.mask(atualizaTelefone, MaskEditUtil.FORMAT_FONE));
@@ -132,11 +135,11 @@ public class AtualizarUsuarioFragment extends Fragment {
         });
 
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
+        btnAlterarTelefone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                atualizaUsuario(atualizaNome.getText().toString(), atualizaEmail.getText().toString(), atualizaTelefone.getText().toString());
+                showInputDialog();
 
             }
         });
@@ -144,19 +147,16 @@ public class AtualizarUsuarioFragment extends Fragment {
         btnAlterarSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_container, new AtualizarSenhaFragment())
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent = new Intent(getActivity(), AlterarSenhaActivity.class);
+                startActivity(intent);
             }
         });
         return view;
     }
     private void atualizaUsuario(final String nome, final String email, final String telefone) {
 
-        //pDialog.setMessage("Atualizando...");
-        //showDialog();
+        pDialog.setMessage("Atualizando...");
+        showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_ATUALIZAR_USUARIO, new Response.Listener<String>() {
             @Override
@@ -285,6 +285,50 @@ public class AtualizarUsuarioFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(strReq);
 
     }
+
+    //exibe caixa de dialogo para inserçao do novo telefone, igual alterar km do fragment MostraInfoVeiculoFragment
+    private void showInputDialog() {
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View promptView = layoutInflater.inflate(R.layout.input_dialog,null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setView(promptView);
+
+        final EditText txtInput = (EditText) promptView.findViewById(R.id.editTextInput);
+            String titulo = "Insira o novo telefone";
+            alertDialogBuilder.setCancelable(false).setTitle(titulo)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(atualizaTelefone.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
+
+                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
+
+                            } else {
+
+                                atualizaUsuario(atualizaNome.toString().trim(), atualizaEmail.toString().trim(), txtInput.getText().toString().trim());
+                                atualizaTelefone.setText(txtInput.getText().toString());
+                                getActivity().finish();
+
+                            }
+
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
+
 
     private void logoutUser() {
         session.setLogin(false);

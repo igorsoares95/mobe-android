@@ -6,8 +6,12 @@
 
     <TextView
         android:id="@+id/lbl_descricao_manutencao_linha_list_view_mostra_manutencoes_do_veiculo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:text="TextView" />
 
 </LinearLayout>

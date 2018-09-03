@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/activity_bg"
@@ -9,15 +10,17 @@
     <LinearLayout
         android:id="@+id/scroll_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
 
         <TextView
             android:id="@+id/Marcatxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Marca:"
             android:layout_margin="5dip"
+            android:text="Marca:"
             android:textColor="@android:color/black"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -27,8 +30,8 @@
             android:layout_width="197dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
-            android:backgroundTint="@color/CorBotao"
-            android:popupBackground="@color/BordaEditText" />
+            android:backgroundTint="@color/CorFundoLinearLayout"
+            android:popupBackground="@android:color/white" />
 
         <TextView
             android:id="@+id/Modelotxt"
@@ -45,8 +48,8 @@
             android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
-            android:backgroundTint="@color/CorBotao"
-            android:popupBackground="@color/BordaEditText" />
+            android:backgroundTint="@color/CorFundoLinearLayout"
+            android:popupBackground="@android:color/white" />
 
         <TextView
             android:id="@+id/Anotxt"
@@ -63,8 +66,8 @@
             android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
-            android:backgroundTint="@color/CorBotao"
-            android:popupBackground="@color/BordaEditText" />
+            android:backgroundTint="@color/CorFundoLinearLayout"
+            android:popupBackground="@android:color/white" />
 
         <TextView
             android:id="@+id/textview8"
@@ -80,12 +83,12 @@
             android:id="@+id/txt_placa_adicionar_carro"
             android:layout_width="195dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:layout_margin="5dip"
+            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Placa"
             android:inputType="text"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:textColorHint="#222222" />
 
         <TextView
@@ -102,20 +105,20 @@
             android:id="@+id/txt_km_adicionar_veiculo"
             android:layout_width="195dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dip"
             android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Quilometragem atual"
-            android:layout_margin="5dip"
             android:inputType="number"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:textColorHint="#222222" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID do Dispositivo:"
             android:layout_margin="5dip"
+            android:text="ID do Dispositivo:"
             android:textColor="@android:color/black"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -124,12 +127,12 @@
             android:id="@+id/txt_dispositivo_adicionar_veiculo"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_edittext"
             android:layout_margin="5dip"
+            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="Identificação do Dispositivo"
             android:inputType="number"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:textColorHint="#222222" />
 
         <Button

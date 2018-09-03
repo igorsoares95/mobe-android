@@ -15,9 +15,7 @@ public class AppConfig {
     public static String URL_ESQUECI_SENHA = "http://10.0.2.2/manutencao_veicular/esqueci_senha.php";
     */
 
-
-
-/*
+    /*
     public static String URL_LOGIN = "http://10.0.2.2:888/base_dados_mobe/login.php";
 
     public static String URL_REGISTRO = "http://10.0.2.2:888/base_dados_mobe/registro.php";
@@ -73,8 +71,7 @@ public class AppConfig {
     public static String URL_OBTER_MANUTENCOES_DO_VEICULO = "http://10.0.2.2:888/base_dados_mobe/obter_manutencoes_do_veiculo.php";
 
     public static String URL_ALTERAR_INFORMACOES_MANUTENCAO_DO_VEICULO = "http://10.0.2.2:888/base_dados_mobe/atualiza_info_manutencao_do_veiculo.php";
-
-*/
+    */
 
     public static String URL_LOGIN = "http://danielfalsetti-001-site7.ftempurl.com:80/login.php";
 
@@ -131,14 +128,6 @@ public class AppConfig {
     public static String URL_OBTER_MANUTENCOES_DO_VEICULO = "http://danielfalsetti-001-site7.ftempurl.com:80/obter_manutencoes_do_veiculo.php";
 
     public static String URL_ALTERAR_INFORMACOES_MANUTENCAO_DO_VEICULO = "http://danielfalsetti-001-site7.ftempurl.com:80/atualiza_info_manutencao_do_veiculo.php";
-
-
-
-
-
-
-
-
 
 
 
