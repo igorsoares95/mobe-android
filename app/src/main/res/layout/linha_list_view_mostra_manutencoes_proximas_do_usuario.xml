@@ -1,133 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="11dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Descrição:" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
-    <TextView
-        android:id="@+id/lbl_veiculo_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginTop="37dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Veículo:" />
+        <TextView
+            android:id="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Descrição:" />
 
-    <TextView
-        android:id="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginTop="64dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Placa:" />
+        <TextView
+            android:id="@+id/txt_descricao_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/lbl_km_atual_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginEnd="131dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Km Atual:" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/lbl_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginTop="91dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Km próxima manutenção:" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
-    <TextView
-        android:id="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginTop="120dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="Data próxima manutenção:" />
+        <TextView
+            android:id="@+id/txt_veiculo_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/txt_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginStart="93dp"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Placa:" />
 
-    <TextView
-        android:id="@+id/txt_veiculo_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_veiculo_list_view_manutencoes_proximas_do_usuario"
-        android:layout_toEndOf="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/txt_placa_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/txt_placa_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
-        android:layout_toEndOf="@+id/lbl_descricao_list_view_manutencoes_proximas_do_usuario"
-        android:text="TextView" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txt_km_atual_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/lbl_placa_list_view_manutencoes_proximas_do_usuario"
-        android:layout_marginEnd="56dp"
-        android:text="TextView" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
 
-    <TextView
-        android:id="@+id/txt_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/lbl_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
-        android:layout_toEndOf="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/lbl_km_atual_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Km Atual:" />
 
-    <TextView
-        android:id="@+id/txt_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txt_km_atual_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/lbl_km_atual_list_view_manutencoes_proximas_do_usuario"
-        android:layout_alignTop="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
-        android:text="TextView" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:id="@+id/lbl_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Km próxima manutenção:" />
+
+        <TextView
+            android:id="@+id/txt_km_proxima_manutencao__list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:id="@+id/lbl_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Data próxima manutenção:" />
+
+
+        <TextView
+            android:id="@+id/txt_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="TextView" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_below="@+id/txt_data_proxima_manutencao_list_view_manutencoes_proximas_do_usuario"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:background="@android:color/black"/>
 
-</RelativeLayout>
+</LinearLayout>

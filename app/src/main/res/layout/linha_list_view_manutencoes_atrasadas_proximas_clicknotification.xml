@@ -156,11 +156,11 @@
 
         <TextView
             android:id="@+id/lbl_data_ultima_manutencao_clicknotification"
-            android:layout_width="171dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:text="Data ultima manutenção:"
             android:textColor="@android:color/black"
-            android:text="Data ultima manutenção:" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txt_data_ultima_manutencao_clicknotification"
@@ -181,11 +181,11 @@
 
         <TextView
             android:id="@+id/lbl_data_proxima_manutencao_clicknotification"
-            android:layout_width="176dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:text="Data próxima manutenção:"
             android:textColor="@android:color/black"
-            android:text="Data próxima manutenção:" />
+            android:textStyle="bold" />
 
 
 
