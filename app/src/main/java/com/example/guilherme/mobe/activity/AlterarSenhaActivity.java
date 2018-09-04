@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlterarSenhaActivity extends AppCompatActivity {
-
+    /**/
     private static final String TAG = RegistroActivity.class.getSimpleName();
     private EditText txtSenhaAntiga;
     private EditText txtNovaSenha;

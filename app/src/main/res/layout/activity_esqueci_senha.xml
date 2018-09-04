@@ -9,7 +9,7 @@
     android:paddingTop="16dp"
     tools:context="com.example.guilherme.mobe.activity.EsqueciSenhaActivity"
     android:background="@drawable/activity_bg">
-
+    <!---->
     <EditText
         android:id="@+id/email_esqueci_senha"
         android:layout_width="fill_parent"
