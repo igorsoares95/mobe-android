@@ -124,7 +124,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
                 if(posicao == 0) {
 
-                    adicionaTodasManutencoesAtrasadasDoUsuarioNoListView();
+                    adicionaTodasManutencoesAtrasadasDoUsuarioNoListView(id_usuario);
 
                 } else {
 
@@ -142,6 +142,13 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adicionaTodasManutencoesAtrasadasDoUsuarioNoListView(id_usuario);
     }
 
     private void abreAlertDialog() {
@@ -206,22 +213,29 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
         });
         */
 
+        /*
         //setOnFocusChangeListener é o evento usado para ao clicar na caixa abrir o datapicker
         txtInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
-                if(hasFocus) {
-
                     new DatePickerDialog(getContext(), date, myCalendar
                             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                             myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-
-                }
             }
         });
 
+        */
+
+        txtInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         AlertDialog alertDialog = alertDialogBuilderDataManutencao.create();
         alertDialog.show();
@@ -284,20 +298,14 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
                     if(!error) {
 
                         Toast.makeText(getActivity(), "Manutenção realizada com sucesso", Toast.LENGTH_SHORT).show();
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.frame_container, new ListaVeiculosFragment())
-                                .commit();
+                        onResume();
 
 
 
                     } else {
 
                         Toast.makeText(getActivity(), "Não foi possível realizar manutenção", Toast.LENGTH_SHORT).show();
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.frame_container, new ListaVeiculosFragment())
-                                .commit();
+                        onResume();
 
                     }
 
@@ -337,7 +345,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
     }
 
-    private void adicionaTodasManutencoesAtrasadasDoUsuarioNoListView() {
+    private void adicionaTodasManutencoesAtrasadasDoUsuarioNoListView(final String id_usuario) {
 
         final ArrayList<ManutencaoAtrasada> manutencoes_atrasadas = new ArrayList<ManutencaoAtrasada>();
 

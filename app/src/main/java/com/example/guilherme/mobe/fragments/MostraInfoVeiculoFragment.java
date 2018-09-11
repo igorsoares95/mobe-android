@@ -2,6 +2,7 @@ package com.example.guilherme.mobe.fragments;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private Button btn_ver_manutencoes;
     private String km_no_momento_da_abertura_da_fragment, dispositivo_no_momento_da_abertura_da_fragment;
     private String nome_activity_atual;
+    private ProgressDialog pDialog;
+
 
 
     public MostraInfoVeiculoFragment() {
@@ -72,7 +75,10 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
         nome_activity_atual = getActivity().getClass().getSimpleName();
 
-        getActivity().setTitle("Informações do veículo");
+        getActivity().setTitle("Meu veículo");
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setCancelable(false);
 
         View view = inflater.inflate(R.layout.fragment_mostra_info_veiculo,container,false);
 
@@ -132,7 +138,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 alerta.setTitle("Adicionar Manutenção");
                 alerta.setMessage("Deseja criar manutenção para esse veículo?");
-                alerta.setCancelable(false);
+                alerta.setCancelable(true);
                 alerta.setNegativeButton("Personalizada", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -207,6 +213,12 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
     }
 
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG,"onResume foi chamado");
+        mostraInfoVeiculo();
+    }
+
     private void showInputDialog(int i) {
 
         LayoutInflater layoutInflater = getLayoutInflater();
@@ -228,9 +240,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
                             } else {
 
-                                alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtInput.getText().toString());
-                                txtDispositivo.setText(txtInput.getText().toString());
-                                getActivity().finish();
+                                alterarKmVeiculoManualmente(txtPlaca.getText().toString(),txtInput.getText().toString(),txtDispositivo.getText().toString());
+                              //  txtDispositivo.setText(txtInput.getText().toString());
 
                             }
 
@@ -255,11 +266,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
                             } else {
 
                                 alterarDispositivoDoVeiculo(txtInput.getText().toString(), txtPlaca.getText().toString());
-                                txtDispositivo.setText(txtInput.getText().toString());
-                                getFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.frame_container, new ListaVeiculosFragment())
-                                        .commit();
+                              //  txtDispositivo.setText(txtInput.getText().toString());
+
 
                             }
                         }
@@ -350,14 +358,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
     }
 
     private void alterarDispositivoDoVeiculo(final String codigo_dispositivo, final String placa) {
-
+        showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_ALTERAR_DISPOSITIVO_DO_VEICULO, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Alterar dispositivo Response: " + response.toString());
-
+                hideDialog();
                 try {
                     JSONObject object = new JSONObject(response);
 
@@ -366,11 +374,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
                     if(!error) {
 
                         Toast.makeText(getActivity().getApplicationContext(), "A dispositivo foi alterado com sucesso!", Toast.LENGTH_LONG).show();
+                        onResume(); // recarregar as informacoes do veiculo
+
 
                     } else {
 
                         String errorMsg = object.getString("error_msg");
                         Toast.makeText(getActivity().getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                        onResume(); // recarregar as informacoes do veiculo
 
                     }
 
@@ -408,15 +419,17 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
     }
 
-    private void alterarKmVeiculoManualmente(final String placa, final String km) {
+    private void alterarKmVeiculoManualmente(final String placa, final String km, final String codigo_dispositivo) {
 
+        pDialog.setMessage("Atualizando...");
+        showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_ALTERAR_KM_MANUALMENTE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Alterar km manualmente Response: " + response.toString());
-
+                hideDialog();
                 try {
                     JSONObject object = new JSONObject(response);
 
@@ -425,11 +438,14 @@ public class MostraInfoVeiculoFragment extends Fragment {
                     if(!error) {
 
                         Toast.makeText(getActivity().getApplicationContext(), "A quilometragem do veículo foi alterada com sucesso!", Toast.LENGTH_LONG).show();
+                        onResume(); // recarregar as informacoes do veiculo
+
 
                     } else {
 
                         String errorMsg = object.getString("error_msg");
                         Toast.makeText(getActivity().getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                        onResume(); // recarregar as informacoes do veiculo
 
                     }
 
@@ -457,6 +473,7 @@ public class MostraInfoVeiculoFragment extends Fragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("placa",placa);
                 params.put("km",km);
+                params.put("codigo_dispositivo",codigo_dispositivo);
                 return params;
             }
 
@@ -469,12 +486,16 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
     private void excluiVeiculo(final String placa) {
 
+        pDialog.setMessage("Excluindo ...");
+        showDialog();
+
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_EXCLUIR_VEICULO, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Excluir veiculo Response: " + response.toString());
+                hideDialog();
 
                 try {
                     JSONObject object = new JSONObject(response);
@@ -524,6 +545,18 @@ public class MostraInfoVeiculoFragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq);
 
+    }
+
+    private void showDialog() {
+        if(!pDialog.isShowing()) {
+            pDialog.show();
+        }
+    }
+
+    private void hideDialog() {
+        if(pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
     }
 
 }

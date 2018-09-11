@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,8 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_detalhes_manutencao_recomendada,container,false);
+
+        getActivity().setTitle("Detalhes da manutenção");
 
         nome_activity_atual = getActivity().getClass().getSimpleName();
 
@@ -172,6 +175,63 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
 
     }
 
+    /*
+    public void onResume() {
+        super.onResume();
+
+        //Verifica qual é a acitivity atual parar assim tratar o botao onBackPressed
+        if(nome_activity_atual.equals("AdicionarVeiculoActivity")) {
+
+            if(getView() == null){
+                return;
+            }
+
+            getView().setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                        // handle back button's click listener
+                        Log.i("teste", "onBackPressed na fragment funcionou");
+                        mostraAlertDialogDeCancelarCriacaoDaManutencao();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
+
+
+    }
+
+    public void mostraAlertDialogDeCancelarCriacaoDaManutencao () {
+
+        AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+        alerta.setTitle("Criação de manutenções");
+        alerta.setMessage("Deseja realmente criar o veículo sem cadastro de manutenções?");
+        alerta.setCancelable(false);
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Caso clique em não o app não faz nada
+            }
+        });
+
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().finish();
+            }
+        });
+
+        AlertDialog alertDialog = alerta.create();
+        alertDialog.show();
+
+    }
+
+    */
+
     private void atualizarTxtDataAposEscolherDataNoDataPicker() {
 
         String myFormat = "dd/MM/yyyy"; //In which you need put here
@@ -208,7 +268,7 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
 
                 //Verifica qual é a acitivity atual, para assim, abrir a fragment com o frame container correto
                 if(nome_activity_atual.equals("AdicionarVeiculoActivity")) {
-                    getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, adicionar_manutencao_personalizada).addToBackStack(null).commit();
                 }
                 else if (nome_activity_atual.equals("MostraInfoVeiculoActivity")) {
                     getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, adicionar_manutencao_personalizada).commit();

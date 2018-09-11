@@ -52,7 +52,7 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         txtConfitmarNovaSenha = (EditText) findViewById(R.id.confirmarSenha_atualizarSenha);
         botaoAlterarSenha = (Button) findViewById(R.id.botaoAlterar_atualizarSenha);
         bd = new SQLiteHandler(getApplicationContext());
-        pDialog = new ProgressDialog(getApplicationContext());
+        pDialog = new ProgressDialog(this);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_close_black_24dp);
@@ -96,7 +96,7 @@ public class AlterarSenhaActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Alteração de senha Response: " + response);
-                //hideDialog();
+                hideDialog();
 
                 try {
 

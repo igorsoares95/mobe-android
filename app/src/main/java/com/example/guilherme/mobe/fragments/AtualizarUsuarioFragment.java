@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageButton;
+import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,21 +84,13 @@ public class AtualizarUsuarioFragment extends Fragment {
         btnAlterarSenha = (Button) view.findViewById(R.id.btn_alterar_senha_mostra_info_usuario);
         btnAlterarTelefone = (AppCompatImageButton) view.findViewById(R.id.btnAlterarTelefone_mostra_info_usuario);
         btnDesativarUsuario = (Button) view.findViewById(R.id.btn_desativar__atualizar_usuario);
-        pDialog = new ProgressDialog(getActivity());
+        pDialog = new ProgressDialog(getContext());
         bd = new SQLiteHandler(getActivity().getApplicationContext());
         session = new SessionManager(getActivity().getApplicationContext());
 
-        HashMap<String, String> usuario = bd.getUserDetails();
-        String nome = usuario.get("S_NOME");
-        final String email = usuario.get("S_EMAIL");
-        String telefone = usuario.get("N_TELEFONE");
-
-        atualizaNome.setText(nome);
-        atualizaEmail.setText(email);
-        atualizaTelefone.setEnabled(false);
-        atualizaTelefone.setText(telefone);
-
+        mostraInfoUsuario();
         atualizaTelefone.addTextChangedListener(MaskEditUtil.mask(atualizaTelefone, MaskEditUtil.FORMAT_FONE));
+
 
         btnDesativarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +115,7 @@ public class AtualizarUsuarioFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         //Caso clique em sim, será feito o logout
-                        desativaUsuario(email);
+                        desativaUsuario(getEmailUsuario());
 
                     }
                 });
@@ -153,6 +146,33 @@ public class AtualizarUsuarioFragment extends Fragment {
         });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mostraInfoUsuario();
+    }
+
+    private void mostraInfoUsuario() {
+
+        HashMap<String, String> usuario = bd.getUserDetails();
+        String nome = usuario.get("S_NOME");
+        final String email = usuario.get("S_EMAIL");
+        String telefone = usuario.get("N_TELEFONE");
+
+        atualizaNome.setText(nome);
+        atualizaEmail.setText(email);
+        atualizaTelefone.setEnabled(false);
+        atualizaTelefone.setText(telefone);
+
+    }
+
+    private String getEmailUsuario() {
+        HashMap<String, String> usuario = bd.getUserDetails();
+        final String email = usuario.get("S_EMAIL");
+        return email;
+    }
+
     private void atualizaUsuario(final String nome, final String email, final String telefone) {
 
         pDialog.setMessage("Atualizando...");
@@ -163,7 +183,7 @@ public class AtualizarUsuarioFragment extends Fragment {
             public void onResponse(String response) {
 
                 Log.d(TAG, "Response Atualizar Usuario: " + response);
-                //hideDialog();
+                hideDialog();
 
                 try {
 
@@ -178,17 +198,14 @@ public class AtualizarUsuarioFragment extends Fragment {
                         int id_usuario = usuario.getInt("id");
                         String telefone = usuario.getString("telefone");
                         bd.updateUser(nome, email, id_usuario, telefone);
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.frame_container, new AtualizarUsuarioFragment())
-                                .commit();
 
-                        Toast.makeText(getActivity().getApplicationContext(), "Usuário atualizado com sucesso!", Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getActivity().getApplicationContext(), "Usuário atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+                        onResume();
                     } else {
 
                         String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getActivity().getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), errorMsg, Toast.LENGTH_SHORT).show();
+                        onResume();
 
                     }
 
@@ -303,14 +320,12 @@ public class AtualizarUsuarioFragment extends Fragment {
 
                             if(atualizaTelefone.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o telefone", Toast.LENGTH_SHORT).show();
 
                             } else {
 
-                                atualizaUsuario(atualizaNome.toString().trim(), atualizaEmail.toString().trim(), txtInput.getText().toString().trim());
-                                atualizaTelefone.setText(txtInput.getText().toString());
-                                getActivity().finish();
-
+                                //Log.i("teste",atualizaNome.getText().toString().trim() + atualizaEmail.getText().toString().trim() + txtInput.getText().toString().trim());
+                                atualizaUsuario(atualizaNome.getText().toString().trim(), atualizaEmail.getText().toString().trim(), txtInput.getText().toString().trim());
                             }
 
                         }
@@ -328,7 +343,6 @@ public class AtualizarUsuarioFragment extends Fragment {
         alertDialog.show();
 
     }
-
 
     private void logoutUser() {
         session.setLogin(false);

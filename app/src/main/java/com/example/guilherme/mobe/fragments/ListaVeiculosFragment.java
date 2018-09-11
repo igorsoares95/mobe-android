@@ -1,6 +1,7 @@
 package com.example.guilherme.mobe.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -47,8 +48,6 @@ public class ListaVeiculosFragment extends Fragment {
     private SQLiteHandler bd;
     private String id_usuario;
     FloatingActionButton fab;
-
-
 
     public ListaVeiculosFragment() {
         // Required empty public constructor
@@ -116,12 +115,46 @@ public class ListaVeiculosFragment extends Fragment {
 
     }
 
-    @Override
+
     public void onResume() {
         super.onResume();
+        Log.i(TAG,"onResume foi chamado");
         adicionaVeiculosNoListView();
+    }
+
+    /*
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG,"onStart foi chamado");
 
     }
+
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG,"onPause foi chamado");
+
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG,"onStop foi chamado");
+
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG,"onDestroy foi chamado");
+
+    }
+
+    public void onDetach() {
+        super.onDetach();
+        Log.i(TAG,"onDetach foi chamado");
+
+    }
+    */
 
     private void adicionaVeiculosNoListView() {
 
@@ -158,10 +191,14 @@ public class ListaVeiculosFragment extends Fragment {
 
                         }
 
-                        ArrayAdapter adapter = new VeiculoAdapter(getActivity(),veiculos);
-                        lista.setAdapter(adapter);
+                    } else {
+
+                        Toast.makeText(getActivity().getApplicationContext(), "Você não possui veículos cadastrados", Toast.LENGTH_LONG).show();
 
                     }
+
+                    ArrayAdapter adapter = new VeiculoAdapter(getContext(),veiculos);
+                    lista.setAdapter(adapter);
 
                 } catch (JSONException e) {
                     // JSON error

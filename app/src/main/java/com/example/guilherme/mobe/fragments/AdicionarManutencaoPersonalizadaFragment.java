@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -52,6 +53,8 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
     TextView lbl_modelo_veiculo, lbl_km_veiculo, lbl_placa_veiculo;
     String modelo_veiculo, placa_veiculo, km_veiculo;
     private Context mContext;
+    String nome_activity_atual;
+
 
 
     public AdicionarManutencaoPersonalizadaFragment() {
@@ -65,8 +68,11 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_adicionar_manutencao_personalizada, container, false);
 
-        mContext = getContext();
+        getActivity().setTitle("Manutenção personalizada");
 
+        nome_activity_atual = getActivity().getClass().getSimpleName();
+
+        mContext = getContext();
 
         txt_descricao_manutencao = (EditText) view.findViewById(R.id.txt_descricao_manutencao_fragment_adicionar_manutencao_personalizada);
         txt_limite_km = (EditText) view.findViewById(R.id.txt_limite_km_fragment_adicionar_manutencao_personalizada);
@@ -108,10 +114,6 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
                     criaManutencaoPersonalizada(placa_veiculo,txt_descricao_manutencao.getText().toString(), txt_limite_km.getText().toString(),
                             txt_limite_tempo_meses.getText().toString(), txt_km_antecipacao.getText().toString(), txt_tempo_antecipacao.getText().toString(),
                             MaskEditUtil.formatarData(txt_data_ultima_manutencao.getText().toString(), "dd/MM/yyyy", "yyyy-MM-dd"), txt_km_ultima_manutencao.getText().toString());
-
-
-                    Toast.makeText(getContext(), "Manutenção personalizada criada com sucesso!", Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
 
                 } else {
 
@@ -162,6 +164,60 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
 
     }
 
+    public void onResume() {
+        super.onResume();
+
+        //Verifica qual é a acitivity atual parar assim tratar o botao onBackPressed
+        if(nome_activity_atual.equals("AdicionarVeiculoActivity")) {
+
+            if(getView() == null){
+                return;
+            }
+
+            getView().setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                        // handle back button's click listener
+                        Log.i("teste", "onBackPressed na fragment funcionou");
+                        mostraAlertDialogDeCancelarCriacaoDaManutencaoPersonalizada();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
+
+
+    }
+
+    public void mostraAlertDialogDeCancelarCriacaoDaManutencaoPersonalizada () {
+
+        AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+        alerta.setTitle("Criação de manutenções");
+        alerta.setMessage("Deseja realmente criar o veículo sem cadastro de manutenções personalizadas?");
+        alerta.setCancelable(false);
+        alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Caso clique em não o app não faz nada
+            }
+        });
+
+        alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().finish();
+            }
+        });
+
+        AlertDialog alertDialog = alerta.create();
+        alertDialog.show();
+
+    }
+
     private void atualizarTxtDataAposEscolherDataNoDataPicker() {
 
         String myFormat = "dd/MM/yyyy"; //In which you need put here
@@ -187,7 +243,7 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
                     if(!error) {
 
                         Toast.makeText(mContext, "Manutenção criada com sucesso", Toast.LENGTH_LONG).show();
-
+                        getActivity().finish();
 
                     } else {
 

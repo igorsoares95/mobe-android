@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.frame_container, new InicioFragment())
-                    .addToBackStack(null).commit();
+                    .commit();
         }
 
         //--------teste------------
@@ -121,12 +121,14 @@ public class MainActivity extends AppCompatActivity
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
 
+
+
                 } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
                     // new push notification is received
 
                     String message = intent.getStringExtra("message");
 
-                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Push notification: " + message, Toast.LENGTH_LONG).show();
 
 
                 }
@@ -262,7 +264,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_container, new InicioFragment())
-                    .addToBackStack(null).commit();
+                    .commit();
 
         }
 

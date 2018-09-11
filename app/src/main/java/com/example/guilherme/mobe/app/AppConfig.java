@@ -129,6 +129,9 @@ public class AppConfig {
 
     public static String URL_ALTERAR_INFORMACOES_MANUTENCAO_DO_VEICULO = "http://danielfalsetti-001-site7.ftempurl.com:80/atualiza_info_manutencao_do_veiculo.php";
 
+    public static String URL_EXCLUIR_MANUTENCAO_DO_VEICULO = "http://danielfalsetti-001-site7.ftempurl.com:80/excluir_manutencao_do_veiculo.php";
+
+
 
 
 
