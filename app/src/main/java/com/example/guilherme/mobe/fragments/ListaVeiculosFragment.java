@@ -4,9 +4,11 @@ package com.example.guilherme.mobe.fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,13 +43,14 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaVeiculosFragment extends Fragment {
+public class ListaVeiculosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     ListView lista;
     private static final String TAG = ListaVeiculosFragment.class.getSimpleName();
     private SQLiteHandler bd;
     private String id_usuario;
     FloatingActionButton fab;
+    SwipeRefreshLayout swipeLayout;
 
     public ListaVeiculosFragment() {
         // Required empty public constructor
@@ -57,11 +60,20 @@ public class ListaVeiculosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         getActivity().setTitle("Meus veículos");
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_veiculos,container,false);
+        //teste
+
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container_fragment_lista_veiculos);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        //fim teste
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
@@ -113,6 +125,17 @@ public class ListaVeiculosFragment extends Fragment {
 
         return view;
 
+    }
+
+    //Esse método é responsável por atualizar a tela quando clicar no SwipeRefreshLayout
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                adicionaVeiculosNoListView();
+            }
+        }, 1000);
     }
 
 

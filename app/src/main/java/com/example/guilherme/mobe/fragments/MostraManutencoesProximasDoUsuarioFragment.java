@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +50,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
+public class MostraManutencoesProximasDoUsuarioFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = MostraManutencoesProximasDoUsuarioFragment.class.getSimpleName();
     ListView lista;
@@ -55,8 +58,11 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
     private SQLiteHandler bd;
     private String id_usuario;
     private String id_manutencao_do_veiculo_selecionada;
+    private String km_atual_do_veiculo_selecionado;
     final List lista_id_veiculos_do_usuario = new ArrayList<>();
     final List<String> lista_itens_do_spinner = new ArrayList<String>();
+    SwipeRefreshLayout swipeLayout;
+
 
     public MostraManutencoesProximasDoUsuarioFragment() {
         // Required empty public constructor
@@ -72,6 +78,17 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mostra_manutencoes_proximas_do_usuario,container,false);
 
+        //teste
+
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container_fragment_mostra_manutencoes_proximas_do_usuario);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        //fim teste
+
         bd = new SQLiteHandler(this.getActivity());
 
         HashMap<String, String> usuario = bd.getUserDetails();
@@ -86,6 +103,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
 
                 ManutencaoProxima manutencao_proxima = (ManutencaoProxima) parent.getItemAtPosition(position);
                 id_manutencao_do_veiculo_selecionada = manutencao_proxima.getId();
+                km_atual_do_veiculo_selecionado = manutencao_proxima.getKm_atual();
 
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 alerta.setTitle("Realizar manutenção");
@@ -140,6 +158,23 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
         });
 
         return view;
+    }
+
+    //Esse método é responsável por atualizar a tela quando clicar no SwipeRefreshLayout
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                adicionaTodasManutencoesProximasDoUsuarioNoListView();
+            }
+        }, 1000);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adicionaTodasManutencoesProximasDoUsuarioNoListView();
     }
 
     private void abreAlertDialog() {
@@ -249,7 +284,11 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        realizaManutencao(data, txtInput.getText().toString(), id_manutencao_do_veiculo_selecionada);
+                        if(Float.parseFloat(txtInput.getText().toString()) > Float.parseFloat(km_atual_do_veiculo_selecionado)) {
+                            Toast.makeText(getActivity(), "Não é possível inserir uma Km maior que a Km atual do veículo", Toast.LENGTH_SHORT).show();
+                        } else {
+                            realizaManutencao(data, txtInput.getText().toString(), id_manutencao_do_veiculo_selecionada);
+                        }
 
                     }
                 })

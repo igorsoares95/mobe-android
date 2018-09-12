@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +44,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MostraInfoVeiculoFragment extends Fragment {
+public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = MostraInfoVeiculoFragment.class.getSimpleName();
     final MostraInfoVeiculoFragment context = this;
@@ -61,6 +63,8 @@ public class MostraInfoVeiculoFragment extends Fragment {
     private String km_no_momento_da_abertura_da_fragment, dispositivo_no_momento_da_abertura_da_fragment;
     private String nome_activity_atual;
     private ProgressDialog pDialog;
+    SwipeRefreshLayout swipeLayout;
+
 
 
 
@@ -81,6 +85,17 @@ public class MostraInfoVeiculoFragment extends Fragment {
         pDialog.setCancelable(false);
 
         View view = inflater.inflate(R.layout.fragment_mostra_info_veiculo,container,false);
+
+        //teste
+
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container_fragment_mostra_info_veiculo);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        //fim teste
 
         //Obter dados da fragment anterior
         Bundle dados_do_veiculo = getArguments();
@@ -211,6 +226,17 @@ public class MostraInfoVeiculoFragment extends Fragment {
 
         return view;
 
+    }
+
+    //Esse método é responsável por atualizar a tela quando clicar no SwipeRefreshLayout
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                mostraInfoVeiculo();
+            }
+        }, 1000);
     }
 
     public void onResume() {

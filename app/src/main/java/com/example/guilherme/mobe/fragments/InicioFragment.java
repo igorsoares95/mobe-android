@@ -3,7 +3,9 @@ package com.example.guilherme.mobe.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,12 +43,14 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InicioFragment extends Fragment {
+public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private Button btn_meus_veiculos, btn_registrar_veiculo, btn_manutencoes_atrasadas, btn_manutencoes_proximas;
     private TextView lbl_saudacao, lbl_nome_usuario, lbl_qtd_manutencoes_atrasadas, lbl_qtd_manutencoes_proximas, lbl_descricao_veiculos;
     private SQLiteHandler bd;
     private static final String TAG = InicioFragment.class.getSimpleName();
+    SwipeRefreshLayout swipeLayout;
+
 
 
     public InicioFragment() {
@@ -59,6 +63,17 @@ public class InicioFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_inicio, container, false);
+
+        //teste
+
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container_fragment_inicio);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        //fim teste
 
         getActivity().setTitle("Início");
 
@@ -119,6 +134,21 @@ public class InicioFragment extends Fragment {
         return view;
 
 
+    }
+
+    //Esse método é responsável por atualizar a tela quando clicar no SwipeRefreshLayout
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                mostraSaudacao();
+                mostraNomeUsuario();
+                mostraQtdDeVeiculos(obtemIdUsuarioSqLite());
+                mostraQtdManutencoesAtrasadas(obtemIdUsuarioSqLite());
+                mostraQtdManutencoesProximas(obtemIdUsuarioSqLite());
+            }
+        }, 1000);
     }
 
     @Override

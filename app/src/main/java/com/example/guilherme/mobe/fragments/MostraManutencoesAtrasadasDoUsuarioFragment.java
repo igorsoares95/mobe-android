@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +37,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +52,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
+public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = MostraManutencoesAtrasadasDoUsuarioFragment.class.getSimpleName();
     ListView lista;
@@ -54,6 +60,9 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
     private SQLiteHandler bd;
     private String id_usuario;
     private String id_manutencao_do_veiculo_selecionada;
+    private String km_atual_do_veiculo_selecionado;
+    SwipeRefreshLayout swipeLayout;
+
 
     final List lista_id_veiculos_do_usuario = new ArrayList<>();
     final List<String> lista_itens_do_spinner = new ArrayList<String>();
@@ -73,6 +82,17 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mostra_manutencoes_atrasadas_do_usuario,container,false);
 
+        //teste
+
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container_fragment_mostra_manutencoes_atrasadas_do_usuario);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        //fim teste
+
         bd = new SQLiteHandler(this.getActivity());
 
         HashMap<String, String> usuario = bd.getUserDetails();
@@ -87,6 +107,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
                 ManutencaoAtrasada manutencao_atrasada = (ManutencaoAtrasada) parent.getItemAtPosition(position);
                 id_manutencao_do_veiculo_selecionada = manutencao_atrasada.getId();
+                km_atual_do_veiculo_selecionado = manutencao_atrasada.getKm_atual();
 
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 alerta.setTitle("Realizar manutenção");
@@ -111,6 +132,8 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
                 AlertDialog alertDialog = alerta.create();
                 alertDialog.show();
+
+
 
 
             }
@@ -144,6 +167,17 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
         return view;
     }
 
+    //Esse método é responsável por atualizar a tela quando clicar no SwipeRefreshLayout
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                swipeLayout.setRefreshing(false);
+                adicionaTodasManutencoesAtrasadasDoUsuarioNoListView(id_usuario);
+            }
+        }, 1000);
+    }
+
 
     @Override
     public void onResume() {
@@ -173,10 +207,12 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        abreAlertDialogKmManutencao(MaskEditUtil.formatarData(txtInput.getText().toString(),"dd/MM/yyyy","yyyy-MM-dd"));
-
-                        Log.e(TAG,MaskEditUtil.formatarData(txtInput.getText().toString(),"dd/MM/yyyy","yyyy-MM-dd"));
-
+                        if(txtInput.getText().toString().equals("")) {
+                            dialog.cancel();
+                            abreAlertDialogDataManutencao();
+                        } else {
+                            abreAlertDialogKmManutencao(MaskEditUtil.formatarData(txtInput.getText().toString(),"dd/MM/yyyy","yyyy-MM-dd"));
+                        }
 
                     }
                 })
@@ -255,7 +291,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
 
         LayoutInflater layoutInflater = getLayoutInflater();
         View promptView = layoutInflater.inflate(R.layout.input_dialog,null);
-        AlertDialog.Builder alertDialogBuilderKmManutencao = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder alertDialogBuilderKmManutencao = new AlertDialog.Builder(getContext());
         alertDialogBuilderKmManutencao.setView(promptView);
 
         final EditText txtInput = (EditText) promptView.findViewById(R.id.editTextInput);
@@ -265,7 +301,20 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        realizaManutencao(data, txtInput.getText().toString(), id_manutencao_do_veiculo_selecionada);
+                        if(!txtInput.getText().toString().equals("")) {
+                            if(Float.parseFloat(txtInput.getText().toString()) > Float.parseFloat(km_atual_do_veiculo_selecionado)) {
+                                Toast.makeText(getActivity(), "Não é possível inserir uma Km maior que a Km atual do veículo", Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                                abreAlertDialogKmManutencao(data);
+                            } else {
+                                realizaManutencao(data, txtInput.getText().toString(), id_manutencao_do_veiculo_selecionada);
+                            }
+                        } else {
+                            dialog.cancel();
+                            abreAlertDialogKmManutencao(data);
+                        }
+
+
 
                     }
                 })
