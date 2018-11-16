@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="25dp"
-    android:paddingRight="25dp"
-    android:paddingTop="16dp"
+    android:orientation="vertical"
     tools:context="com.example.guilherme.mobe.activity.AtivarUsuarioActivity"
     android:background="@drawable/activity_bg">
-
-    <Button
-        android:id="@+id/ativar_usuario"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/bg_botoes"
-        android:text="Ativar usuário"
-        android:textColor="@android:color/black" />
 
     <TextView
         android:text="Sua conta está inativa, clique abaixo para ativar novamente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/lbltexto"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/ativar_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:theme="@style/ButtonTheme"
+        android:text="Ativar usuário"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>

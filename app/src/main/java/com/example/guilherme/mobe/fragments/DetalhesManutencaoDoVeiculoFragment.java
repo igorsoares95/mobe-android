@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,11 @@ public class DetalhesManutencaoDoVeiculoFragment extends Fragment {
         txt_km_ultima_manutencao = (EditText) view.findViewById(R.id.txt_km_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo);
         btn_salvar_alteracao = (Button) view.findViewById(R.id.btn_salvar_alteracao_fragment_detalhes_manutencao_do_veiculo);
         btn_excluir_manutencao = (Button) view.findViewById(R.id.btn_excluir_manutencao_fragment_detalhes_manutencao_do_veiculo);
-
+        txt_limite_km.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_limite_tempo_meses.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_km_antecipacao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_km_ultima_manutencao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_tempo_antecipacao_meses.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
         lbl_descricao.setText(descricao);

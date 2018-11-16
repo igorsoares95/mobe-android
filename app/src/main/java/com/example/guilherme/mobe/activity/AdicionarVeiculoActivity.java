@@ -22,7 +22,7 @@ public class AdicionarVeiculoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Adicionar Veículo");
+      //  getSupportActionBar().setTitle("Adicionar Veículo");
 
         getSupportFragmentManager()
                 .beginTransaction()

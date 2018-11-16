@@ -16,75 +16,148 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:background="@color/CordeFundoActivity"
         android:layout_height="match_parent"
         tools:context=".fragments.InicioFragment">
-
-
-        <!-- TODO: Update blank fragment layout -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="3dp"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/lbl_saudacao_fragment_inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/lbl_nome_usuario_fragment_inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/lbl_descricao_veiculos_fragment_inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/black"/>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/lbl_saudacao_fragment_inicio"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="40sp" />
+            android:background="@android:color/white"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="3dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lbl_nome_usuario_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/black"/>
 
-        <TextView
-            android:id="@+id/lbl_descricao_veiculos_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_meus_veiculos_fragment_inicio"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:theme="@style/ButtonTheme"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Meus veículos" />
 
-        <Button
-            android:id="@+id/btn_meus_veiculos_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Meus veículos" />
+            <Button
+                android:id="@+id/btn_registrar_veiculo_fragment_inicio"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:theme="@style/ButtonTheme"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Registre seu veículo" />
 
-        <Button
-            android:id="@+id/btn_registrar_veiculo_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registre seu veículo" />
+            <TextView
+                android:id="@+id/lbl_qtd_manutencoes_atrasadas_fragment_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/lbl_qtd_manutencoes_atrasadas_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_ver_manutencoes_atrasadas_fragment_inicio"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:theme="@style/ButtonTheme"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Ver manutenções atrasadas" />
 
-        <Button
-            android:id="@+id/btn_ver_manutencoes_atrasadas_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ver manutenções atrasadas" />
+            <TextView
+                android:id="@+id/lbl_qtd_manutencoes_proximas_fragment_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/lbl_qtd_manutencoes_proximas_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/btn_ver_manutencoes_proximas_fragment_inicio"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:theme="@style/ButtonTheme"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Ver manutenções próximas" />
 
-        <Button
-            android:id="@+id/btn_ver_manutencoes_proximas_fragment_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ver manutenções próximas" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/black"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

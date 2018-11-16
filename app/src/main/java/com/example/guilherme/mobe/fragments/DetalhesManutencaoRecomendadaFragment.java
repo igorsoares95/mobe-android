@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -76,6 +77,9 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
         txt_data_ultima_manutencao = view.findViewById(R.id.txt_data_ultima_manutencao_detalhes_manutencao_recomendada);
         txt_km_ultima_manutencao = view.findViewById(R.id.txt_km_ultima_manutencao_detalhes_manutencao_recomendada);
         btn_salvar = view.findViewById(R.id.btn_salvar_detalhes_manutencao_recomendada);
+        txt_km_antecipacao_manutencao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_tempo_antecipacao_manutencao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_km_ultima_manutencao.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         //Obter dados da fragment anterior
         Bundle dados_manutencao_recomendadas = getArguments();

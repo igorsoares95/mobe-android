@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,8 +29,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
+import com.example.guilherme.mobe.helper.MaskEditUtil;
+import com.example.guilherme.mobe.helper.MaskTeste;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.listview.Veiculo;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,6 +66,7 @@ public class AdicionarCarroFragment extends Fragment {
     private SQLiteHandler bd;
     private String id_usuario;
     private String nome_activity_atual;
+    private TextWatcher placaMask;
 
     private List lista_id_modelos = new ArrayList<>();
     private List<String> lista_nome_modelos = new ArrayList<String>();
@@ -87,6 +94,17 @@ public class AdicionarCarroFragment extends Fragment {
         txt_dispositivo = (EditText) view.findViewById(R.id.txt_dispositivo_adicionar_veiculo);
         txt_km = (EditText) view.findViewById(R.id.txt_km_adicionar_veiculo);
         txt_placa = (EditText) view.findViewById(R.id.txt_placa_adicionar_carro);
+        txt_dispositivo.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_km.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_placa.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
+        SimpleMaskFormatter smf_placa = new SimpleMaskFormatter("UUU-NNNN");
+        MaskTextWatcher mtw_placa = new MaskTextWatcher(txt_placa, smf_placa);
+        txt_placa.addTextChangedListener(mtw_placa);
+        SimpleMaskFormatter smf_dispositivo = new SimpleMaskFormatter("NNNN");
+        MaskTextWatcher mtw_dispositivo = new MaskTextWatcher(txt_dispositivo, smf_dispositivo);
+        txt_dispositivo.addTextChangedListener(mtw_dispositivo);
+
+
 
         pDialog = new ProgressDialog(getActivity());
         bd = new SQLiteHandler(getActivity());
@@ -155,7 +173,15 @@ public class AdicionarCarroFragment extends Fragment {
         btn_proxima_etapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adicionaVeiculo(ano_selecionado,txt_placa.getText().toString().trim(),txt_km.getText().toString().trim(),id_usuario,txt_dispositivo.getText().toString().trim(),String.valueOf(id_modelo_selecionado));
+                if (txt_dispositivo.getText().toString().isEmpty() && txt_placa.getText().toString().isEmpty() && txt_km.getText().toString().isEmpty()) {
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    adicionaVeiculo(ano_selecionado, txt_placa.getText().toString().trim(), txt_km.getText().toString().trim(), id_usuario, txt_dispositivo.getText().toString().trim(), String.valueOf(id_modelo_selecionado));
+
+                }
 
             }
         });
@@ -284,7 +310,7 @@ public class AdicionarCarroFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Update Error: " + error.getMessage());
+                Log.e(TAG, "Obter marcas Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }
@@ -315,7 +341,7 @@ public class AdicionarCarroFragment extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Update user Re: " + response.toString());
+                Log.d(TAG, "Obter modelos response: " + response.toString());
 
                 try {
                     JSONObject object = new JSONObject(response);
@@ -341,7 +367,7 @@ public class AdicionarCarroFragment extends Fragment {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "Não foi encontrado modelos para a marca selecionada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Não foram encontrados modelos para a marca selecionada", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -350,7 +376,7 @@ public class AdicionarCarroFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Update Error: " + error.getMessage());
+                Log.e(TAG, "Obter modelos Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Verifique sua conexão com a internet", Toast.LENGTH_LONG).show();
             }

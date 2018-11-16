@@ -432,7 +432,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment implem
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado manutenções atrasadas", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontradas manutenções atrasadas", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -510,7 +510,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment implem
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado manutenções atrasadas para esse veículo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontradas manutenções atrasadas para esse veículo", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -589,7 +589,7 @@ public class MostraManutencoesAtrasadasDoUsuarioFragment extends Fragment implem
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado veiculos para esse usuario", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontrados veículos para esse usuário", Toast.LENGTH_SHORT).show();
 
                     }
 

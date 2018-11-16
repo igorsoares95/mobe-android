@@ -1,134 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.DetalhesManutencaoDoVeiculoFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/CordeFundoActivity"
-    android:orientation="vertical"
-    tools:context=".fragments.DetalhesManutencaoDoVeiculoFragment">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:background="@color/CordeFundoActivity"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lbl_descricao_fragment_detalhes_manutencao_do_veiculo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/lbl_descricao_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="TextView" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="Limite de quilometragem:"/>
+
+
+            <EditText
+                android:id="@+id/txt_limite_km_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:layout_marginTop="3dp"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Limite km" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Limite de tempo:"/>
+
+            <EditText
+                android:id="@+id/txt_limite_tempo_meses_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Limite tempo meses" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Quilometragem de notificação:"/>
+
+            <EditText
+                android:id="@+id/txt_km_antecipacao_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Km notificação" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Tempo de notificação:"/>
+
+            <EditText
+                android:id="@+id/txt_tempo_antecipacao_meses_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Tempo antecipacao meses" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Data da ultima manutenção:"/>
+
+            <EditText
+                android:id="@+id/txt_data_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:background="@drawable/estilo_edittext"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Data ultima manutencao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Quilometragem da ultima manutenção:"/>
+
+            <EditText
+                android:id="@+id/txt_km_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Km ultima manutencao" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_salvar_alteracao_fragment_detalhes_manutencao_do_veiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ButtonTheme"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:text="TextView" />
+            android:text="Salvar alteracoes" />
 
-        <View
+        <Button
+            android:id="@+id/btn_excluir_manutencao_fragment_detalhes_manutencao_do_veiculo"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="3dp"
-            android:background="@android:color/black"/>
+            android:layout_height="wrap_content"
+            android:theme="@style/ButtonTheme"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="Excluir Manutenção"/>
+
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:background="@android:color/white">
-
-
-        <EditText
-            android:id="@+id/txt_limite_km_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Limite km" />
-
-        <EditText
-            android:id="@+id/txt_limite_tempo_meses_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Limite tempo meses" />
-
-        <EditText
-            android:id="@+id/txt_km_antecipacao_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Km antecipacao" />
-
-        <EditText
-            android:id="@+id/txt_tempo_antecipacao_meses_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Tempo antecipacao meses" />
-
-        <EditText
-            android:id="@+id/txt_data_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Data ultima manutencao" />
-
-        <EditText
-            android:id="@+id/txt_km_ultima_manutencao_fragment_detalhes_manutencao_do_veiculo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Km ultima manutencao" />
-
-    </LinearLayout>
-
-
-
-
-    <Button
-        android:id="@+id/btn_salvar_alteracao_fragment_detalhes_manutencao_do_veiculo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_botoes"
-        android:layout_margin="10dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="Salvar alteracoes" />
-
-    <Button
-        android:id="@+id/btn_excluir_manutencao_fragment_detalhes_manutencao_do_veiculo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_botoes"
-        android:layout_margin="10dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="Excluir manutencao" />
-
-
-</LinearLayout>
+</ScrollView>

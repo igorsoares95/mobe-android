@@ -23,7 +23,13 @@
     </style>
     
     <style name="BotaoSemBorda" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/BordaEditText</item>
+        <item name="android:colorPressedHighlight">@color/BordaEditText</item>
+    </style>
+
+    <style name="ButtonTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/button_highlight</item>
+        <item name="colorButtonNormal">@color/Cor_bg</item>
+        <item name="colorControlActivated">@color/button_highlight</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

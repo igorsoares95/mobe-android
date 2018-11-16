@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+           android:id="@+id/menu_top">
 
         <item
             android:id="@+id/nav_inicio"
@@ -24,17 +25,21 @@
             android:title="Meus Veículos" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_minha_conta"
-                android:icon="@drawable/ic_menu_account"
-                android:title="Minha Conta" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_logout"
-                android:title="Logout" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="none"
+           android:id="@+id/menu_bottom">
+        <item
+            android:id="@+id/nav_minha_conta"
+            android:icon="@drawable/ic_menu_account"
+            android:title="Minha Conta" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout"
+            android:title="Logout" />
+
+        <item
+            android:id="@+id/nav_sobre"
+            android:icon="@drawable/ic_sobre"
+            android:title="Sobre"/>
+    </group>
 
 </menu>

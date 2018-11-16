@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageButton;
 import android.telephony.PhoneNumberUtils;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,8 @@ import com.example.guilherme.mobe.helper.SessionManager;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.activity.RegistroActivity;
 import com.example.guilherme.mobe.helper.MaskEditUtil;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +75,7 @@ public class AtualizarUsuarioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Atualizar dados pessoais");
+        getActivity().setTitle("Minha Conta");
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_atualizar_usuario, container, false);
@@ -87,9 +91,12 @@ public class AtualizarUsuarioFragment extends Fragment {
         pDialog = new ProgressDialog(getContext());
         bd = new SQLiteHandler(getActivity().getApplicationContext());
         session = new SessionManager(getActivity().getApplicationContext());
-
         mostraInfoUsuario();
-        atualizaTelefone.addTextChangedListener(MaskEditUtil.mask(atualizaTelefone, MaskEditUtil.FORMAT_FONE));
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN)NNNN - NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(atualizaTelefone, smf);
+        atualizaTelefone.addTextChangedListener(mtw);
+        //atualizaTelefone.addTextChangedListener(MaskEditUtil.mask(atualizaTelefone, MaskEditUtil.FORMAT_FONE));
+
 
 
         btnDesativarUsuario.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +105,7 @@ public class AtualizarUsuarioFragment extends Fragment {
 
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 alerta.setTitle("Desativar conta");
-                alerta.setMessage("Deseja realmente desativar essa conta?");
+                alerta.setMessage("Deseja realmente desativar sua conta?");
                 alerta.setCancelable(false);
                 alerta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
 
@@ -312,6 +319,10 @@ public class AtualizarUsuarioFragment extends Fragment {
         alertDialogBuilder.setView(promptView);
 
         final EditText txtInput = (EditText) promptView.findViewById(R.id.editTextInput);
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN)NNNN - NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(txtInput, smf);
+        txtInput.addTextChangedListener(mtw);
+        txtInput.setInputType(InputType.TYPE_CLASS_PHONE);
             String titulo = "Insira o novo telefone";
             alertDialogBuilder.setCancelable(false).setTitle(titulo)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -320,7 +331,7 @@ public class AtualizarUsuarioFragment extends Fragment {
 
                             if(atualizaTelefone.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o telefone", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "O telefone não foi alterado", Toast.LENGTH_SHORT).show();
 
                             } else {
 

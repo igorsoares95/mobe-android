@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -85,6 +86,11 @@ public class AdicionarManutencaoPersonalizadaFragment extends Fragment {
         lbl_modelo_veiculo = (TextView) view.findViewById(R.id.lbl_modelo_veiculo_fragment_adicionar_manutencao_personalizada);
         lbl_km_veiculo = (TextView) view.findViewById(R.id.lbl_km_veiculo_fragment_adicionar_manutencao_personalizada);
         lbl_placa_veiculo = (TextView) view.findViewById(R.id.lbl_placa_veiculo_fragment_adicionar_manutencao_personalizada);
+        txt_km_antecipacao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_km_ultima_manutencao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_limite_km.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_tempo_antecipacao.setInputType(InputType.TYPE_CLASS_NUMBER);
+        txt_limite_tempo_meses.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         Bundle dados_do_veiculo = getArguments();
 

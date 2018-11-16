@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingRight="70dp"
+    android:paddingTop="16dp"
+    android:background="@drawable/activity_bg"
+    tools:context="com.example.guilherme.mobe.activity.AlterarSenhaActivity">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Senha atual:"
+        android:id="@+id/txt_email_usuario_main"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_edittext"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:hint="Senha Atual"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/white"
+        android:ems="10"
+        android:id="@+id/senhaAtual_atualizarSenha"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nova senha: "
+        android:id="@+id/textView2"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:background="@drawable/bg_edittext"
+        android:hint="Nova Senha"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/white"
+        android:ems="10"
+        android:id="@+id/novaSenha_atualizarSenha"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmar nova senha:"
+        android:id="@+id/textView3"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:hint="Confirmar nova senha"
+        android:background="@drawable/bg_edittext"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/white"
+        android:ems="10"
+        android:id="@+id/confirmarSenha_atualizarSenha" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_botoes"
+        android:text="Alterar"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/botaoAlterar_atualizarSenha"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</LinearLayout>
+

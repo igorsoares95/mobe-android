@@ -134,8 +134,8 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
             @Override
             public void onClick(View v) {
 
-                StringBuffer responseText = new StringBuffer();
-                responseText.append("The following were selected...\n");
+               // StringBuffer responseText = new StringBuffer();
+               // responseText.append("The following were selected...\n");
 
                 ArrayList<ManutencaoRecomendada> lista_manutencoes_recomendadas = manutencao_recomendada_adapter.lista_manutencoes_recomendadas;
                 for(int i=0;i<lista_manutencoes_recomendadas.size();i++){
@@ -144,7 +144,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                     ManutencaoRecomendada manutencao_recomendada_na_abertura_da_fragment = primeiro_estado_das_manutencoes_recomendadas.get(i);
 
                     if(manutencao_recomendada.isSelecionado() && !manutencao_recomendada_na_abertura_da_fragment.isSelecionado()){
-                        responseText.append("\n" + manutencao_recomendada.getDescricao());
+                        //responseText.append("\n" + manutencao_recomendada.getDescricao());
                         lista_manutencoes_selecionadas.add(manutencao_recomendada);
 
                     } else if(manutencao_recomendada_na_abertura_da_fragment.isSelecionado() && !manutencao_recomendada.isSelecionado()) {
@@ -155,7 +155,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                     }
                 }
 
-                Toast.makeText(getContext(), responseText, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), responseText, Toast.LENGTH_LONG).show();
 
                 if(lista_manutencoes_selecionadas.size() > 0) {
 
@@ -227,7 +227,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado manutenções recomendadas", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontradas manutenções recomendadas", Toast.LENGTH_SHORT).show();
                         //esconder o botao pois nao tem nenhuma manutencao recomendada
                         btn_proximo.setVisibility(View.GONE);
                         perguntaSeDesejaManutencaoPersonalizada();

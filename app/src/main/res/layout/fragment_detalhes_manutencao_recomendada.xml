@@ -1,266 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/CordeFundoActivity"
-    android:orientation="vertical"
     tools:context=".fragments.DetalhesManutencaoRecomendadaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/CordeFundoActivity"
+        android:orientation="vertical"
+        tools:context=".fragments.DetalhesManutencaoRecomendadaFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/lbl_modelo_veiculo_detalhes_manutencao_recomendada"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="TextView" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="Placa:"/>
+                <TextView
+                    android:id="@+id/lbl_modelo_veiculo_detalhes_manutencao_recomendada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/lbl_placa_veiculo_detalhes_manutencao_recomendada"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@android:color/black"
-                android:text="TextView" />
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Placa:"/>
+
+                <TextView
+                    android:id="@+id/lbl_placa_veiculo_detalhes_manutencao_recomendada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@android:color/black"
+                    android:text="TextView" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:text="Km:"/>
+
+                <TextView
+                    android:id="@+id/lbl_km_veiculo_detalhes_manutencao_recomendada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@android:color/black"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_marginTop="3dp"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:text="Km:"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/lbl_km_veiculo_detalhes_manutencao_recomendada"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Descrição:"/>
+
+                <TextView
+                    android:id="@+id/lbl_descricao_manutencao_detalhes_manutencao_recomendada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@android:color/black"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="3dp"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:textStyle="bold"
+                   android:text="Limite de Quilometragem:"/>
+
+               <TextView
+                   android:id="@+id/lbl_limite_km_manutencao_detalhes_manutencao_recomendada"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="3dp"
+                   android:textColor="@android:color/black"
+                   android:text="TextView" />
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="3dp"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:textStyle="bold"
+                   android:text="Limite de Tempo:"/>
+
+               <TextView
+                   android:id="@+id/lbl_limite_tempo_meses_manutencao_detalhes_manutencao_recomendada"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="3dp"
+                   android:textColor="@android:color/black"
+                   android:text="TextView" />
+
+           </LinearLayout>
+
+            <View
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="@android:color/black"
-                android:text="TextView" />
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_marginTop="3dp"/>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@android:color/black"
-            android:layout_marginTop="3dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:background="@android:color/white"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:text="Descrição:"/>
+                android:text="Quilometragem de notificação:"/>
+
+            <EditText
+                android:id="@+id/txt_km_antecipacao_manutencao_detalhes_manutencao_recomendada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:layout_marginTop="3dp"
+                android:padding="5dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Km Antecipacao" />
 
             <TextView
-                android:id="@+id/lbl_descricao_manutencao_detalhes_manutencao_recomendada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:textColor="@android:color/black"
-                android:text="TextView" />
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Tempo de notificação:"/>
+
+            <EditText
+                android:id="@+id/txt_tempo_antecipacao_manutencao_detalhes_manutencao_recomendada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:padding="5dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Tempo Antecipacao meses" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Data da ultima manutenção:"/>
+
+            <EditText
+                android:id="@+id/txt_data_ultima_manutencao_detalhes_manutencao_recomendada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:padding="5dp"
+                android:ems="10"
+                android:inputType="date"
+                android:hint="Data ultima manutencao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="3dp"
+                android:textStyle="bold"
+                android:text="Quilometragem da ultima manutenção:"/>
+
+
+            <EditText
+                android:id="@+id/txt_km_ultima_manutencao_detalhes_manutencao_recomendada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/estilo_edittext"
+                android:textCursorDrawable="@drawable/cursor_roxo"
+                android:padding="5dp"
+                android:ems="10"
+                android:hint="Km ultima manutencao"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="3dp"
-           android:orientation="horizontal">
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@android:color/black"
-               android:textStyle="bold"
-               android:text="Limite de Quilometragem:"/>
-
-           <TextView
-               android:id="@+id/lbl_limite_km_manutencao_detalhes_manutencao_recomendada"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="5dp"
-               android:textColor="@android:color/black"
-               android:text="TextView" />
-
-       </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="3dp"
-           android:orientation="horizontal">
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@android:color/black"
-               android:textStyle="bold"
-               android:text="Limite de Tempo:"/>
-
-           <TextView
-               android:id="@+id/lbl_limite_tempo_meses_manutencao_detalhes_manutencao_recomendada"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="5dp"
-               android:textColor="@android:color/black"
-               android:text="TextView" />
-
-       </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@android:color/black"
-            android:layout_marginTop="3dp"/>
+        <Button
+            android:id="@+id/btn_salvar_detalhes_manutencao_recomendada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ButtonTheme"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:text="Salvar" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Quilometragem de notificação:"/>
-
-        <EditText
-            android:id="@+id/txt_km_antecipacao_manutencao_detalhes_manutencao_recomendada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/estilo_edittext"
-            android:layout_marginTop="3dp"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Km Antecipacao" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="3dp"
-            android:textStyle="bold"
-            android:text="Tempo de notificação:"/>
-
-        <EditText
-            android:id="@+id/txt_tempo_antecipacao_manutencao_detalhes_manutencao_recomendada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/estilo_edittext"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Tempo Antecipacao meses" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="3dp"
-            android:textStyle="bold"
-            android:text="Data da ultima manutenção:"/>
-
-        <EditText
-            android:id="@+id/txt_data_ultima_manutencao_detalhes_manutencao_recomendada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/estilo_edittext"
-            android:padding="5dp"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Data ultima manutencao" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="3dp"
-            android:textStyle="bold"
-            android:text="Quilometragem da ultima manutenção:"/>
-
-
-        <EditText
-            android:id="@+id/txt_km_ultima_manutencao_detalhes_manutencao_recomendada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/estilo_edittext"
-            android:padding="5dp"
-            android:ems="10"
-            android:hint="Km ultima manutencao"
-            android:inputType="textPersonName" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_salvar_detalhes_manutencao_recomendada"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_botoes"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="Salvar" />
-
-</LinearLayout>
+</ScrollView>

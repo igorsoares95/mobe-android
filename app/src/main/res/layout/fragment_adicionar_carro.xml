@@ -1,150 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/activity_bg"
     tools:context=".fragments.AdicionarCarroFragment">
 
-    <LinearLayout
-        android:id="@+id/scroll_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        <LinearLayout
+            android:id="@+id/scroll_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="2dp">
 
-        <TextView
-            android:id="@+id/Marcatxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="Marca:"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/black" />
 
-        <Spinner
-            android:id="@+id/Marcaspinner"
-            android:layout_width="197dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:backgroundTint="@color/CorFundoLinearLayout"
-            android:popupBackground="@android:color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Modelotxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="Modelo:"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/Marcatxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Marca:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/Modelospinner"
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:backgroundTint="@color/CorFundoLinearLayout"
-            android:popupBackground="@android:color/white" />
+                <Spinner
+                    android:id="@+id/Marcaspinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/CorFundoLinearLayout"
+                    android:popupBackground="@android:color/white" />
 
-        <TextView
-            android:id="@+id/Anotxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="Ano:"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@android:color/black" />
 
-        <Spinner
-            android:id="@+id/anos_spinner"
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:backgroundTint="@color/CorFundoLinearLayout"
-            android:popupBackground="@android:color/white" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/textview8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="Placa"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txt_placa_adicionar_carro"
-            android:layout_width="195dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:background="@drawable/bg_edittext"
-            android:ems="10"
-            android:hint="Placa"
-            android:inputType="text"
-            android:textColor="@android:color/black"
-            android:textColorHint="#222222" />
+                <TextView
+                    android:id="@+id/Modelotxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Modelo:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="Quilometragem:"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/Modelospinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/CorFundoLinearLayout"
+                    android:popupBackground="@android:color/white" />
 
-        <EditText
-            android:id="@+id/txt_km_adicionar_veiculo"
-            android:layout_width="195dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:background="@drawable/bg_edittext"
-            android:ems="10"
-            android:hint="Quilometragem atual"
-            android:inputType="number"
-            android:textColor="@android:color/black"
-            android:textColorHint="#222222" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@android:color/black" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:text="ID do Dispositivo:"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/txt_dispositivo_adicionar_veiculo"
-            android:layout_width="192dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:background="@drawable/bg_edittext"
-            android:ems="10"
-            android:hint="Identificação do Dispositivo"
-            android:inputType="number"
-            android:textColor="@android:color/black"
-            android:textColorHint="#222222" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_proximo_adicionar_carro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dip"
-            android:background="@drawable/bg_botoes"
-            android:text="PRÓXIMO"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/Anotxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Ano:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/anos_spinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/CorFundoLinearLayout"
+                    android:popupBackground="@android:color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textview8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Placa"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_placa_adicionar_carro"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/bg_edittext"
+                    android:ems="10"
+                    android:hint="Placa"
+                    android:inputType="textCapWords"
+                    android:textCursorDrawable="@drawable/cursor_roxo"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="#222222" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Quilometragem:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_km_adicionar_veiculo"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/bg_edittext"
+                    android:ems="10"
+                    android:hint="Quilometragem atual"
+                    android:textCursorDrawable="@drawable/cursor_roxo"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="#222222" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="ID do Dispositivo:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_dispositivo_adicionar_veiculo"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/bg_edittext"
+                    android:textCursorDrawable="@drawable/cursor_roxo"
+                    android:ems="10"
+                    android:hint="Identificação do Dispositivo"
+                    android:inputType="number"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="#222222" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/black" />
+
+            <Button
+                android:id="@+id/btn_proximo_adicionar_carro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dip"
+                android:theme="@style/ButtonTheme"
+                android:text="PRÓXIMO"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 </ScrollView>

@@ -14,6 +14,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:textCursorDrawable="@drawable/cursor_roxo"
         android:ems="10"
         android:inputType="textPersonName" />
 

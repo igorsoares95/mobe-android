@@ -26,6 +26,9 @@ import java.util.Map;
 import com.example.guilherme.mobe.R;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.app.AppConfig;
+import com.example.guilherme.mobe.helper.MaskEditUtil;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 public class RegistroActivity extends Activity {
 
@@ -53,8 +56,12 @@ public class RegistroActivity extends Activity {
         btnLinkLogin = (Button) findViewById(R.id.btnLinkLogin);
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
+        //mascara do github para mascarar as edittext - link no trello de como usar
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN)NNNN - NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(insereTelefone, smf);
+        insereTelefone.addTextChangedListener(mtw);
 
-        insereTelefone.addTextChangedListener(MaskEditUtil.mask(insereTelefone, MaskEditUtil.FORMAT_FONE));
+        //insereTelefone.addTextChangedListener(MaskEditUtil.mask(insereTelefone, MaskEditUtil.FORMAT_FONE));
 
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override

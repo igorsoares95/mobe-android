@@ -37,6 +37,7 @@ import com.example.guilherme.mobe.fragments.InicioFragment;
 import com.example.guilherme.mobe.fragments.ListaVeiculosFragment;
 import com.example.guilherme.mobe.fragments.MostraManutencoesAtrasadasDoUsuarioFragment;
 import com.example.guilherme.mobe.fragments.MostraManutencoesProximasDoUsuarioFragment;
+import com.example.guilherme.mobe.fragments.SobreFragment;
 import com.example.guilherme.mobe.helper.SQLiteHandler;
 import com.example.guilherme.mobe.helper.SessionManager;
 import com.example.guilherme.mobe.app.Config;
@@ -246,9 +247,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -318,6 +316,12 @@ public class MainActivity extends AppCompatActivity
 
             AlertDialog alertDialog = alerta.create();
             alertDialog.show();
+
+        } else if (id == R.id.nav_sobre) {
+
+            getSupportFragmentManager()
+                    .beginTransaction().replace(R.id.frame_container, new SobreFragment())
+                    .addToBackStack(null).commit();
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

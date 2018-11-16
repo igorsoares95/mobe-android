@@ -5,11 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="Transparente">@android:color/transparent</color>
     <color name="CorBotao">#7FFF00</color>
-    <color name="Cor_bg">#DCDCDC</color>
+    <color name="Cor_bg">#D3D3D3</color>
     <color name="BordaEditText">#8B008B</color>
     <color name="yellow">#FFFF00</color>
     <color name="orange">#FFA500</color>
     <color name="red">#FF0000</color>
-    <color name="CordeFundoActivity">#FFFFF0</color>
+    <color name="CordeFundoActivity">#FFF5EE</color>
     <color name="CorFundoLinearLayout">#8B008B</color>
+    <color name="button_highlight">#8B008B</color>
 </resources>

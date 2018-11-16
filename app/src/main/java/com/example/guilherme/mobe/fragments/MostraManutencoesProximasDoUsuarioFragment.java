@@ -415,7 +415,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment impleme
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado manutenções próximas", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontradas manutenções próximas", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -494,7 +494,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment impleme
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado manutenções proximas para esse veículo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontradas manutenções proximas para esse veículo", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -575,7 +575,7 @@ public class MostraManutencoesProximasDoUsuarioFragment extends Fragment impleme
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Não foi encontrado veiculos para esse usuario", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foram encontrados veículos para esse usuário", Toast.LENGTH_SHORT).show();
 
                     }
 

@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatImageButton;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ import com.example.guilherme.mobe.app.AppConfig;
 import com.example.guilherme.mobe.app.AppController;
 import com.example.guilherme.mobe.listview.Veiculo;
 import com.example.guilherme.mobe.listview.VeiculoAdapter;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -253,6 +256,7 @@ public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshL
         alertDialogBuilder.setView(promptView);
 
         final EditText txtInput = (EditText) promptView.findViewById(R.id.editTextInput);
+        txtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         if (i == 1) {
             String titulo = "Insira a nova Quilometragem";
             alertDialogBuilder.setCancelable(false).setTitle(titulo)
@@ -262,7 +266,7 @@ public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshL
 
                             if(km_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterada a km", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "A KM não foi alterada", Toast.LENGTH_LONG).show();
 
                             } else {
 
@@ -280,6 +284,9 @@ public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshL
                         }
                     });
         } else {
+            SimpleMaskFormatter smf_dispositivo = new SimpleMaskFormatter("NNNN");
+            MaskTextWatcher mtw_dispositivo = new MaskTextWatcher(txtInput, smf_dispositivo);
+            txtInput.addTextChangedListener(mtw_dispositivo);
             String titulo = "Insira o novo Dispositivo";
             alertDialogBuilder.setCancelable(false).setTitle(titulo)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -287,7 +294,7 @@ public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshL
                         public void onClick(DialogInterface dialog, int which) {
                             if(dispositivo_no_momento_da_abertura_da_fragment.equals(txtInput.getText().toString()) || txtInput.getText().toString().isEmpty()) {
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Não foi alterado o código do dispositivo", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "O código do dispositivo não foi alterado", Toast.LENGTH_SHORT).show();
 
                             } else {
 
@@ -399,7 +406,7 @@ public class MostraInfoVeiculoFragment extends Fragment implements SwipeRefreshL
 
                     if(!error) {
 
-                        Toast.makeText(getActivity().getApplicationContext(), "A dispositivo foi alterado com sucesso!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "O código do dispositivo foi alterado com sucesso!", Toast.LENGTH_LONG).show();
                         onResume(); // recarregar as informacoes do veiculo
 
 

@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def appName = "Mobe"
+            outputFileName = appName+"-${variant.versionName}.apk"
+        }
+    }
 }
 
 dependencies {
@@ -28,8 +35,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
     //implementation 'com.google.firebase:firebase-core:16.0.0' - nao vai usar
+    //biblioteca do git para mascarar as edittext - link no trello para ver como usar as mascaras
     implementation 'com.github.pinball83:masked-edittext:1.0.4'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.android.gms:play-services:11.0.1'

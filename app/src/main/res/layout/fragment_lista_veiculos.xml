@@ -11,18 +11,26 @@
     tools:context=".fragments.ListaVeiculosFragment">
 
         <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/CordeFundoActivity"
+        android:layout_gravity="center"
+        tools:context=".fragments.ListaVeiculosFragment">
+
+        <!-- TODO: Update blank fragment layout -->
 
         <ListView
             android:id="@+id/lvVeiculos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:paddingTop="10dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/activity_bg"
-            android:paddingTop="10dp" />
+            android:layout_marginRight="5dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

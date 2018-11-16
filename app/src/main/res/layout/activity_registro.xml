@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#8B008B"
+    android:background="@color/BordaEditText"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
@@ -14,101 +14,99 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:weightSum="1"
-        >
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:weightSum="1">
 
         <EditText
             android:id="@+id/nome_registro"
-            android:layout_width="fill_parent"
-            android:layout_height="54dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_inicio_registro_edittext"
             android:hint="Nome Completo"
             android:padding="10dp"
             android:inputType="textCapWords"
             android:textColor="@android:color/white"
-            android:textColorHint="#ffffff"
-            />
+            android:textCursorDrawable="@drawable/cursor_branco"
+            android:textColorHint="@android:color/white"/>
 
         <EditText
             android:id="@+id/email_registro"
-            android:layout_width="fill_parent"
-            android:layout_height="42dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_inicio_registro_edittext"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
+            android:textCursorDrawable="@drawable/cursor_branco"
             android:textColor="@android:color/white"
-            android:textColorHint="#ffffff"
-            />
+            android:textColorHint="@android:color/white"/>
 
         <EditText
             android:id="@+id/telefone_registro"
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="phone"
             android:ems="10"
             android:layout_marginBottom="10dp"
+            android:textCursorDrawable="@drawable/cursor_branco"
             android:hint="Telefone"
             android:background="@drawable/bg_inicio_registro_edittext"
             android:padding="10dp"
             android:textColor="@android:color/white"
-            android:textColorHint="#ffffff"
-            android:layout_weight="0.07"
-            />
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/senha_registro"
-            android:layout_width="fill_parent"
-            android:layout_height="42dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_inicio_registro_edittext"
             android:hint="Senha"
             android:inputType="textPassword"
+            android:textCursorDrawable="@drawable/cursor_branco"
             android:padding="10dp"
             android:textColor="@android:color/white"
-            android:textColorHint="#ffffff"
-            />
+            android:textColorHint="@android:color/white"/>
 
         <EditText
             android:id="@+id/confirma_senha_registro"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bg_inicio_registro_edittext"
             android:hint="Confirmar Senha"
             android:inputType="textPassword"
+            android:textCursorDrawable="@drawable/cursor_branco"
             android:padding="10dp"
             android:textColor="@android:color/white"
-            android:textColorHint="#ffffff"
-            />
+            android:textColorHint="@android:color/white"/>
 
         <Button
             android:id="@+id/btn_registro"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:background="@drawable/bg_botoes"
+            android:theme="@style/ButtonTheme"
             android:text="Cadastrar"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            android:textSize="16dp"
-            />
+            android:textSize="16dp"/>
 
         <Button
             android:id="@+id/btnLinkLogin"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dip"
+            android:padding="5dp"
             android:background="@null"
             android:text="Já registrado? Entre"
             android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
-            />
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"/>
 
     </LinearLayout>
 

@@ -37,6 +37,7 @@ public class ClickNotificationMostrarManutencoes extends AppCompatActivity {
       //  btn_abrir_pagina_inicial = findViewById(R.id.btn_abrir_pagina_inicial);
 
         setSupportActionBar(toolbar);
+        this.setTitle("Manutenções");
 
         Intent intent = getIntent();
         payload_string = intent.getStringExtra("payload");

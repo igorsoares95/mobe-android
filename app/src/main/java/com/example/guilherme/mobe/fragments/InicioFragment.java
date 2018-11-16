@@ -35,8 +35,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -170,10 +172,19 @@ public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void mostraSaudacao() {
-        Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR);
+       // Calendar c = Calendar.getInstance();
+       // int hour = c.get(Calendar.HOUR);
 
-        if(hour >= 6 && hour <= 12) {
+        SimpleDateFormat dateFormat_hora = new SimpleDateFormat("HH");
+        Date data = new Date();
+        Calendar  cal = Calendar.getInstance();
+        cal.setTime(data);
+        Date data_atual = cal.getTime();
+        int hour = Integer.parseInt(dateFormat_hora.format(data_atual));
+
+        //int hour = 13;
+
+        if(hour >= 6 && hour < 12) {
             lbl_saudacao.setText("Bom dia,");
         }
         else if(hour < 18) {
@@ -231,6 +242,7 @@ public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
 
                     } else {
+                        btn_meus_veiculos.setEnabled(false);
                         lbl_descricao_veiculos.setText("Você não possui veículos registrados");
                     }
 
@@ -313,6 +325,7 @@ public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
 
                     } else {
+                        btn_manutencoes_atrasadas.setEnabled(false);
                         lbl_qtd_manutencoes_atrasadas.setText("Você não possui manutenções atrasadas");
                     }
 
@@ -392,6 +405,7 @@ public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
 
                     } else {
+                        btn_manutencoes_proximas.setEnabled(false);
                         lbl_qtd_manutencoes_proximas.setText("Você não possui manutenções próximas");
                     }
 
@@ -428,8 +442,5 @@ public class InicioFragment extends Fragment implements SwipeRefreshLayout.OnRef
         AppController.getInstance().addToRequestQueue(strReq);
 
     }
-
-
-
 
 }

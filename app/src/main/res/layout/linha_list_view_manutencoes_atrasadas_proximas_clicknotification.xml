@@ -34,7 +34,7 @@
             android:id="@+id/txt_manutencao_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="3dp"
             android:text="TextView"
             android:textColor="@android:color/black" />
 
@@ -55,23 +55,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/lbl_placa_clicknotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:text="Placa:" />
-
-        <TextView
-            android:id="@+id/txt_placa_clicknotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="TextView"
-            android:textColor="@android:color/black" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -81,11 +64,28 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp">
 
+        <TextView
+            android:id="@+id/lbl_placa_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="Placa:" />
+
+        <TextView
+            android:id="@+id/txt_placa_clicknotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="TextView"
+            android:textColor="@android:color/black" />
+
 
         <TextView
             android:id="@+id/lbl_km_atual_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:text="Km atual:" />
@@ -94,6 +94,7 @@
             android:id="@+id/txt_km_atual_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:text="TextView"
             android:textColor="@android:color/black" />
 
@@ -118,6 +119,7 @@
             android:id="@+id/txt_km_ultima_manutencao_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:textColor="@android:color/black"
             android:text="TextView" />
 
@@ -142,6 +144,7 @@
             android:id="@+id/txt_km_proxima_manutencao_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:textColor="@android:color/black"
             android:text="TextView" />
 
@@ -166,6 +169,7 @@
             android:id="@+id/txt_data_ultima_manutencao_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:textColor="@android:color/black"
             android:text="TextView" />
 
@@ -187,12 +191,11 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-
-
         <TextView
             android:id="@+id/txt_data_proxima_manutencao_clicknotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:textColor="@android:color/black"
             android:text="TextView" />
 

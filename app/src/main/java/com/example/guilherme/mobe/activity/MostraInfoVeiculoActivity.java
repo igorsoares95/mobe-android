@@ -17,7 +17,7 @@ public class MostraInfoVeiculoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Meu Veículo");
+       // getSupportActionBar().setTitle("Meu Veículo");
 
         // pegar o bundle da fragment ListaVeiculosFragment e passa para a MostraInfoVeiculoFragment
         Intent intent = getIntent();
