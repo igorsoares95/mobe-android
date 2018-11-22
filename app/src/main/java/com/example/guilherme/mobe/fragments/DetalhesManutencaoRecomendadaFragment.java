@@ -122,7 +122,13 @@ public class DetalhesManutencaoRecomendadaFragment extends Fragment {
                     if(contador_manutencoes == lista_manutencoes_selecionadas.size()) {
                         // é o ultimo
                         //Toast.makeText(getContext(), "ultima manutencao", Toast.LENGTH_SHORT).show();
-                        perguntaSeDesejaManutencaoPersonalizada();
+                        String nome_activity_atual = getActivity().getClass().getSimpleName();
+                        if (nome_activity_atual.equals("MostraInfoVeiculoActivity")) {
+                            getActivity().finish();
+                        } else {
+                            perguntaSeDesejaManutencaoPersonalizada();
+                        }
+
 
                     } else {
 

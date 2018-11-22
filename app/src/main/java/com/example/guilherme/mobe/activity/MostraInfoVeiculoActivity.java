@@ -1,6 +1,7 @@
 package com.example.guilherme.mobe.activity;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -36,10 +37,21 @@ public class MostraInfoVeiculoActivity extends AppCompatActivity {
 
         if(id == android.R.id.home){
 
-            if(getSupportFragmentManager().getBackStackEntryCount() > 0 ) {
-                getSupportFragmentManager().popBackStack();
-            } else {
+            Fragment fragment_atual = getSupportFragmentManager().findFragmentById(R.id.frame_container_mostra_info_veiculo);
+            String nome_fragment_atual = fragment_atual.getClass().getSimpleName();
+            if(nome_fragment_atual.equals("MostraInfoVeiculoFragment")) {
                 this.finish();
+            } else if (nome_fragment_atual.equals("MostraManutencoesRecomendadasDoVeiculo")) {
+                getSupportFragmentManager().popBackStack();
+            } else if (nome_fragment_atual.equals("DetalhesManutencaoRecomendadaFragment")) {
+                //voltar para a fragment anterior
+                getSupportFragmentManager().popBackStack();
+            } else if (nome_fragment_atual.equals("AdicionarManutencaoPersonalizadaFragment")) {
+                getSupportFragmentManager().popBackStack();
+            } else if (nome_fragment_atual.equals("MostraManutencoesDoVeiculo")) {
+                getSupportFragmentManager().popBackStack();
+            } else if (nome_fragment_atual.equals("DetalhesManutencaoDoVeiculoFragment")) {
+                getSupportFragmentManager().popBackStack();
             }
 
         }

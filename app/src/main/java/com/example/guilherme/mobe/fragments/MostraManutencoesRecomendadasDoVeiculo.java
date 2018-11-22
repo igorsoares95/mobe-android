@@ -143,6 +143,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                     ManutencaoRecomendada manutencao_recomendada = lista_manutencoes_recomendadas.get(i);
                     ManutencaoRecomendada manutencao_recomendada_na_abertura_da_fragment = primeiro_estado_das_manutencoes_recomendadas.get(i);
 
+
                     if(manutencao_recomendada.isSelecionado() && !manutencao_recomendada_na_abertura_da_fragment.isSelecionado()){
                         //responseText.append("\n" + manutencao_recomendada.getDescricao());
                         lista_manutencoes_selecionadas.add(manutencao_recomendada);
@@ -156,6 +157,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                 }
 
                 //Toast.makeText(getContext(), responseText, Toast.LENGTH_LONG).show();
+
 
                 if(lista_manutencoes_selecionadas.size() > 0) {
 
@@ -174,7 +176,7 @@ public class MostraManutencoesRecomendadasDoVeiculo extends Fragment {
                         getFragmentManager().beginTransaction().replace(R.id.frame_container_adicionar_veiculo, detalhes_manutencao_recomendada_fragment).addToBackStack(null).commit();
                     }
                     else if (nome_activity_atual.equals("MostraInfoVeiculoActivity")) {
-                        getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, detalhes_manutencao_recomendada_fragment).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.frame_container_mostra_info_veiculo, detalhes_manutencao_recomendada_fragment).addToBackStack(null).commit();
                     }
 
                 } else {
